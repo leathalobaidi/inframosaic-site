@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Humanoid 100 — 2026 Update · InfraMosaic</title>
+<style>
+  :root{
+    --ink:#0f1e2c; --body:#1f2d3a; --muted:#5d6f80; --faint:#8696a6;
+    --line:#e3e9ef; --bg:#eef1f5; --paper:#ffffff;
+    --navy:#0c1d30; --navy2:#13314c;
+    --green:#128a63; --green-d:#0c6a4c; --green-bg:#eafaf3;
+    --past:#f1f4f7; --past-ink:#43525f;
+    --amber:#b9772a; --amber-bg:#fdf6ec;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);
+       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--green-d);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ---- masthead ---- */
+  .mast{background:linear-gradient(160deg,#0b1a2b 0%,#10314c 100%);color:#eef4fa;
+        padding:54px 0 46px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .brand{font-size:12px;letter-spacing:.32em;text-transform:uppercase;
+         color:#7fc8ad;font-weight:700;margin-bottom:20px}
+  .mast h1{font-family:var(--serif);font-weight:600;font-size:46px;line-height:1.08;
+           margin:0 0 12px;letter-spacing:-.01em}
+  .mast .sub{font-family:var(--serif);font-style:italic;font-size:21px;color:#b9cee0;
+             margin:0 0 26px;font-weight:400}
+  .srcline{font-size:13.5px;color:#9fb4c7;line-height:1.7;max-width:760px}
+  .srcline b{color:#e7f0f8;font-weight:600}
+
+  /* ---- delta KPI strip ---- */
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:0;
+        background:var(--navy);color:#eaf2f9;border-top:1px solid #1d3954}
+  .kpi{padding:20px 18px;border-right:1px solid #1d3954}
+  .kpi:last-child{border-right:none}
+  .kpi .from{font-size:11px;color:#7d97ad;text-decoration:line-through;
+             text-transform:uppercase;letter-spacing:.06em}
+  .kpi .to{font-family:var(--serif);font-size:27px;font-weight:600;color:#fff;
+           line-height:1.05;margin:3px 0 4px}
+  .kpi .lab{font-size:11px;color:#9fb6c9;text-transform:uppercase;letter-spacing:.07em;line-height:1.4}
+  .kpi .to em{font-style:normal;color:#5fd0a3}
+
+  /* ---- part nav ---- */
+  nav.parts{position:sticky;top:0;z-index:20;background:rgba(247,249,251,.95);
+            backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+            font-size:12.5px;overflow-x:auto;white-space:nowrap}
+  nav.parts .wrap{padding:11px 28px;display:flex;gap:6px;align-items:center}
+  nav.parts a{color:var(--muted);padding:5px 10px;border-radius:999px;font-weight:500}
+  nav.parts a:hover{background:var(--green-bg);color:var(--green-d);text-decoration:none}
+  nav.parts .nlab{color:var(--faint);font-weight:700;letter-spacing:.12em;
+                  text-transform:uppercase;font-size:10.5px;margin-right:4px}
+
+  /* ---- intro ---- */
+  .intro{background:var(--paper);border-bottom:1px solid var(--line)}
+  .intro .wrap{padding:30px 28px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px}
+  .legend .chip{font-size:12.5px;padding:7px 13px;border-radius:8px;font-weight:600}
+  .chip.c-ms{background:var(--past);color:var(--past-ink);border:1px solid #dde4ea}
+  .chip.c-now{background:var(--green-bg);color:var(--green-d);border:1px solid #c4ecdb}
+  .chip.c-d{background:var(--navy);color:#cde8dd}
+
+  /* ---- parts ---- */
+  main .wrap{padding:0 28px}
+  section.part{padding:40px 0 8px;border-bottom:1px solid var(--line)}
+  .pnum{font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+        color:var(--green);font-weight:800}
+  section.part h2{font-family:var(--serif);font-weight:600;font-size:30px;
+                  color:var(--ink);margin:6px 0 4px;letter-spacing:-.01em}
+  .exhibit{font-size:12.5px;color:var(--faint);font-weight:600;letter-spacing:.04em;
+           text-transform:uppercase;margin-bottom:20px}
+
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:6px}
+  .lane{border-radius:12px;padding:20px 22px;font-size:15px}
+  .lane .tag{font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;
+             display:inline-flex;align-items:center;gap:7px;margin-bottom:11px}
+  .lane.ms{background:var(--past);color:var(--past-ink)}
+  .lane.ms .tag{color:#8a98a4}
+  .lane.ms .tag::before{content:"";width:9px;height:9px;border-radius:50%;background:#aab6c0}
+  .lane.now{background:var(--paper);border:1px solid var(--line);
+            box-shadow:0 1px 0 rgba(18,138,99,.0),inset 4px 0 0 var(--green)}
+  .lane.now{padding-left:24px}
+  .lane.now .tag{color:var(--green-d)}
+  .lane.now .tag::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--green)}
+  .lane p{margin:0 0 10px}
+  .lane p:last-child{margin-bottom:0}
+  .lane.now b{color:var(--ink)}
+  .lane.now .big{color:var(--green-d);font-weight:700}
+
+  .delta{background:var(--navy);color:#e6f1ea;border-radius:12px;padding:18px 22px;
+         margin:14px 0 4px;font-size:15px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+  .delta .dtag{font-family:var(--serif);font-size:30px;font-weight:700;color:#5fd0a3;line-height:1}
+  .delta .dtag small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.16em;
+                     text-transform:uppercase;color:#7fb6a0;margin-top:5px;font-weight:700}
+  .delta b{color:#fff}
+  .delta em{color:#aef0d4;font-style:italic}
+
+  /* ---- tables ---- */
+  table{width:100%;border-collapse:collapse;margin:8px 0 18px;font-size:13.5px;
+        background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#f7f9fb;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+     color:var(--muted);font-weight:700}
+  tbody tr:last-child td{border-bottom:none}
+  td .rk{display:inline-block;min-width:20px;font-weight:800;color:var(--green-d)}
+  .pill{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;white-space:nowrap}
+  .pill.def{background:#fdeaea;color:#b3261e}
+  .pill.tight{background:#fdf3e3;color:#b07012}
+  .pill.bal{background:#e9f6ef;color:#1a7d57}
+  .v-yes{color:#1a7d57;font-weight:700}
+  .v-mid{color:#b07012;font-weight:700}
+  .v-no{color:#b3261e;font-weight:700}
+  .v-na{color:var(--muted);font-weight:700}
+  caption{caption-side:top;text-align:left;font-size:12.5px;color:var(--muted);
+          padding:0 0 8px;font-weight:600}
+
+  .note{font-size:14px;color:var(--muted);font-style:italic;margin:6px 0 14px}
+
+  /* ---- footer ---- */
+  footer{background:var(--navy);color:#9fb6c9;padding:40px 0;font-size:13px;margin-top:8px}
+  footer .wrap{line-height:1.7}
+  footer b{color:#dce8f1}
+  footer .big{font-family:var(--serif);font-size:18px;color:#eaf2f9;font-style:italic;
+              margin-bottom:14px;font-weight:400}
+
+  @media(max-width:760px){
+    .kpis{grid-template-columns:repeat(2,1fr)}
+    .kpi:nth-child(2n){border-right:none}
+    .cmp{grid-template-columns:1fr}
+    .mast h1{font-size:34px}
+    .delta{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="brand">InfraMosaic · Humanoid Intelligence</div>
+    <h1>The Humanoid 100 — 2026 Update</h1>
+    <p class="sub">How Morgan Stanley's map of the humanoid robot value chain reads 16 months on</p>
+    <p class="srcline">
+      <b>Source paper:</b> Morgan Stanley Research, <i>The Humanoid 100: Mapping the Humanoid Robot Value Chain</i> — pricing as of 4 Feb 2025.<br>
+      <b>This update:</b> InfraMosaic database, build of 13 June 2026 — 255-company universe, $40.7tn live market cap, 58 programs, 26 deployments, IHCI cost index and the supply/demand order book. The paper is walked in its own running order, exhibit by exhibit.
+    </p>
+  </div>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><div class="from">100 names</div><div class="to">255</div><div class="lab">universe tracked</div></div>
+  <div class="kpi"><div class="from">—</div><div class="to">89<em>/100</em></div><div class="lab">MS-100 covered</div></div>
+  <div class="kpi"><div class="from">not given</div><div class="to">$40.7tn</div><div class="lab">live market cap</div></div>
+  <div class="kpi"><div class="from">~0 units</div><div class="to">122k</div><div class="lab">units deployed / on order</div></div>
+  <div class="kpi"><div class="from">"joints 60-70%"</div><div class="to">Sensors <em>#1</em></div><div class="lab">BOM cost (Exhibit 54)</div></div>
+  <div class="kpi"><div class="from">unveils</div><div class="to">4</div><div class="lab">at mass-production</div></div>
+</div>
+
+<nav class="parts"><div class="wrap">
+  <span class="nlab">Pages</span>
+  <a href="#p0">Index</a><a href="#p1">Thesis</a><a href="#p2">Momentum</a><a href="#p3">Brain</a>
+  <a href="#p4">Body</a><a href="#p5">Integrators</a><a href="#p6">Regional</a><a href="#p8">Valuation</a>
+  <a href="#p9">TAM / hurdles</a><a href="#p10">BOM</a><a href="#p11">Unveils</a><a href="#p12">New data</a>
+  <a href="#p13">Scorecard</a><a href="#pa">+20 names</a>
+</div></nav>
+
+<section class="intro"><div class="wrap">
+  <p style="margin:0;font-size:15.5px;color:var(--body)">
+    Each page below is shown <b>as a comparison</b>: what the paper said in February 2025, what
+    InfraMosaic's current data shows in June 2026, and — in the dark bar — what a re-write would
+    actually change. Nothing here redistributes the MS list; the <i>Humanoid 100</i> is used only as
+    the cross-check spine, and the dataset is InfraMosaic's own.
+  </p>
+  <div class="legend">
+    <span class="chip c-ms">● MS · Feb 2025 — what the paper said</span>
+    <span class="chip c-now">● InfraMosaic · Jun 2026 — what the data shows</span>
+    <span class="chip c-d">Δ — what the re-write changes</span>
+  </div>
+</div></section>
+
+<main><div class="wrap">
+
+<!-- PART 0 -->
+<section class="part" id="p0">
+  <div class="pnum">Part 0</div><h2>The index itself</h2>
+  <div class="exhibit">Cover · the "Nasdaq-100 of humanoids"</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>A curated <b>100-company</b> index — Brain, Body (64 names), Integrators — pitched as one watchlist that spans the whole value chain. Pricing 4 Feb 2025.</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>Now a <span class="big">255-name universe</span> (150 core + 105 tier-2). <b>All of MS's original 100 sit inside it</b> — the cross-check shows <b>89 ms_h100 = yes</b> after folding the 20 constituents v1 had missed. The other 166 are InfraMosaic's extension into the China component long-tail and rest-of-world supply chain. Total tracked cap <b>$40.7tn, 255/255 live</b>.</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>Stop calling it "100." The interesting universe is <b>~2.5× bigger</b>, and the action since Feb 2025 is in the <b>tier-2 Chinese parts makers</b> the original mostly skipped. Keep a 100-name "blue-chip" cut for the headline; the working database is 255.</div></div>
+</section>
+
+<!-- PART 1 -->
+<section class="part" id="p1">
+  <div class="pnum">Part 1</div><h2>Executive thesis</h2>
+  <div class="exhibit">The investment case</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>Humanoids move from demo to deployment over the decade; a <b>~$5tn market by 2050</b>, &gt;1bn units by the 2040s. The supply chain — not the robot brands — is the durable trade, and it runs heavily through China. "52% of the Humanoid 100 already involved; 48% material potential."</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>The thesis aged well — and the boring half is exactly where value showed up. Brands still mostly pre-revenue; <b>picks-and-shovels re-rated</b>. Two things MS couldn't see now dominate:</p>
+      <p>1. <b>Deployment is real</b> — 26 programs in paid pilots/early production, <span class="big">122,302 cumulative units</span> on order or deployed.<br>
+      2. A <b>memory/AI-compute super-cycle</b> repriced the Brain violently (NVIDIA $4.97tn, Micron $1.1tn).</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>Lead with <b>"deployment has started"</b> not "is coming," and split the thesis cleanly: the <em>Brain</em> has already been paid for by the AI trade; the <em>Body</em> is where the humanoid-specific, not-yet-priced optionality still sits.</div></div>
+</section>
+
+<!-- PART 2 -->
+<section class="part" id="p2">
+  <div class="pnum">Part 2</div><h2>Momentum &amp; involvement</h2>
+  <div class="exhibit">Exhibits 1–4 · mentions over time, involved vs potential</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>A near-vertical 2023–24 ramp in transcript and media mentions of "humanoid" — the attention leading indicator. Just over half of the 100 had confirmed involvement.</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>The mention curve climbed through 2025 then <b>plateaued high</b> — humanoids are a standing agenda item, not a novelty spike. Confirmed involvement (programs, supply contracts, named design-ins) is now the <b>majority</b> for core names; the "potential" bucket shrank as suppliers disclosed design-wins.</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>Swap the lead indicator from a <b>mentions</b> chart to a <b>deployments + unit-orders</b> series — mentions were the 2024 proxy, shipments are the 2026 proxy. The 52/48 split becomes roughly <b>70/30</b> confirmed/potential.</div></div>
+</section>
+
+<!-- PART 3 -->
+<section class="part" id="p3">
+  <div class="pnum">Part 3</div><h2>The Brain</h2>
+  <div class="exhibit">Exhibits 10–12 · models, compute, EDA, simulation, vision</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>Foundation models, AI compute, EDA, simulation, vision. US- and Taiwan-led: Alphabet, Microsoft, NVIDIA, TSMC, Arm, Cadence, Synopsys, Palantir, Oracle — with memory (Micron, SK Hynix, Samsung) as a footnote and vision (Hexagon).</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>Brain = <b>67 of 255</b>; China 41.8% by count but value and moat sit in the US/Taiwan core. Most concentrated segment (<b>HHI 3,232</b>) — compute is an oligopoly. The 12 biggest names in the whole universe are now almost all Brain:</p>
+      <p class="big" style="font-size:13.5px;line-height:1.7">NVIDIA $4.97tn · Alphabet $4.39tn · Apple $4.28tn · Microsoft $2.90tn · Amazon $2.57tn · TSMC $2.20tn · Broadcom $1.82tn · Tesla $1.53tn · Meta $1.44tn · Samsung $1.40tn · Micron $1.11tn · SK Hynix $1.01tn</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>Two fixes to Exhibit 11. (1) <b>Memory is no longer a footnote</b> — Micron &amp; SK Hynix are trillion-dollar names (Micron's 52-wk range $103 → $1,089); top billing, not the annex. (2) The Brain is <b>already re-rated by the AI trade</b> — owning it for <em>humanoid</em> exposure is a lottery ticket stapled to an already-expensive AI stock.</div></div>
+</section>
+
+<!-- PART 4 -->
+<section class="part" id="p4">
+  <div class="pnum">Part 4 · the heart of the paper</div><h2>The Body</h2>
+  <div class="exhibit">Exhibits 13–15 · the electro-mechanical stack</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>The Body (64 companies) is the electro-mechanical stack and <b>where China has built an almost unassailable position</b>. Parts walked one by one: bearings, screws, reducers, motors + rare-earth magnets, encoders, sensors, batteries, analog semis, structure. "Joint drive modules are 60–70% of a humanoid's cost."</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>Body = <span class="big">147 of 255</span> (the universe's centre of gravity), China 41.5%, HHI 2,425. Every MS parts-bucket is now a value-chain node with a live exposure score and a supply/demand utilisation. The <b>top of the exposure table is entirely Body</b>:</p></div>
+  </div>
+  <table>
+    <caption>Highest-conviction read in the database — IMES exposure leaders (all Body)</caption>
+    <thead><tr><th>Rank</th><th>Company</th><th>IMES</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td><span class="rk">1</span></td><td><b>Harmonic Drive Systems</b></td><td>92</td><td>strain-wave reducer near-monopoly</td></tr>
+      <tr><td><span class="rk">1</span></td><td><b>Moog</b></td><td>92</td><td>precision actuation</td></tr>
+      <tr><td><span class="rk">3</span></td><td>Symbotic</td><td>88</td><td>warehouse automation pull</td></tr>
+      <tr><td><span class="rk">4</span></td><td>Renishaw</td><td>85</td><td>encoders / metrology</td></tr>
+      <tr><td><span class="rk">5</span></td><td>Nabtesco</td><td>84</td><td>cycloidal reducers</td></tr>
+      <tr><td><span class="rk">5</span></td><td>Intuitive Surgical</td><td>84</td><td>dexterous precision analog</td></tr>
+      <tr><td><span class="rk">7</span></td><td>UBTech</td><td>83</td><td>only listed pure-play maker</td></tr>
+    </tbody>
+  </table>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div><b>The one material correction to the paper's economics.</b> MS's own <b>Exhibit 54</b> shows <b>sensors are the #1 cost line at 37%</b>, ahead of motors (20%) and screws (20%) — yet the prose still anchors on "joint modules = 60–70%." The re-write re-bases the BOM on Exhibit 54 and foregrounds the <b>six-axis force-torque sensor as both the top cost and the tightest bottleneck</b> (ATI/Novanta near-monopoly; flagged at <em>440% of 2030 capacity</em>). The paper buries its own most important number.</div></div>
+
+  <table>
+    <caption>Parts ledger — MS bucket → 2026 node read</caption>
+    <thead><tr><th>Part (MS Exhibit 14/15)</th><th>MS constituents</th><th>2026 read</th></tr></thead>
+    <tbody>
+      <tr><td><b>Bearings</b></td><td>NSK, RBC, Regal Rexnord, Schaeffler, Timken</td><td>commoditising; low IMES</td></tr>
+      <tr><td><b>Screws</b> (ball + roller)</td><td>Hengli, Hiwin, NSK, SKF, Shanghai Beite, THK</td><td><span class="pill def">deficit 770%</span> tightest mechanical bottleneck</td></tr>
+      <tr><td><b>Reducers</b> (harmonic + cycloidal)</td><td>Harmonic Drive, Nabtesco, LeaderDrive, Shuanghuan, Zhongda, Hiwin, Hota</td><td><b>highest-IMES node</b>; China share climbing fast</td></tr>
+      <tr><td><b>Motors + magnets</b></td><td>Estun, Leadshine, Moons', Nidec, Inovance + JL Mag, Lynas, MP</td><td><b>magnets ~100% China</b>; binding physical constraint (Dy/Tb controls)</td></tr>
+      <tr><td><b>Encoders</b></td><td>Nidec, Novanta, Sensata</td><td>Renishaw IMES 85; precision moat intact</td></tr>
+      <tr><td><b>Sensors — force/torque</b></td><td>Keli, Novanta, Sensata, TE</td><td><span class="pill def">#1 BOM · 440%</span> the re-write's hero chart</td></tr>
+      <tr><td><b>Vision / lidar</b></td><td>ADI, Hexagon, Keyence, Sony, Robosense, Aptiv, Magna, Valeo, Teledyne</td><td><span class="pill bal">glut 5.5%</span> auto over-capacity spilled in</td></tr>
+      <tr><td><b>Batteries</b></td><td>CATL, EVE, LG ES, Samsung SDI</td><td><span class="pill bal">glut ~0%</span> humanoid demand a rounding error on EV cells</td></tr>
+      <tr><td><b>Analog semis</b></td><td>Allegro, Infineon, Melexis, NXP, Onsemi, Renesas, ST, TI</td><td>steady; auto-cycle linked</td></tr>
+      <tr><td><b>Structure / wiring</b></td><td>Amphenol, Aptiv, Magna, TE, Xusheng, Sanhua, Tuopu</td><td>China die-casters scaling</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PART 5 -->
+<section class="part" id="p5">
+  <div class="pnum">Part 5</div><h2>Integrators</h2>
+  <div class="exhibit">Exhibits 16–17 · who assembles the robot</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>Five archetypes: autos/OEM (BYD, GAC, Hyundai/Boston Dynamics, Tesla, Toyota, XPeng), tech/consumer (Apple, Foxconn, LG, Samsung, Sony, Xiaomi), cloud (Alibaba, Amazon, Naver, Tencent), industrial robotics (ABB, Midea/KUKA, Teradyne), pure-play (Rainbow Robotics, UBTech).</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>Integrators = <b>41 of 255</b>, China 34.1%, <b>least concentrated</b> segment (HHI 2,064) — many credible assemblers, no winner yet. Pure-plays pulling ahead on shipped units: <b>UBTech</b> (Walker S2, 3-min battery-swap, &gt;800m-yuan orders) and <b>AgiBot/Zhiyuan</b> (A2, #1 by 2025 volume, ~5,168 units) now out-ship Western brands.</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>Promote two under-weighted points: (1) <b>Foxconn/Hon Hai as the contract-manufacturing kingmaker</b> — whoever wins the OEM race likely builds at Foxconn; (2) <b>Tesla as both Brain and Integrator</b> with the only credible 1M-unit line. Note that Figure, Apptronik and Agility are integrators <em>absent from MS-100</em> because they're private — captured in the 12-name watchlist (Figure ~$39bn, plus newcomer <b>Humanoid / HMND 01</b>, London).</div></div>
+</section>
+
+<!-- PART 6 -->
+<section class="part" id="p6">
+  <div class="pnum">Part 6</div><h2>Composition &amp; regional</h2>
+  <div class="exhibit">Exhibits 18–23 · geography of the value chain</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>Humanoid-100 skewed China &amp; Taiwan on the Body, US on the Brain. <b>China = 63% of the supply chain</b> (supply-chain-weighted). Analyst-surveyed AI-exposure / materiality / pricing-power scatter.</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>By name across 255: <b>China 40.4% (103)</b> · North America 24.3% (62) · Japan 14.5% (37) · Europe 7.8% (20) · Korea 5.9% (15) · Taiwan 4.3% (11) · Asia-other 2.4% · Oceania 0.4%. Country HHI <b>2,468</b>. China-share by segment: Brain 41.8%, Body 41.5%, Integrator 34.1%.</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>MS's "63% China" was supply-chain-weighted; by-name it's 40.4% — but the <b>Body component nodes reproduce MS exactly</b> (magnets ~100% China, actuators ~64%). The thesis <b>intensified</b>: Dy/Tb export controls now sit on the highest-criticality nodes. Sharper message: <em>"China's dominance isn't broad, it's surgical — it owns the three or four parts that can't be substituted."</em></div></div>
+</section>
+
+<!-- PART 8 -->
+<section class="part" id="p8">
+  <div class="pnum">Part 8</div><h2>Valuation &amp; performance</h2>
+  <div class="exhibit">Exhibits 24–34 · P/E, CAGR, index returns — the section that changed most</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>P/E rank of the Humanoid 100, P/E vs 3-yr revenue CAGR, and LTM performance of the index and its Brain/Body/Integrator and regional sleeves vs benchmarks. Pricing 4 Feb 2025.</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>Since Feb 2025 the universe lived through an <b>AI/memory super-cycle</b>:</p>
+      <p>· <b class="big">NVIDIA $4.97tn</b>, the gravitational centre.<br>
+      · <b>Micron $1.11tn</b> (52-wk $103→$1,089) and <b>SK Hynix $1.01tn</b> (KRW 238k→2,407k) — memory went from footnote to two of the twelve biggest names.<br>
+      · Total index cap <b>$40.7tn</b>; the top 12 alone ≈ $28tn.</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>Every valuation exhibit is stale and must be re-struck — and add a <b>warning the original lacks</b>: the index's return since Feb 2025 is <b>overwhelmingly an AI-compute/memory story, not a humanoid story</b>. A reader buying "the Humanoid 100" today is mostly buying the AI trade. The genuinely <em>humanoid-levered</em> return sits in the small/mid Body names — exactly where IMES points and index-cap weighting points away.</div></div>
+</section>
+
+<!-- PART 9 -->
+<section class="part" id="p9">
+  <div class="pnum">Part 9</div><h2>Pop culture, pros/cons, TAM &amp; hurdles</h2>
+  <div class="exhibit">Exhibits 35–47 · the case for adoption</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>Humanoids general-purpose but expensive/immature vs purpose-built automation. ~<b>$3tn US humanoid TAM by 2050</b> on labor-substitution; adoption negligible to ~2035 then an S-curve. Adoption hurdles listed.</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>The cost gap <b>closed faster than the con-side assumed</b> — the IHCI shows a Western reference robot down from ~$200k to <b>~$95k</b> in 18 months. The market model keeps the same S-curve and brackets MS: <b>base 550k units / $13bn (2030) → 1.4M / $30bn (2035)</b>. The 2028 inflection is intact; pilots are hundreds-to-thousands, not millions.</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>Move <b>"cost"</b> from the con column toward neutral; keep reliability/autonomy in unstructured environments as the live con. Keep the TAM architecture but tighten the near-term units with real 2025–26 order data. Add two <b>2026-specific hurdles absent from the original</b>: rare-earth export controls and force-torque sensor supply.</div></div>
+</section>
+
+<!-- PART 10 -->
+<section class="part" id="p10">
+  <div class="pnum">Part 10</div><h2>Hardware &amp; bill of materials</h2>
+  <div class="exhibit">Exhibits 48–55 · Optimus Gen-2 teardown</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>Optimus Gen-2: 28 actuators (14 rotary + 14 linear), ~50 DoF, 22-DoF hand. <b>Exhibit 54 BOM:</b> Sensor 37%, Motor 20.3%, Screw 20.2%, Reducer 12.6%, Encoder 3.9%, FSD+chips+camera 3.8%, Bearing 0.8%, Battery 0.5%.</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>Reference BOM now <b>re-based directly on Exhibit 54</b> (~$55,000): <b class="big">Sensors $20.4k (37%)</b> · Motors $11.2k (20%) · Screws $11.1k (20%) · Reducers $6.9k (13%) · Encoders 4% · Compute 4%. Whole-robot curve: Western $200k (2024) → $40k (2030); China $46k → $18k. A regression test <b>locks sensors as #1</b> so the correction can't silently revert.</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>The paper's biggest internal inconsistency to fix: prose says "joint modules 60–70%," its own Exhibit 54 says "sensors 37% #1." Resolve it in favour of the data — <b>sensors lead</b> — and tie it to supply (F-T sensors also the tightest bottleneck). Flag the <b>planetary roller screw cost-down</b> ($3,000 → $800 at Tesla scale) as the proven template the rest of the BOM follows.</div></div>
+</section>
+
+<!-- PART 11 -->
+<section class="part" id="p11">
+  <div class="pnum">Part 11</div><h2>Unveils tracker</h2>
+  <div class="exhibit">Exhibits 61–64 · who showed a robot</div>
+  <div class="cmp">
+    <div class="lane ms"><div class="tag">MS · Feb 2025</div>
+      <p>~67 notable unveils since 2022; <b>2024 = 51 unveils</b> (China 35, US 8, EMEA 4, Rest-Asia 4); China 61% of all unveils, US/Canada 24%. General-purpose 56% of use-cases.</p></div>
+    <div class="lane now"><div class="tag">InfraMosaic · Jun 2026</div>
+      <p>Folded into a <b>58-program database</b> with specs, status and pricing, carried forward through 2025–26. By region: China 32 · N. America 16 · Europe 4 · Japan 3 · Korea 1 · Middle East 1 · India 1. By maturity: Prototype 22 · Limited-prod 17 · Pilot 12 · <b>Mass-prod 4</b> · Pre-prod 1. New: Unitree R1 ($5,800), 1X NEO ($20k), XPeng Iron, UBTech Walker S2, AgiBot A2, plus non-MS <b>Humanoid / HMND 01</b> (London).</p></div>
+  </div>
+  <div class="delta"><div class="dtag">Δ<small>Rewrite</small></div>
+    <div>The chart graduates from "who showed a robot" to <b>"who shipped one."</b> Four programs are at <b>mass-production</b> — a status that didn't exist when MS drew Exhibit 61. China's lead in count persists; add a <b>status axis</b> showing China also leads in units shipped (Unitree/UBTech/AgiBot).</div></div>
+</section>
+
+<!-- PART 12 -->
+<section class="part" id="p12">
+  <div class="pnum">Part 12</div><h2>What's genuinely NEW since the paper</h2>
+  <div class="exhibit">Three datasets MS could not build in Feb 2025</div>
+  <table>
+    <thead><tr><th>New dataset</th><th>What it adds</th></tr></thead>
+    <tbody>
+      <tr><td><b>Deployment tracker</b></td><td><b>26 programs, 122,302 cumulative units</b> in paid pilots/early production. In Feb 2025 there was essentially nothing to count — this is a whole new section on <em>who is actually being paid to put robots on floors</em>.</td></tr>
+      <tr><td><b>IHCI</b> — InfraMosaic Humanoid Cost Index</td><td>Monthly, 2024-01 = 100. Now <b>Western 47.3 / China 65.0</b> (Western reference robot down ~53% to ~$95k; China down ~35% to ~$30k). MS gave point estimates; InfraMosaic gives the <em>track</em>.</td></tr>
+      <tr><td><b>Supply / demand order book</b></td><td>Robot ramp × per-robot bill-of-quantities vs assessed capacity. 2030 verdicts — <span class="pill def">deficit</span> roller screws 770%, F-T sensors 440%, integrated actuators 385%; <span class="pill bal">glut</span> LiDAR 5.5%, batteries ~0%, magnets 0.5%. Converts "China dominates the Body" into a quantified, node-by-node tightness map.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PART 13 -->
+<section class="part" id="p13">
+  <div class="pnum">Part 13</div><h2>Scorecard — right, wrong, couldn't know</h2>
+  <div class="exhibit">Grading the original 16 months on</div>
+  <table>
+    <thead><tr><th>MS call</th><th>Verdict 2026</th></tr></thead>
+    <tbody>
+      <tr><td>"The supply chain, not the brands, is the trade"</td><td><span class="v-yes">✅ Right</span> — picks-and-shovels re-rated; brands still pre-revenue.</td></tr>
+      <tr><td>"China owns the Body / 63% of the supply chain"</td><td><span class="v-yes">✅ Right &amp; intensified</span> — surgical dominance on magnets/reducers/screws + export controls.</td></tr>
+      <tr><td>"Sensors are 37% of BOM (Exhibit 54)"</td><td><span class="v-yes">✅ Right in data, wrong in prose</span> — narrative under-weighted its own number; now corrected &amp; locked.</td></tr>
+      <tr><td>"$5tn by 2050 / S-curve from ~2028"</td><td><span class="v-mid">🟡 Unfalsifiable but intact</span> — near-term units now real and on-trajectory; long-run TAM still a guess.</td></tr>
+      <tr><td>"Joint modules = 60–70% of cost"</td><td><span class="v-mid">🟠 Superseded</span> — true at sub-system cut, misleading at component cut where sensors lead.</td></tr>
+      <tr><td>Memory as a Brain footnote</td><td><span class="v-no">❌ Missed</span> — Micron &amp; SK Hynix are now trillion-dollar index members.</td></tr>
+      <tr><td>No deployment / cost-track / order-book data</td><td><span class="v-na">⚪ Couldn't know</span> — these are the 2026 additions, not MS errors.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- APPENDIX A -->
+<section class="part" id="pa">
+  <div class="pnum">Appendix A</div><h2>The 20 names a 2026 re-write must add</h2>
+  <div class="exhibit">In MS's own Exhibit 11/14/16 enumerations but absent from InfraMosaic v1 — now added (ms_h100 = yes), with live caps</div>
+  <p style="font-size:15px;color:var(--body);margin-top:0">
+    Aptiv · Oracle · Palantir · Micron · SK&nbsp;Hynix · Toyota · Magna · Honeywell · Hon&nbsp;Hai/Foxconn ·
+    Timken · Teledyne · Valeo · Hexagon · Dassault&nbsp;Systèmes · Naver · GAC · Midea/KUKA ·
+    RBC&nbsp;Bearings · Shanghai&nbsp;Beite · Xusheng.
+  </p>
+</section>
+
+</div></main>
+
+<footer><div class="wrap">
+  <div class="big">InfraMosaic — the price-reporting agency and asset-level database for the humanoid economy.</div>
+  <b>Provenance.</b> Universe &amp; live caps from <b>data/companies.csv + market_caps.csv</b> (255/255, Yahoo crumb-flow, FX→USD; memory-supercycle outliers verified via 52-wk range before ingest).
+  Source paper transcription + Firecrawl export in <b>research/humanoid100/</b>. Per-company live evidence in <b>SOURCED_EVIDENCE.md</b> (every claim carries its own source URL).
+  Models — IMES, HHI, IHCI, supply/demand order book — in <b>docs/METHODOLOGY.md</b>; 65 integrity tests pass.<br><br>
+  <span style="color:#7d97ad">Not affiliated with Morgan Stanley; the MS Humanoid 100 is used solely as a published cross-reference. Build 14 June 2026.</span>
+</div></footer>
+
+</body>
+</html>

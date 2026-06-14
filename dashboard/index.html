@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InfraMosaic · Humanoid Intelligence</title>
+<style>
+  :root{
+    --navy:#0f1b2d; --navy2:#16263d; --ink:#1a2433; --muted:#64748b;
+    --line:#e4e9f0; --bg:#f5f7fb; --card:#ffffff;
+    --amber:#e8943a; --amber-d:#c9742a; --teal:#1f8f86; --teal-l:#e6f4f2;
+    --red:#d6455d; --green:#2f9e68; --grey:#9aa7b8;
+    --shadow:0 1px 2px rgba(16,32,55,.06),0 4px 14px rgba(16,32,55,.06);
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); font-size:14px; line-height:1.45;}
+  a{color:var(--teal); text-decoration:none}
+  /* layout */
+  .app{display:grid; grid-template-columns:236px 1fr; min-height:100vh}
+  aside{background:linear-gradient(180deg,var(--navy),var(--navy2)); color:#cdd8e6;
+    position:sticky; top:0; height:100vh; overflow:auto; padding:0 0 24px}
+  .brand{padding:20px 20px 16px; border-bottom:1px solid rgba(255,255,255,.08)}
+  .brand .logo{display:flex; align-items:center; gap:10px}
+  .brand .mark{width:26px;height:26px;border-radius:7px;
+    background:conic-gradient(from 210deg,var(--amber),var(--teal),var(--amber));
+    box-shadow:0 0 0 3px rgba(232,148,58,.14)}
+  .brand h1{font-size:18px; margin:0; color:#fff; letter-spacing:.2px; font-weight:700}
+  .brand .tag{font-size:11px; color:#8aa0bb; margin-top:6px; line-height:1.35}
+  nav{padding:12px 12px}
+  nav button{display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+    background:transparent; border:0; color:#b6c4d6; padding:9px 12px; border-radius:9px;
+    font-size:13.5px; cursor:pointer; margin-bottom:2px}
+  nav button:hover{background:rgba(255,255,255,.06); color:#fff}
+  nav button.active{background:rgba(232,148,58,.16); color:#fff; font-weight:600}
+  nav .nb{width:7px;height:7px;border-radius:50%;background:#41597a;flex:none}
+  nav button.active .nb{background:var(--amber)}
+  .side-foot{padding:14px 20px; font-size:11px; color:#6c819e; border-top:1px solid rgba(255,255,255,.08); margin-top:8px}
+  main{padding:26px 30px 60px; max-width:1320px}
+  .view{display:none}
+  .view.active{display:block; animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  h2.section{font-size:21px; margin:0 0 4px; letter-spacing:-.2px}
+  .sub{color:var(--muted); font-size:13px; margin:0 0 20px; max-width:760px}
+  /* KPI cards */
+  .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:22px}
+  .kpi{background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:15px 16px; box-shadow:var(--shadow)}
+  .kpi .v{font-size:26px; font-weight:700; letter-spacing:-.5px; color:var(--navy)}
+  .kpi .l{font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-top:3px}
+  .kpi .s{font-size:11.5px; color:var(--teal); margin-top:4px; font-weight:600}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+  .panel{background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 18px 16px; box-shadow:var(--shadow); margin-bottom:18px}
+  .panel h3{margin:0 0 2px; font-size:15px}
+  .panel .ph{color:var(--muted); font-size:12px; margin:0 0 14px}
+  .callout{border-left:3px solid var(--amber); background:#fff8f0; padding:12px 14px;
+    border-radius:8px; font-size:13px; margin-bottom:18px}
+  .callout b{color:var(--amber-d)}
+  /* tables */
+  table{width:100%; border-collapse:collapse; font-size:12.8px}
+  th,td{text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:middle}
+  th{font-size:11px; text-transform:uppercase; letter-spacing:.4px; color:var(--muted);
+    cursor:pointer; user-select:none; white-space:nowrap; position:sticky; top:0; background:var(--card)}
+  th.sortable:hover{color:var(--ink)}
+  tbody tr:hover{background:#f8fafd}
+  td.num,th.num{text-align:right; font-variant-numeric:tabular-nums}
+  .tbl-wrap{max-height:560px; overflow:auto; border:1px solid var(--line); border-radius:10px}
+  /* badges */
+  .badge{display:inline-block; padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600; white-space:nowrap}
+  .b-High{background:#fde7ea; color:#b1243a} .b-Medium{background:#fdf0e2; color:#b3711f}
+  .b-Low{background:#eef1f5; color:#5b6b80}
+  .dep-VeryHigh{background:#fbe0e5;color:#a01530} .dep-High{background:#fde7ea;color:#b1243a}
+  .dep-Medium{background:#fdf0e2;color:#b3711f} .dep-Low{background:#e6f6ee;color:#1f7d4d}
+  .seg-Brain{color:#5a6fd6} .seg-Body{color:#c9742a} .seg-Integrator{color:#1f8f86}
+  .pill{font-size:10.5px; padding:1px 7px; border-radius:5px; background:#eef1f5; color:#5b6b80; font-weight:600}
+  .flag{font-size:10.5px; color:#b1243a; font-weight:700}
+  .trend-up{color:var(--red); font-weight:700}
+  .trend-down{color:var(--green); font-weight:700}
+  .trend-flat{color:var(--grey); font-weight:700}
+  /* filters */
+  .filters{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; align-items:center}
+  .filters select,.filters input{padding:7px 10px; border:1px solid var(--line); border-radius:8px;
+    font-size:13px; background:#fff; color:var(--ink)}
+  .filters input{min-width:210px}
+  .chipcount{margin-left:auto; color:var(--muted); font-size:12px}
+  /* value-chain map */
+  .vc-seg{margin-bottom:18px}
+  .vc-seg h4{margin:0 0 10px; font-size:13px; text-transform:uppercase; letter-spacing:.6px; color:var(--muted)}
+  .vc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+  .node{background:var(--card); border:1px solid var(--line); border-radius:11px; padding:13px 13px 11px;
+    box-shadow:var(--shadow); position:relative; overflow:hidden}
+  .node .crit{position:absolute; top:0; left:0; height:100%; width:4px}
+  .node .nm{font-weight:650; font-size:13px; margin-bottom:8px; padding-left:4px}
+  .node .row{display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin:3px 0; padding-left:4px}
+  .node .row b{color:var(--ink); font-variant-numeric:tabular-nums}
+  .node .bk{position:absolute; top:10px; right:10px; font-size:9px; background:#fde7ea; color:#b1243a;
+    padding:2px 6px; border-radius:5px; font-weight:700; letter-spacing:.3px}
+  /* charts */
+  .bar-row{display:grid; grid-template-columns:130px 1fr 52px; align-items:center; gap:10px; margin:7px 0; font-size:12.5px}
+  .bar-track{background:#eef1f5; border-radius:6px; height:16px; overflow:hidden}
+  .bar-fill{height:100%; border-radius:6px; background:linear-gradient(90deg,var(--teal),#34b3a8)}
+  .bar-fill.amber{background:linear-gradient(90deg,var(--amber-d),var(--amber))}
+  .bar-val{text-align:right; font-variant-numeric:tabular-nums; color:var(--muted)}
+  svg{display:block; width:100%; height:auto}
+  .legend{display:flex; gap:16px; font-size:12px; color:var(--muted); margin-top:10px}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .note{font-size:11.5px; color:var(--muted); margin-top:10px}
+  .meth p{margin:0 0 12px} .meth h3{margin:18px 0 6px; font-size:14px}
+  .meth code{background:#eef1f5; padding:1px 6px; border-radius:5px; font-size:12px}
+  .disc{font-size:11.5px; color:var(--muted); border-top:1px solid var(--line); margin-top:18px; padding-top:12px}
+  @media(max-width:980px){.app{grid-template-columns:1fr}aside{position:static;height:auto}
+    .kpis{grid-template-columns:repeat(2,1fr)}.grid2,.grid3,.vc-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside>
+    <div class="brand">
+      <div class="logo"><div class="mark"></div><h1>InfraMosaic</h1></div>
+      <div class="tag" id="tagline"></div>
+    </div>
+    <nav id="nav"></nav>
+    <div class="side-foot" id="sidefoot"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+<script src="data.js"></script>
+<script>
+const D = window.INFRAMOSAIC;
+const $ = (t,a={},...kids)=>{const e=document.createElement(t);
+  for(const k in a){if(k==='class')e.className=a[k];else if(k==='html')e.innerHTML=a[k];else e.setAttribute(k,a[k]);}
+  for(const c of kids.flat()){if(c==null)continue;e.appendChild(typeof c==='string'?document.createTextNode(c):c);}return e;};
+const fmtUSD = n => '$'+Number(n).toLocaleString('en-US');
+const fmtCap = v => (v==null||v==='')?'–':(+v>=1000?'$'+(+v/1000).toFixed(2)+'T':'$'+(+v>=10?Math.round(+v):(+v).toFixed(1))+'bn');
+const depClass = d => 'dep-'+String(d).replace(/\s/g,'');
+const trendCls = t => /fall/i.test(t)?'trend-down':(/ris/i.test(t)?'trend-up':'trend-flat');
+const trendArrow = t => /fall/i.test(t)?'▼':(/ris/i.test(t)?'▲':'▬');
+
+/* ---------------- chart helpers (inline SVG, no deps) ---------------- */
+function hbars(items, opt={}){ // items:[{label,value,sub}]
+  const max = opt.max || Math.max(...items.map(i=>i.value))||1;
+  const wrap = $('div');
+  items.forEach(i=>{
+    const pct = Math.max(2, 100*i.value/max);
+    wrap.appendChild($('div',{class:'bar-row'},
+      $('div',{},i.label),
+      $('div',{class:'bar-track'}, $('div',{class:'bar-fill'+(opt.amber?' amber':''),style:`width:${pct}%`})),
+      $('div',{class:'bar-val'}, i.sub!=null?i.sub:String(i.value))
+    ));
+  });
+  return wrap;
+}
+function lineChart(series, opt={}){ // series:[{name,color,points:[{x,y}]}], xs labels
+  const W=560,H=240,pad={l:54,r:14,t:14,b:28};
+  const xs = opt.xs;
+  const allY = series.flatMap(s=>s.points.map(p=>p.y));
+  const ymax = opt.ymax || Math.max(...allY); const ymin=0;
+  const px = i => pad.l + (W-pad.l-pad.r)*(i/(xs.length-1));
+  const py = v => pad.t + (H-pad.t-pad.b)*(1-(v-ymin)/(ymax-ymin));
+  const ns='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(ns,'svg'); svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  // gridlines + y labels
+  for(let g=0;g<=4;g++){const v=ymin+(ymax-ymin)*g/4; const y=py(v);
+    const ln=document.createElementNS(ns,'line');ln.setAttribute('x1',pad.l);ln.setAttribute('x2',W-pad.r);
+    ln.setAttribute('y1',y);ln.setAttribute('y2',y);ln.setAttribute('stroke','#eef1f5');svg.appendChild(ln);
+    const tx=document.createElementNS(ns,'text');tx.setAttribute('x',pad.l-8);tx.setAttribute('y',y+3);
+    tx.setAttribute('text-anchor','end');tx.setAttribute('font-size','10');tx.setAttribute('fill','#94a3b8');
+    tx.textContent=opt.yfmt?opt.yfmt(v):Math.round(v);svg.appendChild(tx);}
+  // x labels (stepped to avoid crowding on long series)
+  const xstep=Math.max(1,Math.ceil(xs.length/8));
+  xs.forEach((xl,i)=>{if(i%xstep!==0)return;
+    const tx=document.createElementNS(ns,'text');tx.setAttribute('x',px(i));
+    tx.setAttribute('y',H-8);tx.setAttribute('text-anchor','middle');tx.setAttribute('font-size','10');
+    tx.setAttribute('fill','#94a3b8');tx.textContent=xl;svg.appendChild(tx);});
+  series.forEach(s=>{
+    // area
+    let dArea=`M ${px(0)} ${py(s.points[0].y)}`;
+    s.points.forEach((p,i)=>{dArea+=` L ${px(i)} ${py(p.y)}`;});
+    dArea+=` L ${px(s.points.length-1)} ${py(0)} L ${px(0)} ${py(0)} Z`;
+    const ar=document.createElementNS(ns,'path');ar.setAttribute('d',dArea);
+    ar.setAttribute('fill',s.color);ar.setAttribute('opacity','0.08');svg.appendChild(ar);
+    let d=`M ${px(0)} ${py(s.points[0].y)}`;
+    s.points.forEach((p,i)=>{d+=` L ${px(i)} ${py(p.y)}`;});
+    const path=document.createElementNS(ns,'path');path.setAttribute('d',d);path.setAttribute('fill','none');
+    path.setAttribute('stroke',s.color);path.setAttribute('stroke-width','2.5');svg.appendChild(path);
+    s.points.forEach((p,i)=>{const c=document.createElementNS(ns,'circle');c.setAttribute('cx',px(i));
+      c.setAttribute('cy',py(p.y));c.setAttribute('r','3');c.setAttribute('fill',s.color);svg.appendChild(c);});
+  });
+  return svg;
+}
+function donut(items){ // items:[{label,value,color}]
+  const total=items.reduce((a,b)=>a+b.value,0); const ns='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 220 220');
+  let a0=-Math.PI/2; const cx=110,cy=110,r=86,ir=52;
+  items.forEach(it=>{const frac=it.value/total; const a1=a0+frac*2*Math.PI;
+    const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    const xi0=cx+ir*Math.cos(a1),yi0=cy+ir*Math.sin(a1),xi1=cx+ir*Math.cos(a0),yi1=cy+ir*Math.sin(a0);
+    const large=frac>0.5?1:0;
+    const p=document.createElementNS(ns,'path');
+    p.setAttribute('d',`M ${x0} ${y0} A ${r} ${r} 0 ${large} 1 ${x1} ${y1} L ${xi0} ${yi0} A ${ir} ${ir} 0 ${large} 0 ${xi1} ${yi1} Z`);
+    p.setAttribute('fill',it.color);svg.appendChild(p);a0=a1;});
+  return svg;
+}
+const PALETTE=['#1f8f86','#e8943a','#5a6fd6','#d6455d','#2f9e68','#9a6cd6','#c9742a','#34b3a8','#b1243a','#7b8794'];
+
+/* ---------------- views ---------------- */
+const VIEWS=[
+  ['overview','Overview', renderOverview],
+  ['map','Value-Chain Map', renderMap],
+  ['companies','Company Explorer', renderCompanies],
+  ['exposure','Exposure Index', renderExposure],
+  ['concentration','Supply-Chain Risk', renderConcentration],
+  ['prices','Price Board', renderPrices],
+  ['bom','BOM Cost Curve', renderBOM],
+  ['programs','Humanoid Programs', renderPrograms],
+  ['deployments','Deployments & Orders', renderDeployments],
+  ['market','Market & Cost Index', renderMarket],
+  ['supplydemand','Supply / Demand', renderSupplyDemand],
+  ['watchlist','Private Watchlist', renderWatchlist],
+  ['methodology','Methodology', renderMethodology],
+];
+
+function renderOverview(){
+  const k=D.kpis; const v=$('div');
+  v.appendChild($('h2',{class:'section'},'Humanoid Robotics — Market Intelligence'));
+  v.appendChild($('p',{class:'sub'},'InfraMosaic maps the public-market humanoid value chain end to end: '+k.companies_total+' listed companies across '+k.nodes+' value-chain nodes, with proprietary exposure scoring, supply-chain concentration indices, component price assessments and a reference-robot cost curve.'));
+  const kp=$('div',{class:'kpis'});
+  const cards=[
+    [k.companies_total,'Companies tracked',k.ms_h100_count+' in MS Humanoid 100'],
+    ['$'+k.total_market_cap_usd_tn+'tn','Tracked market cap',k.marketcap_coverage+' names · live'],
+    [k.china_share_pct+'%','China share of universe','Country HHI '+k.overall_hhi_country],
+    [k.components_priced,'Components assessed','PRA-style price board'],
+    [fmtUSD(k.bom_material_total_usd),'Reference material BOM','Optimus Gen-2 class'],
+    [k.deficit_components+'/'+k.sd_components,'Deficit-risk components','at base-case volume'],
+    [k.programs_total,'Humanoid programs',k.programs_mass_production+' in mass production'],
+    [fmtUSD(k.bom_curve_china_2030),'2030 cost · China track','vs '+fmtUSD(k.bom_curve_western_2030)+' Western'],
+    [k.high_exposure_count,'High-exposure names','mean IMES '+k.mean_imes],
+    [k.watchlist_count,'Private OEMs watched','with public backers'],
+  ];
+  cards.forEach(c=>kp.appendChild($('div',{class:'kpi'},
+    $('div',{class:'v'},String(c[0])),$('div',{class:'l'},c[1]),$('div',{class:'s'},c[2]))));
+  v.appendChild(kp);
+
+  v.appendChild($('div',{class:'callout',html:'<b>The China spread.</b> Building a reference humanoid <b>without</b> Chinese suppliers costs ~3× more — the BOM swings from ~$46k to ~$131k. China holds the actuator, reducer, roller-screw and rare-earth-magnet bottlenecks; rare-earth export controls (Dy/Tb) are the single largest cost risk InfraMosaic tracks.'}));
+
+  const g=$('div',{class:'grid2'});
+  // exposure by segment
+  const segP=$('div',{class:'panel'},$('h3',{},'Exposure by segment'),$('p',{class:'ph'},'Mean InfraMosaic Exposure Score (IMES, 0–100)'));
+  const seg=D.exposure_index.filter(r=>r.scope==='segment');
+  segP.appendChild(hbars(seg.map(s=>({label:s.scope_value,value:s.mean_imes,sub:s.mean_imes+''})),{max:100,amber:true}));
+  g.appendChild(segP);
+  // region mix
+  const regP=$('div',{class:'panel'},$('h3',{},'Where the value chain lives'),$('p',{class:'ph'},'Share of tracked companies by region'));
+  regP.appendChild(hbars(D.concentration_region.map(r=>({label:r.region,value:r.share_pct,sub:r.share_pct+'%'})),{max:Math.max(...D.concentration_region.map(r=>r.share_pct))}));
+  g.appendChild(regP);
+  v.appendChild(g);
+
+  // top exposure preview
+  const tp=$('div',{class:'panel'},$('h3',{},'Highest-exposure companies'),$('p',{class:'ph'},'Top 8 by IMES — the names most leveraged to humanoids'));
+  tp.appendChild(simpleTable(['Company','Ticker','Segment','Node','Country','IMES',''],
+    D.top_exposure.slice(0,8).map(t=>[t.name,t.ticker,segSpan(t.segment),t.node,t.country,
+      $('span',{class:'num'},String(t.imes)),bandBadge(t.band)])));
+  v.appendChild(tp);
+  return v;
+}
+
+function segSpan(s){return $('span',{class:'seg-'+s},s);}
+function bandBadge(b){return $('span',{class:'badge b-'+b},b);}
+function simpleTable(headers, rows){
+  const t=$('table'); const tr=$('tr'); headers.forEach(h=>tr.appendChild($('th',{},h)));
+  t.appendChild($('thead',{},tr));
+  const tb=$('tbody');
+  rows.forEach(r=>{const row=$('tr');r.forEach(c=>row.appendChild($('td',{},typeof c==='object'&&c!==null?c:String(c))));tb.appendChild(row);});
+  t.appendChild(tb); return $('div',{class:'tbl-wrap'},t);
+}
+
+function renderMap(){
+  const v=$('div');
+  v.appendChild($('h2',{class:'section'},'Value-Chain Map'));
+  v.appendChild($('p',{class:'sub'},'The 25 nodes of the humanoid value chain. Left bar = criticality (1–5). Badge = InfraMosaic China-dependence assessment. BOTTLENECK flags the choke-points where supply is concentrated and substitution is hard.'));
+  const critColor=c=>['#cbd5e1','#9aa7b8','#e8943a','#d98038','#d6455d','#b1243a'][c];
+  ['Brain','Body','Integrator'].forEach(seg=>{
+    const nodes=D.taxonomy.filter(n=>n.segment===seg).sort((a,b)=>b.criticality-a.criticality||b.n-a.n);
+    const wrap=$('div',{class:'vc-seg'},$('h4',{},seg+' · '+nodes.length+' nodes'));
+    const grid=$('div',{class:'vc-grid'});
+    nodes.forEach(n=>{
+      const card=$('div',{class:'node'});
+      card.appendChild($('div',{class:'crit',style:`background:${critColor(n.criticality)}`}));
+      if(n.bottleneck==='Y')card.appendChild($('div',{class:'bk'},'BOTTLENECK'));
+      card.appendChild($('div',{class:'nm'},n.node_name));
+      card.appendChild($('div',{class:'row'},$('span',{},'Companies'),$('b',{},String(n.n))));
+      card.appendChild($('div',{class:'row'},$('span',{},'Mean IMES'),$('b',{},String(n.mean_imes))));
+      card.appendChild($('div',{class:'row'},$('span',{},'China share'),$('b',{},n.china_pct+'%')));
+      const dep=$('div',{class:'row'},$('span',{},'Dependence'),$('span',{class:'badge '+depClass(n.china_dependence)},n.china_dependence));
+      card.appendChild(dep);
+      grid.appendChild(card);
+    });
+    wrap.appendChild(grid); v.appendChild(wrap);
+  });
+  return v;
+}
+
+let cstate={seg:'',region:'',band:'',ms:'',q:'',sort:'imes',dir:-1};
+function renderCompanies(){
+  const v=$('div');
+  v.appendChild($('h2',{class:'section'},'Company Explorer'));
+  v.appendChild($('p',{class:'sub'},'Every tracked public company with its value-chain node, supplier tier, MS Humanoid 100 membership and InfraMosaic Exposure Score. Filter, search and sort.'));
+  const f=$('div',{class:'filters'});
+  const mk=(opts,key,ph)=>{const s=$('select');s.appendChild($('option',{value:''},ph));
+    opts.forEach(o=>s.appendChild($('option',{value:o},o)));s.value=cstate[key];
+    s.onchange=()=>{cstate[key]=s.value;paint();};return s;};
+  f.appendChild(mk(['Brain','Body','Integrator'],'seg','All segments'));
+  f.appendChild(mk([...new Set(D.companies.map(c=>c.region))].sort(),'region','All regions'));
+  f.appendChild(mk(['High','Medium','Low'],'band','All exposure'));
+  f.appendChild(mk(['yes','no','unknown'],'ms','MS-H100: any'));
+  const q=$('input',{type:'search',placeholder:'Search company or ticker…'});q.value=cstate.q;
+  q.oninput=()=>{cstate.q=q.value;paint();};f.appendChild(q);
+  const count=$('div',{class:'chipcount'}); f.appendChild(count);
+  v.appendChild(f);
+  const detail=$('div'); v.appendChild(detail);
+  const host=$('div'); v.appendChild(host);
+  function renderDetail(c){
+    const node=D.taxonomy.find(n=>n.node_id===c.node_id)||{};
+    const progs=(D.programs||[]).filter(p=>p.link_company_id===c.company_id);
+    const tok=c.name.toLowerCase().split(' ')[0];
+    const deps=(D.deployments||[]).filter(d=>d.maker && d.maker.toLowerCase().split(' ')[0]===tok);
+    const p=$('div',{class:'panel'});
+    p.appendChild($('div',{style:'display:flex;justify-content:space-between;align-items:center;gap:12px'},
+      $('h3',{},c.name+' · '+c.ticker),
+      $('span',{class:'badge b-'+c.exposure_band},'IMES '+c.imes+' · '+c.exposure_band)));
+    p.appendChild($('p',{class:'ph'},c.rationale));
+    const grid=$('div',{class:'grid3'});
+    const kv=(k,val)=>$('div',{class:'kpi',style:'box-shadow:none;padding:11px 13px'},
+      $('div',{class:'v',style:'font-size:15px'},String(val)),$('div',{class:'l'},k));
+    grid.appendChild(kv('Segment · node',c.primary_segment+' · '+(node.node_name||'')));
+    grid.appendChild(kv('Sub-segment',c.primary_sub_segment));
+    grid.appendChild(kv('Country · region',c.country+' · '+c.region));
+    grid.appendChild(kv('Exchange · tier',c.exchange+' · '+c.supplier_tier));
+    grid.appendChild(kv('Market cap',fmtCap(c.market_cap_usd_bn)+(c.mktcap_source==='live'?'':' · est')));
+    grid.appendChild(kv('MS Humanoid 100',c.ms_h100));
+    grid.appendChild(kv('Revenue exposure',c.rev_exposure+' / 5'));
+    grid.appendChild(kv('Strategic position',c.strategic_position+' / 5'));
+    grid.appendChild(kv('Moat',c.moat+' / 5'));
+    p.appendChild(grid);
+    if(progs.length)p.appendChild($('div',{class:'note'},'Programs: '+progs.map(x=>x.model+' ('+x.status+')').join(' · ')));
+    if(deps.length)p.appendChild($('div',{class:'note'},'Deployments: '+deps.map(x=>x.customer+' — '+x.application).join(' · ')));
+    detail.innerHTML='';
+    detail.appendChild(p);
+    detail.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  const cols=[['name','Company'],['ticker','Ticker'],['primary_segment','Segment'],
+    ['primary_sub_segment','Sub-segment'],['supplier_tier','Tier'],['country','Country'],
+    ['market_cap_usd_bn','Mkt cap'],['ms_h100','MS-H100'],['imes','IMES'],['exposure_band','Exposure']];
+  const NUMCOL={imes:1,market_cap_usd_bn:1};
+  function paint(){
+    let rows=D.companies.filter(c=>
+      (!cstate.seg||c.primary_segment===cstate.seg)&&
+      (!cstate.region||c.region===cstate.region)&&
+      (!cstate.band||c.exposure_band===cstate.band)&&
+      (!cstate.ms||c.ms_h100===cstate.ms)&&
+      (!cstate.q||(c.name+' '+c.ticker).toLowerCase().includes(cstate.q.toLowerCase())));
+    rows.sort((a,b)=>{let x=a[cstate.sort],y=b[cstate.sort];
+      if(NUMCOL[cstate.sort]){x=+x||0;y=+y||0;} else {x=String(x).toLowerCase();y=String(y).toLowerCase();}
+      return (x<y?-1:x>y?1:0)*cstate.dir;});
+    count.textContent=rows.length+' of '+D.companies.length+' companies';
+    const t=$('table'); const tr=$('tr');
+    cols.forEach(([key,lbl])=>{const th=$('th',{class:'sortable'+(NUMCOL[key]?' num':'')},lbl+(cstate.sort===key?(cstate.dir<0?' ↓':' ↑'):''));
+      th.onclick=()=>{if(cstate.sort===key)cstate.dir*=-1;else{cstate.sort=key;cstate.dir=NUMCOL[key]?-1:1;}paint();};tr.appendChild(th);});
+    t.appendChild($('thead',{},tr));
+    const tb=$('tbody');
+    rows.forEach(c=>{
+      const tr=$('tr',{},
+        $('td',{},$('b',{},c.name)),
+        $('td',{},$('span',{class:'pill'},c.ticker)),
+        $('td',{},segSpan(c.primary_segment)),
+        $('td',{},c.primary_sub_segment),
+        $('td',{},c.supplier_tier),
+        $('td',{},c.country),
+        $('td',{class:'num'},fmtCap(c.market_cap_usd_bn)),
+        $('td',{}, c.ms_h100==='yes'?'●':(c.ms_h100==='unknown'?'○':'–')),
+        $('td',{class:'num'},String(c.imes)),
+        $('td',{},bandBadge(c.exposure_band))
+      );
+      tr.style.cursor='pointer';
+      tr.onclick=()=>renderDetail(c);
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb);
+    host.innerHTML=''; host.appendChild($('div',{class:'tbl-wrap'},t));
+  }
+  paint();
+  return v;
+}
+
+function renderExposure(){
+  const v=$('div');
+  v.appendChild($('h2',{class:'section'},'Exposure Index'));
+  v.appendChild($('p',{class:'sub'},'The InfraMosaic Exposure Score (IMES) blends three assessed 0–5 sub-scores — revenue exposure (40%), strategic position (35%) and moat / substitutability (25%) — into a 0–100 score. It answers: how leveraged is this name to humanoids, and how defensible is its position?'));
+  const g=$('div',{class:'grid2'});
+  const sp=$('div',{class:'panel'},$('h3',{},'Mean IMES by segment'),$('p',{class:'ph'},'0–100'));
+  sp.appendChild(hbars(D.exposure_index.filter(r=>r.scope==='segment').map(s=>({label:s.scope_value+' ('+s.n+')',value:s.mean_imes,sub:s.mean_imes+''})),{max:100,amber:true}));
+  g.appendChild(sp);
+  const bp=$('div',{class:'panel'},$('h3',{},'Exposure-band distribution'),$('p',{class:'ph'},'Count of companies'));
+  const bands=D.exposure_bands;
+  bp.appendChild(hbars(['High','Medium','Low'].map(b=>({label:b,value:bands[b]||0,sub:String(bands[b]||0)})),{max:D.companies.length}));
+  g.appendChild(bp);
+  v.appendChild(g);
+  const tp=$('div',{class:'panel'},$('h3',{},'Top 20 by exposure'),$('p',{class:'ph'},'The most humanoid-leveraged public names'));
+  tp.appendChild(simpleTable(['#','Company','Ticker','Segment','Node','Country','Mkt cap','IMES','Band'],
+    D.top_exposure.map((t,i)=>[String(i+1),t.name,t.ticker,segSpan(t.segment),t.node,t.country,
+      $('span',{class:'num'},fmtCap(t.market_cap_usd_bn)),$('span',{class:'num'},String(t.imes)),bandBadge(t.band)])));
+  v.appendChild(tp);
+  const lp=$('div',{class:'panel'},$('h3',{},'Largest tracked companies by market cap'),$('p',{class:'ph'},'Live market caps · the mega-cap anchors of the value chain'));
+  lp.appendChild(simpleTable(['#','Company','Ticker','Segment','Node','Market cap','IMES'],
+    D.largest.map((t,i)=>[String(i+1),$('b',{},t.name),t.ticker,segSpan(t.segment),t.node,
+      $('span',{class:'num'},fmtCap(t.market_cap_usd_bn)),$('span',{class:'num'},String(t.imes))])));
+  v.appendChild(lp);
+  return v;
+}
+
+function renderConcentration(){
+  const v=$('div');
+  v.appendChild($('h2',{class:'section'},'Supply-Chain Concentration & Risk'));
+  v.appendChild($('p',{class:'sub'},'Where the humanoid supply chain is concentrated, measured by Herfindahl-Hirschman Index (HHI) of supplier countries per node. Higher HHI = more concentrated = more fragile. China dominates the electro-mechanical "Body"; the US/Taiwan dominate the "Brain".'));
+  const k=D.kpis;
+  const kp=$('div',{class:'kpis'});
+  [[k.china_share_pct+'%','China share of universe','of '+k.companies_total+' companies'],
+   [k.overall_hhi_country,'Overall country HHI','0=diffuse · 10000=monopoly'],
+   [D.taxonomy.filter(n=>n.bottleneck==='Y').length,'Bottleneck nodes','flagged choke-points'],
+   ['Dy / Tb','Top supply risk','rare-earth export controls']
+  ].forEach(c=>kp.appendChild($('div',{class:'kpi'},$('div',{class:'v'},String(c[0])),$('div',{class:'l'},c[1]),$('div',{class:'s'},c[2]))));
+  v.appendChild(kp);
+
+  const g=$('div',{class:'grid2'});
+  const cp=$('div',{class:'panel'},$('h3',{},'Country share of tracked companies'),$('p',{class:'ph'},'Top 8 — headquarters country'));
+  cp.appendChild(hbars(D.concentration_country.slice(0,8).map(c=>({label:c.country,value:c.share_pct,sub:c.share_pct+'%'})),{max:D.concentration_country[0].share_pct,amber:true}));
+  g.appendChild(cp);
+  const seg=$('div',{class:'panel'},$('h3',{},'China dependence by segment'),$('p',{class:'ph'},'% of segment companies HQ-d in China'));
+  seg.appendChild(hbars(D.concentration_segment.map(s=>({label:s.segment,value:s.china_pct,sub:s.china_pct+'%'})),{max:100,amber:true}));
+  g.appendChild(seg);
+  v.appendChild(g);
+
+  // node concentration table
+  const tp=$('div',{class:'panel'},$('h3',{},'Node concentration table'),$('p',{class:'ph'},'Sorted by criticality then HHI. ⚑ = bottleneck. Low-n nodes (<3 cos.) flagged.'));
+  const nodes=[...D.taxonomy].sort((a,b)=>b.criticality-a.criticality||b.hhi-a.hhi);
+  tp.appendChild(simpleTable(['Node','Segment','Crit','Cos.','China %','HHI','Top country','Dependence'],
+    nodes.map(n=>[
+      $('span',{}, n.node_name+(n.bottleneck==='Y'?' ⚑':'')+(n.low_n_flag?' ·low-n':'')),
+      segSpan(n.segment), String(n.criticality),
+      $('span',{class:'num'},String(n.n)), $('span',{class:'num'},n.china_pct+'%'),
+      $('span',{class:'num'},String(n.hhi)), n.top_country+' '+n.top_share_pct+'%',
+      $('span',{class:'badge '+depClass(n.china_dependence)},n.china_dependence)
+    ])));
+  v.appendChild(tp);
+  return v;
+}
+
+function renderPrices(){
+  const v=$('div');
+  v.appendChild($('h2',{class:'section'},'Component Price Board'));
+  v.appendChild($('p',{class:'sub'},'PRA-style assessed prices for the humanoid component stack. HARD = explicit sourced price point; ASSESSED = triangulated estimate with stated basis. ▼ falling (cost-down) · ▲ rising · ▬ flat.'));
+  const tp=$('div',{class:'panel'},$('h3',{},'Assessed component prices'),$('p',{class:'ph'},D.components.length+' line items · assessment dates in-row'));
+  tp.appendChild(simpleTable(['Component','Node','Assessed','Range','Unit','Qty/robot','Conf.','Trend','Basis'],
+    D.components.map(c=>[
+      $('b',{},c.component_name),
+      (D.taxonomy.find(n=>n.node_id===c.node_id)||{}).node_name||c.node_id,
+      $('span',{class:'num'}, (c.unit.startsWith('$')?'':'$')+Number(c.assessed_price_usd).toLocaleString()),
+      c.price_low+'–'+c.price_high, c.unit, c.qty_per_robot, $('span',{class:'pill'},c.confidence),
+      $('span',{class:trendCls(c.trend)}, trendArrow(c.trend)+' '+c.trend),
+      c.basis_source
+    ])));
+  v.appendChild(tp);
+
+  const g=$('div',{class:'grid2'});
+  // raw materials
+  const rp=$('div',{class:'panel'},$('h3',{},'Critical raw materials'),$('p',{class:'ph'},'Magnet & battery feedstock · export-control flags'));
+  rp.appendChild(simpleTable(['Material','Price','Unit','China %','Export ctrl','Trend'],
+    D.raw_materials.map(m=>[$('b',{},m.material),'$'+m.assessed_price,m.unit,(m.china_share_pct||'–')+(m.china_share_pct?'%':''),
+      m.export_control==='Y'?$('span',{class:'flag'},'CONTROLLED'):'–',
+      $('span',{class:trendCls(m.trend)},trendArrow(m.trend)+' '+m.trend)])));
+  g.appendChild(rp);
+  // BOM donut
+  const dp=$('div',{class:'panel'},$('h3',{},'Reference BOM composition'),$('p',{class:'ph'},'Material BOM '+fmtUSD(D.kpis.bom_material_total_usd)+' · Optimus Gen-2 class'));
+  const items=D.bom_reference.map((b,i)=>({label:b.subsystem,value:+b.assessed_cost_usd,color:PALETTE[i%PALETTE.length]}));
+  const dwrap=$('div',{style:'display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:center'});
+  dwrap.appendChild(donut(items));
+  const leg=$('div');
+  items.forEach(it=>leg.appendChild($('div',{class:'bar-row',style:'grid-template-columns:14px 1fr 64px'},
+    $('span',{style:`width:11px;height:11px;border-radius:3px;background:${it.color};display:inline-block`}),
+    $('span',{style:'font-size:11.5px'}, it.label.replace(/\s*\(.*\)/,'')),
+    $('span',{class:'bar-val'}, fmtUSD(it.value)))));
+  dwrap.appendChild(leg); dp.appendChild(dwrap);
+  g.appendChild(dp);
+  v.appendChild(g);
+  return v;
+}
+
+function renderBOM(){
+  const v=$('div');
+  v.appendChild($('h2',{class:'section'},'Reference-Robot Cost Curve'));
+  v.appendChild($('p',{class:'sub'},'The headline price the whole industry is racing to cut. Two tracks: Western whole-robot cost (Morgan Stanley / Goldman basis) vs the China-supply BOM track. The gap between them is the strategic story of the decade.'));
+  const cv=D.bom_curve;
+  const p=$('div',{class:'panel'},$('h3',{},'Humanoid unit cost, 2024–2030'),$('p',{class:'ph'},'USD · point estimates · see Methodology for source normalisation'));
+  p.appendChild(lineChart([
+    {name:'Western whole-robot',color:'#d6455d',points:cv.map(r=>({x:r.year,y:r.western_point}))},
+    {name:'China-supply BOM',color:'#1f8f86',points:cv.map(r=>({x:r.year,y:r.china_point}))},
+  ],{xs:cv.map(r=>r.year),ymax:220000,yfmt:v=>'$'+Math.round(v/1000)+'k'}));
+  p.appendChild($('div',{class:'legend'},
+    $('span',{html:'<i style="background:#d6455d"></i>Western whole-robot cost'}),
+    $('span',{html:'<i style="background:#1f8f86"></i>China-supply BOM'})));
+  v.appendChild(p);
+
+  const tp=$('div',{class:'panel'},$('h3',{},'Cost curve detail'),$('p',{class:'ph'},'Indexed to 2024 = 100 · China discount = gap vs Western track'));
+  tp.appendChild(simpleTable(['Year','Western','China','W. index','China index','China discount','Conf.','Basis'],
+    cv.map(r=>[String(r.year),fmtUSD(r.western_point),fmtUSD(r.china_point),
+      $('span',{class:'num'},String(r.western_index)),$('span',{class:'num'},String(r.china_index)),
+      $('span',{class:'num'},r.china_discount_pct+'%'),$('span',{class:'pill'},r.confidence),r.basis])));
+  v.appendChild(tp);
+  return v;
+}
+
+function renderWatchlist(){
+  const v=$('div');
+  v.appendChild($('h2',{class:'section'},'Private OEM Watchlist'));
+  v.appendChild($('p',{class:'sub'},'The leading privately-held humanoid builders — not investable directly, but tracked via their public backers. These are the demand-shapers the whole supply chain is building for.'));
+  const p=$('div',{class:'panel'});
+  p.appendChild(simpleTable(['Company','Country','Status','Valuation','Public backers','Note'],
+    D.watchlist.map(w=>[$('b',{},w.company),w.country,$('span',{class:'pill'},w.status),w.valuation,
+      w.backers.replace(/-/g,' '),w.note])));
+  v.appendChild(p);
+  return v;
+}
+
+function renderMethodology(){
+  const v=$('div',{class:'meth'});
+  v.appendChild($('h2',{class:'section'},'Methodology & Provenance'));
+  v.appendChild($('div',{class:'panel',html:`
+    <h3>Coverage universe</h3>
+    <p>InfraMosaic independently sources its company universe (${D.kpis.companies_total} public companies) and uses Morgan Stanley's <i>Humanoid 100</i> only as a cross-check column (<code>ms_h100</code>), never as the redistributed product. ${D.kpis.ms_h100_count} of our names overlap the MS list; the remainder are InfraMosaic additions.</p>
+    <h3>Exposure score (IMES)</h3>
+    <p>Each company carries three assessed 0–5 sub-scores — <b>revenue exposure</b> (weight 0.40), <b>strategic position</b> (0.35) and <b>moat / substitutability</b> (0.25) — combined and scaled to a 0–100 <b>IMES</b>. Bands: High ≥ 66, Medium 40–65, Low &lt; 40. Scores are forward-looking assessments (most names have negligible humanoid revenue <i>today</i>), analogous to a PRA price assessment: expert judgment against documented criteria.</p>
+    <h3>Concentration (HHI)</h3>
+    <p>For each value-chain node we compute the Herfindahl-Hirschman Index of supplier-country shares: <code>HHI = Σ(country share %)²</code>, range 0–10,000. Nodes with fewer than three companies are flagged <i>low-n</i>.</p>
+    <h3>Price board & BOM</h3>
+    <p>Component prices are tagged <b>HARD</b> (explicit sourced price point) or <b>ASSESSED</b> (triangulated estimate with stated basis). The reference BOM is an Optimus Gen-2-class unit (~28 DoF). The cost curve normalises inconsistent public "cost" definitions onto two like-for-like tracks (Western whole-robot vs China-supply BOM).</p>
+    <h3>Confidence & limitations</h3>
+    <p>This is a v1.0 seed build. Market-cap bands and some Chinese small-cap tickers are assessed and flagged with a <code>confidence</code> field; price assessments are point-in-time (2025-Q4) and not yet IOSCO-audited. Figures inform analysis, not trading or investment decisions.</p>
+    <div class="disc">Sources: Morgan Stanley <i>Humanoid 100</i> (Feb/Jun 2025); BloombergNEF; IMARC; Bain; Goldman Sachs; Yole; Intel Market Research; company filings; exchange quote pages. Full provenance in <code>docs/SOURCES.md</code>. InfraMosaic is an independent research product and is not affiliated with Morgan Stanley. Build ${D.meta.build_date}, methodology ${D.meta.methodology}.</div>
+  `}));
+  return v;
+}
+
+function renderPrograms(){
+  const v=$('div'); const k=D.kpis;
+  v.appendChild($('h2',{class:'section'},'Humanoid Programs'));
+  v.appendChild($('p',{class:'sub'},'Every materially important humanoid robot program worldwide — public and private makers — with specs, status and price. This is the demand side the whole value chain is building for.'));
+  const pub=D.programs.filter(p=>p.maker_public==='Y').length;
+  const kp=$('div',{class:'kpis'});
+  [[k.programs_total,'Programs tracked',pub+' from public makers'],
+   [k.programs_mass_production,'In mass production','shipping at scale'],
+   ['$5,800','Cheapest (Unitree R1)','vs $250k Agility Digit'],
+   [D.programs.filter(p=>p.region==='Asia-China').length,'China programs','of '+k.programs_total]
+  ].forEach(c=>kp.appendChild($('div',{class:'kpi'},$('div',{class:'v'},String(c[0])),$('div',{class:'l'},c[1]),$('div',{class:'s'},c[2]))));
+  v.appendChild(kp);
+  const byStatus={}; D.programs.forEach(p=>byStatus[p.status]=(byStatus[p.status]||0)+1);
+  const order=['Mass-production','Limited-production','Pilot','Pre-production','Prototype','RnD'];
+  const sp=$('div',{class:'panel'},$('h3',{},'Programs by maturity'),$('p',{class:'ph'},'Count by status'));
+  sp.appendChild(hbars(order.filter(s=>byStatus[s]).map(s=>({label:s,value:byStatus[s],sub:String(byStatus[s])})),{max:D.programs.length,amber:true}));
+  v.appendChild(sp);
+  const sb=s=>{const m={'Mass-production':'b-High','Limited-production':'b-Medium','Pilot':'b-Medium','Pre-production':'b-Low','Prototype':'b-Low','RnD':'b-Low'};return $('span',{class:'badge '+(m[s]||'b-Low')},s);};
+  const tp=$('div',{class:'panel'},$('h3',{},'Program directory'),$('p',{class:'ph'},D.programs.length+' programs · price = announced / target / listing'));
+  tp.appendChild(simpleTable(['Maker','Model','Status','DoF','Height','Weight','Payload','Hands','Price','Year','Region'],
+    D.programs.map(p=>[p.maker,$('b',{},p.model),sb(p.status),p.dof_total||'–',
+      p.height_cm?p.height_cm+'cm':'–',p.weight_kg?p.weight_kg+'kg':'–',p.payload_kg?p.payload_kg+'kg':'–',
+      p.hands_dof||'–',p.price_usd?'$'+Number(p.price_usd).toLocaleString():'n/d',p.first_year,p.region])));
+  v.appendChild(tp);
+  return v;
+}
+
+function renderDeployments(){
+  const v=$('div'); const k=D.kpis;
+  v.appendChild($('h2',{class:'section'},'Deployments & Orders'));
+  v.appendChild($('p',{class:'sub'},'Announced commercial humanoid deployments, pilots, orders and preorders. Vendor-claimed numbers are flagged — the gap between a demo and an audited deployment is the real signal a buyer pays for.'));
+  const comm=D.deployments.filter(d=>d.status==='Commercial-deployment').length;
+  const pil=D.deployments.filter(d=>d.status==='Pilot').length;
+  const kp=$('div',{class:'kpis'});
+  [[k.deployments_total,'Tracked deployments',comm+' commercial · '+pil+' pilot'],
+   [Number(k.deployment_units_tracked).toLocaleString(),'Tracked units','incl. orders & targets'],
+   [D.deployments.filter(d=>d.application.indexOf('Automotive')>=0).length,'Automotive programs','the lead vertical'],
+   [D.deployments.filter(d=>d.confidence==='Vendor-claimed').length,'Vendor-claimed','treat with caution']
+  ].forEach(c=>kp.appendChild($('div',{class:'kpi'},$('div',{class:'v'},String(c[0])),$('div',{class:'l'},c[1]),$('div',{class:'s'},c[2]))));
+  v.appendChild(kp);
+  const byApp={}; D.deployments.forEach(d=>byApp[d.application]=(byApp[d.application]||0)+1);
+  const ap=$('div',{class:'panel'},$('h3',{},'Deployments by application'),$('p',{class:'ph'},'Count'));
+  ap.appendChild(hbars(Object.entries(byApp).sort((a,b)=>b[1]-a[1]).map(e=>({label:e[0],value:e[1],sub:String(e[1])})),{max:Math.max(...Object.values(byApp))}));
+  v.appendChild(ap);
+  const sb=s=>{const m={'Commercial-deployment':'b-High','Order':'b-Medium','Pilot':'b-Medium','Preorder':'b-Low','Demo':'b-Low','MoU':'b-Low'};return $('span',{class:'badge '+(m[s]||'b-Low')},s);};
+  const tp=$('div',{class:'panel'},$('h3',{},'Deployment & order tracker'),$('p',{class:'ph'},D.deployments.length+' entries'));
+  tp.appendChild(simpleTable(['Customer','Maker','Model','Application','Country','Units','Status','Conf.','Year'],
+    D.deployments.map(d=>[$('b',{},d.customer),d.maker,d.model,d.application,d.country,d.units_display,
+      sb(d.status),$('span',{class:'pill'},d.confidence),d.year])));
+  v.appendChild(tp);
+  return v;
+}
+
+function renderMarket(){
+  const v=$('div'); const k=D.kpis;
+  v.appendChild($('h2',{class:'section'},'Market Outlook & Cost Index'));
+  v.appendChild($('p',{class:'sub'},'The InfraMosaic base-case demand ramp, the major bank scenarios, and the InfraMosaic Humanoid Cost Index (IHCI) — a modelled monthly index of reference-robot cost, 2024-01 = 100.'));
+  const kp=$('div',{class:'kpis'});
+  [[(k.market_units_2030/1000)+'k','Base units 2030','annual shipments'],
+   ['$'+k.market_value_2030_bn+'bn','Base market 2030','hardware value'],
+   [(k.market_units_2035/1e6).toFixed(1)+'M','Base units 2035','annual shipments'],
+   ['$5tn','MS market 2050','~1bn units installed']
+  ].forEach(c=>kp.appendChild($('div',{class:'kpi'},$('div',{class:'v'},String(c[0])),$('div',{class:'l'},c[1]),$('div',{class:'s'},c[2]))));
+  v.appendChild(kp);
+  const mf=D.market_forecast;
+  const fp=$('div',{class:'panel'},$('h3',{},'Base-case units shipped, 2025–2035'),$('p',{class:'ph'},'Global annual shipments — InfraMosaic base case'));
+  fp.appendChild(lineChart([{name:'Units',color:'#1f8f86',points:mf.map(r=>({x:r.year,y:+r.units_base}))}],
+    {xs:mf.map(r=>r.year),ymax:1500000,yfmt:v=>Math.round(v/1000)+'k'}));
+  v.appendChild(fp);
+  const ci=D.cost_index;
+  const ip=$('div',{class:'panel'},$('h3',{},'InfraMosaic Humanoid Cost Index (IHCI)'),$('p',{class:'ph'},'Reference-robot cost, monthly · 2024-01 = 100 · modelled back-cast'));
+  ip.appendChild(lineChart([
+    {name:'W',color:'#d6455d',points:ci.map(r=>({x:r.month,y:+r.ihci_western}))},
+    {name:'C',color:'#1f8f86',points:ci.map(r=>({x:r.month,y:+r.ihci_china}))},
+  ],{xs:ci.map(r=>r.month),ymax:100,yfmt:v=>Math.round(v)}));
+  ip.appendChild($('div',{class:'legend'},
+    $('span',{html:'<i style="background:#d6455d"></i>IHCI-Western'}),
+    $('span',{html:'<i style="background:#1f8f86"></i>IHCI-China'})));
+  v.appendChild(ip);
+  const sp=$('div',{class:'panel'},$('h3',{},'What the houses say'),$('p',{class:'ph'},'Published humanoid market forecasts (cross-referenced)'));
+  sp.appendChild(simpleTable(['House','Year','Metric','Units','Value $bn','Note'],
+    D.market_scenarios.map(s=>[$('b',{},s.house),s.year,s.metric,
+      s.units?Number(s.units).toLocaleString():'–',s.value_usd_bn||'–',s.note])));
+  v.appendChild(sp);
+  return v;
+}
+
+function renderSupplyDemand(){
+  const v=$('div'); const k=D.kpis;
+  v.appendChild($('h2',{class:'section'},'Supply / Demand & Order Book'));
+  v.appendChild($('p',{class:'sub'},'Component demand = base-case robots/yr × per-robot quantity, set against assessed production capacity. At scale the joint-drive components — actuators, planetary roller screws, reducers — face the steepest capacity build-out. These are the choke-points that gate the whole ramp.'));
+  const kp=$('div',{class:'kpis'});
+  [[k.sd_components,'Components modelled','demand vs capacity'],
+   [k.deficit_components,'Deficit-risk','demand outruns supply'],
+   [(k.market_units_2030/1000)+'k','Robots/yr 2030','base-case driver'],
+   ['Dy / Tb','Hard constraint','rare-earth export control']
+  ].forEach(c=>kp.appendChild($('div',{class:'kpi'},$('div',{class:'v'},String(c[0])),$('div',{class:'l'},c[1]),$('div',{class:'s'},c[2]))));
+  v.appendChild(kp);
+  const withU=D.supply_demand.filter(s=>s.util_2030_pct!=null).sort((a,b)=>b.util_2030_pct-a.util_2030_pct);
+  const up=$('div',{class:'panel'},$('h3',{},'2030 capacity utilisation'),$('p',{class:'ph'},'Base-case demand ÷ assessed 2030 capacity · >100% = deficit · bars capped at 300% for scale'));
+  up.appendChild(hbars(withU.map(s=>({label:s.component_name,value:Math.min(s.util_2030_pct,300),sub:s.util_2030_pct+'%'})),{max:300,amber:true}));
+  v.appendChild(up);
+  const tcls=t=>/deficit/.test(t)?'b-High':/tighten/.test(t)?'b-Medium':'b-Low';
+  const uconv=u=>u.replace('/yr','');
+  const tp=$('div',{class:'panel'},$('h3',{},'Supply / demand order book'),$('p',{class:'ph'},'Per-robot quantity · projected demand 2025→2030 · assessed capacity · tightness verdict'));
+  tp.appendChild(simpleTable(['Component','Unit','/robot','Demand 2025','Demand 2030','Capacity 2030','Util 2030','Tightness','Conf.'],
+    D.supply_demand.map(s=>[$('b',{},s.component_name),uconv(s.unit),String(s.per_robot),
+      Number(s.demand_2025).toLocaleString(),Number(s.demand_2030).toLocaleString(),
+      s.capacity_2030_est?Number(s.capacity_2030_est).toLocaleString():'–',
+      s.util_2030_pct!=null?s.util_2030_pct+'%':'–',
+      $('span',{class:'badge '+tcls(s.tightness)},s.tightness),$('span',{class:'pill'},s.supply_confidence)])));
+  v.appendChild(tp);
+  v.appendChild($('div',{class:'callout',html:'<b>Read-through.</b> At the base-case 2030 volume, demand for roller screws, integrated actuators and force-torque sensors runs multiples of today\'s assessed capacity — the supply chain has to build out an order of magnitude. LiDAR and batteries, by contrast, are in glut. The binding constraint is not money; it is the rare-earth magnet inside every actuator.'}));
+  return v;
+}
+
+/* ---------------- shell ---------------- */
+document.getElementById('tagline').textContent=D.meta.tagline;
+document.getElementById('sidefoot').innerHTML=
+  'Vertical: '+D.meta.vertical+'<br>Build '+D.meta.build_date+' · v'+D.meta.methodology+'<br>'+D.kpis.companies_total+' companies · '+D.kpis.nodes+' nodes';
+const nav=document.getElementById('nav'), mainEl=document.getElementById('main');
+let current='overview';
+function show(id){
+  current=id;
+  [...nav.children].forEach(b=>b.classList.toggle('active',b.dataset.id===id));
+  const view=VIEWS.find(x=>x[0]===id);
+  mainEl.innerHTML=''; const wrap=$('div',{class:'view active'}); wrap.appendChild(view[2]()); mainEl.appendChild(wrap);
+  window.scrollTo(0,0);
+}
+VIEWS.forEach(([id,label])=>{
+  const b=$('button',{}, $('span',{class:'nb'}), label); b.dataset.id=id;
+  b.onclick=()=>show(id); nav.appendChild(b);
+});
+show('overview');
+</script>
+</body>
+</html>

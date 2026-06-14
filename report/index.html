@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>State of Humanoids 2026 · InfraMosaic</title>
+<style>
+  :root{
+    --navy:#0f1b2d; --ink:#1c2531; --body:#36414f; --muted:#74808f;
+    --line:#e7e2d8; --bg:#faf8f4; --card:#fffdf9;
+    --amber:#c9742a; --amber-l:#f5ead9; --teal:#1f8f86; --red:#d6455d; --green:#2f9e68;
+    --serif:Georgia,"Times New Roman","Songti SC",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--body);font-family:var(--sans);font-size:16px;line-height:1.65}
+  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
+  /* masthead */
+  header.mast{border-bottom:3px double var(--ink);margin-top:30px;padding-bottom:14px}
+  .mast .row{display:flex;justify-content:space-between;align-items:center;font-size:12px;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .mast .logo{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:700;letter-spacing:.04em}
+  .mast .mark{width:20px;height:20px;border-radius:5px;background:conic-gradient(from 210deg,var(--amber),var(--teal),var(--amber))}
+  h1.title{font-family:var(--serif);font-size:52px;line-height:1.04;letter-spacing:-.02em;color:var(--ink);
+    margin:22px 0 10px;font-weight:700}
+  .dek{font-family:var(--serif);font-size:21px;line-height:1.4;color:var(--ink);font-style:italic;margin:0 0 18px;max-width:680px}
+  .byline{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    border-top:1px solid var(--line);padding-top:12px;margin-bottom:6px}
+  /* stat strip */
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);
+    border-radius:10px;overflow:hidden;margin:26px 0 30px;background:var(--card)}
+  .strip .s{padding:16px 16px;border-right:1px solid var(--line)}
+  .strip .s:last-child{border-right:0}
+  .strip .v{font-family:var(--serif);font-size:27px;color:var(--ink);font-weight:700;line-height:1}
+  .strip .l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:6px}
+  /* sections */
+  section{margin:38px 0}
+  .sec-no{font-family:var(--serif);font-size:13px;letter-spacing:.2em;color:var(--amber);text-transform:uppercase;font-weight:700}
+  h2{font-family:var(--serif);font-size:30px;line-height:1.12;color:var(--ink);margin:6px 0 14px;letter-spacing:-.01em}
+  h3{font-size:15px;letter-spacing:.02em;color:var(--ink);margin:24px 0 8px}
+  p{margin:0 0 15px}
+  .lead::first-letter{font-family:var(--serif);float:left;font-size:62px;line-height:.82;padding:6px 10px 0 0;color:var(--amber);font-weight:700}
+  .pull{font-family:var(--serif);font-size:23px;line-height:1.35;color:var(--ink);font-style:italic;
+    border-left:3px solid var(--amber);padding:6px 0 6px 20px;margin:24px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:20px 0}
+  .card h3{margin-top:0}
+  .cap{font-size:12.5px;color:var(--muted);margin-top:8px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;font-family:var(--sans)}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+  th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .badge{display:inline-block;padding:1px 8px;border-radius:20px;font-size:11px;font-weight:700}
+  .b-High{background:#fbe0e5;color:#a01530}.b-Medium{background:#f6e7d2;color:#9a5a16}.b-Low{background:#eceae3;color:#6a7280}
+  .dep-VeryHigh{background:#fbe0e5;color:#a01530}.dep-High{background:#fde7ea;color:#b1243a}
+  .dep-Medium{background:#f6e7d2;color:#9a5a16}.dep-Low{background:#e6f6ee;color:#1f7d4d}
+  .bar-row{display:grid;grid-template-columns:150px 1fr 56px;align-items:center;gap:10px;margin:6px 0;font-size:13px}
+  .bar-track{background:#efece4;border-radius:5px;height:15px;overflow:hidden}
+  .bar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--amber),#e0a866)}
+  .bar-fill.teal{background:linear-gradient(90deg,var(--teal),#34b3a8)}
+  .bar-v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-size:12.5px}
+  svg{display:block;width:100%;height:auto}
+  .legend{display:flex;gap:16px;font-size:12.5px;color:var(--muted);margin-top:8px}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  ul.find{margin:0 0 8px;padding:0;list-style:none}
+  ul.find li{padding:9px 0 9px 26px;border-bottom:1px solid var(--line);position:relative}
+  ul.find li::before{content:"";position:absolute;left:4px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--amber)}
+  ul.find li b{color:var(--ink)}
+  footer{border-top:3px double var(--ink);margin:46px 0 60px;padding-top:16px;font-size:12.5px;color:var(--muted)}
+  @media(max-width:680px){h1.title{font-size:38px}.strip{grid-template-columns:repeat(2,1fr)}
+    .strip .s:nth-child(2){border-right:0}.bar-row{grid-template-columns:120px 1fr 48px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div class="row">
+      <span class="logo"><span class="mark"></span>InfraMosaic Intelligence</span>
+      <span id="issue">Frontier Hardware · Issue 01</span>
+    </div>
+    <h1 class="title">The State of Humanoids 2026</h1>
+    <p class="dek">A $5-trillion industry is being built one actuator at a time — and three-quarters of the supply chain runs through one country. A map of who makes the robots, what they cost, and where the choke-points are.</p>
+    <div class="byline" id="byline">InfraMosaic Research · Humanoid Robotics Vertical</div>
+  </header>
+
+  <div class="strip" id="strip"></div>
+
+  <section>
+    <div class="sec-no">01 — Executive summary</div>
+    <h2>The wiring of the robot economy</h2>
+    <p class="lead">The humanoid robot has stopped being a demo and started being a supply chain. In 2025 the first paid pilots landed on factory floors — Figure at BMW, Apptronik at Mercedes, Agility at GXO — while Chinese makers shipped robots by the thousand. Behind every one of them sits a value chain of actuators, reducers, roller screws, rare-earth magnets, sensors and AI compute that, until now, nobody has mapped at the level the money requires.</p>
+    <p>This is that map. InfraMosaic tracks the public-market humanoid value chain end to end. The findings below are drawn from the live database; the numbers update when the data does.</p>
+    <ul class="find" id="findings"></ul>
+  </section>
+
+  <section>
+    <div class="sec-no">02 — The value chain</div>
+    <h2>Brain, Body, Integrator</h2>
+    <p>Every humanoid resolves into three layers. The <b>Brain</b> — AI models, compute, vision, simulation — is where the West and Taiwan lead. The <b>Body</b> — the electro-mechanical stack of motors, gears, screws, sensors, magnets and batteries — is where China has built an almost unassailable position. The <b>Integrators</b> assemble it all into a working robot. The economics live in the Body: joint drive modules alone are 60–70% of a humanoid's cost.</p>
+    <div class="card">
+      <h3>The choke-points</h3>
+      <p style="font-size:14px">Nodes flagged as bottlenecks — concentrated supply <i>and</i> hard to substitute — ranked by criticality and China dependence.</p>
+      <div id="bottlenecks"></div>
+    </div>
+    <p>At base-case 2030 volumes those choke-points translate into hard numbers: demand for planetary roller screws and integrated actuators runs several times today's assessed production capacity, while LiDAR and batteries sit in glut. The full supply/demand order book — component demand from the robot ramp against assessed capacity — is tracked live in the InfraMosaic platform.</p>
+    <p class="pull">The reducer, the roller screw and the rare-earth magnet are to the humanoid what the lithium cell was to the electric car: small, unglamorous, and the whole game.</p>
+  </section>
+
+  <section>
+    <div class="sec-no">03 — The China question</div>
+    <h2>One country, most of the chain</h2>
+    <p id="china-para"></p>
+    <div class="card">
+      <h3>China dependence by segment</h3>
+      <div id="china-seg"></div>
+      <p class="cap">Share of each segment's tracked companies headquartered in China. The Body is the exposure; the Brain is the hedge.</p>
+    </div>
+    <p>The risk is not abstract. In 2025 China placed export licences on dysprosium and terbium — the heat-resistance dopants in the high-temperature magnets inside every frameless torque motor. Those two elements sit directly on the highest-criticality nodes in the chain. A humanoid built entirely outside the Chinese supply chain costs roughly <b>three times</b> as much. That spread is the single most important number in the industry, and the strongest case for a price-reporting agency to exist.</p>
+  </section>
+
+  <section>
+    <div class="sec-no">04 — The cost curve</div>
+    <h2>The race to twenty thousand dollars</h2>
+    <p id="cost-para"></p>
+    <div class="card">
+      <h3>InfraMosaic Humanoid Cost Index (IHCI)</h3>
+      <div id="ihci"></div>
+      <div class="legend"><span><i style="background:#d6455d"></i>IHCI-Western</span><span><i style="background:#1f8f86"></i>IHCI-China</span></div>
+      <p class="cap">Reference-robot cost, indexed to January 2024 = 100. A modelled back-cast pending a live monthly assessment panel.</p>
+    </div>
+    <p>The reference humanoid — an Optimus-Gen-2-class machine of ~28 degrees of freedom — carries a material bill of materials of about <b id="bom-figure"></b>. Counted by component, <b>sensors are the single largest line — about 37% of the bill</b>, driven by the six-axis force-torque sensors in the hands and feet; motors and roller screws are roughly a fifth each, reducers an eighth. The planetary roller screw, fourteen to a robot, is the most-watched cost-down lever in the industry, already cut from $3,000 to $800 at Tesla's negotiated scale — but the force-torque sensor is the quieter choke-point, near-monopolised by ATI and Novanta.</p>
+  </section>
+
+  <section>
+    <div class="sec-no">05 — Who is shipping</div>
+    <h2>From demo to deployment</h2>
+    <p id="prog-para"></p>
+    <div class="card">
+      <h3>Selected programs</h3>
+      <div id="programs-tbl"></div>
+      <p class="cap">A selection from the full program directory. Price = announced, target or third-party listing.</p>
+    </div>
+    <p>The deployment data tells the real story: most automotive "fleets" are still low-unit pilots, while China's open-market sales — Unitree and AgiBot each claiming 5,000-plus units in 2025 — are where volume actually lives. The gap between a vendor-claimed swarm and an audited deployment is exactly the signal a buyer pays an intelligence service to draw.</p>
+  </section>
+
+  <section>
+    <div class="sec-no">06 — Market outlook</div>
+    <h2>How big, how fast</h2>
+    <p id="market-para"></p>
+    <div class="card">
+      <h3>What the houses say</h3>
+      <div id="scenarios-tbl"></div>
+      <p class="cap">Published forecasts span two orders of magnitude. InfraMosaic's base case sits deliberately conservative on hardware units.</p>
+    </div>
+    <p class="pull">Morgan Stanley sees a billion humanoids and a $5-trillion market by 2050. Elon Musk says ten billion. Somewhere between the spreadsheet and the dream is a number you can underwrite — and that number is the product.</p>
+  </section>
+
+  <section>
+    <div class="sec-no">07 — How to read InfraMosaic</div>
+    <h2>Methodology, in brief</h2>
+    <p>InfraMosaic sources its company universe independently and uses Morgan Stanley's <i>Humanoid 100</i> only as a cross-check. Exposure scores are forward-looking assessments against a documented rubric. Prices are tagged HARD (sourced) or ASSESSED (triangulated). Concentration is measured by the Herfindahl-Hirschman Index of supplier countries. The cost index is a modelled back-cast pending a live, audited assessment panel — the next milestone on the path to a contract-grade reference. Full methodology and provenance accompany the dataset.</p>
+  </section>
+
+  <footer>
+    <p><b>InfraMosaic</b> — the source of truth for the humanoid robot value chain. This report is generated live from the InfraMosaic database (build <span id="bd"></span>, methodology <span id="mv"></span>). It is independent research, not investment advice, and not a contract-grade price feed. InfraMosaic is not affiliated with Morgan Stanley. Sources: Morgan Stanley, BloombergNEF, Goldman Sachs, Bain, Yole, IMARC, company filings — full provenance in the accompanying documentation.</p>
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+const D=window.INFRAMOSAIC,K=D.kpis;
+const $=(t,a={},...kids)=>{const e=document.createElement(t);for(const k in a){if(k==='class')e.className=a[k];else if(k==='html')e.innerHTML=a[k];else e.setAttribute(k,a[k]);}for(const c of kids.flat()){if(c==null)continue;e.appendChild(typeof c==='string'?document.createTextNode(c):c);}return e;};
+const fmt=n=>'$'+Number(n).toLocaleString('en-US');
+const depCls=d=>'dep-'+String(d).replace(/\s/g,'');
+function bars(host,items,opt={}){const max=opt.max||Math.max(...items.map(i=>i.value));items.forEach(i=>{host.appendChild($('div',{class:'bar-row'},$('div',{},i.label),$('div',{class:'bar-track'},$('div',{class:'bar-fill'+(opt.teal?' teal':''),style:`width:${Math.max(2,100*i.value/max)}%`})),$('div',{class:'bar-v'},i.sub)));});}
+function line(host,series,xs,ymax,yfmt){const W=560,H=220,pad={l:46,r:12,t:12,b:26},ns='http://www.w3.org/2000/svg';
+  const px=i=>pad.l+(W-pad.l-pad.r)*(i/(xs.length-1)),py=v=>pad.t+(H-pad.t-pad.b)*(1-v/ymax);
+  const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
+  for(let g=0;g<=4;g++){const v=ymax*g/4,y=py(v);const ln=document.createElementNS(ns,'line');ln.setAttribute('x1',pad.l);ln.setAttribute('x2',W-pad.r);ln.setAttribute('y1',y);ln.setAttribute('y2',y);ln.setAttribute('stroke','#efece4');svg.appendChild(ln);const tx=document.createElementNS(ns,'text');tx.setAttribute('x',pad.l-7);tx.setAttribute('y',y+3);tx.setAttribute('text-anchor','end');tx.setAttribute('font-size','9.5');tx.setAttribute('fill','#a39')||tx.setAttribute('fill','#9aa');tx.setAttribute('fill','#a8a29a');tx.textContent=yfmt(v);svg.appendChild(tx);}
+  const step=Math.max(1,Math.ceil(xs.length/7));
+  xs.forEach((xl,i)=>{if(i%step!==0)return;const tx=document.createElementNS(ns,'text');tx.setAttribute('x',px(i));tx.setAttribute('y',H-7);tx.setAttribute('text-anchor','middle');tx.setAttribute('font-size','9.5');tx.setAttribute('fill','#a8a29a');tx.textContent=xl;svg.appendChild(tx);});
+  series.forEach(s=>{let d='M '+px(0)+' '+py(s.points[0]);s.points.forEach((p,i)=>d+=' L '+px(i)+' '+py(p));const path=document.createElementNS(ns,'path');path.setAttribute('d',d);path.setAttribute('fill','none');path.setAttribute('stroke',s.color);path.setAttribute('stroke-width','2.4');svg.appendChild(path);s.points.forEach((p,i)=>{const c=document.createElementNS(ns,'circle');c.setAttribute('cx',px(i));c.setAttribute('cy',py(p));c.setAttribute('r','2.6');c.setAttribute('fill',s.color);svg.appendChild(c);});});
+  host.appendChild(svg);}
+function tbl(host,headers,rows){const t=$('table'),tr=$('tr');headers.forEach(h=>tr.appendChild($('th',{},h)));t.appendChild($('thead',{},tr));const tb=$('tbody');rows.forEach(r=>{const row=$('tr');r.forEach(c=>row.appendChild($('td',{},typeof c==='object'&&c!==null?c:String(c))));tb.appendChild(row);});t.appendChild(tb);host.appendChild(t);}
+
+// strip
+const strip=document.getElementById('strip');
+[[K.companies_total,'Companies tracked'],['$'+K.total_market_cap_usd_tn+'tn','Live market cap'],
+ [K.china_share_pct+'%','China share of chain'],['$5tn','MS market by 2050']
+].forEach(s=>strip.appendChild($('div',{class:'s'},$('div',{class:'v'},String(s[0])),$('div',{class:'l'},s[1]))));
+
+// findings
+const f=document.getElementById('findings');
+const bn=D.taxonomy.filter(n=>n.bottleneck==='Y').length;
+[`<b>${K.companies_total} public companies</b> across ${K.nodes} value-chain nodes — ${K.ms_h100_count} overlap the Morgan Stanley Humanoid 100; the rest are InfraMosaic additions.`,
+ `<b>${K.china_share_pct}% of the universe is Chinese</b>, but the concentration is in the Body: rare-earth magnets and mining are ~100% China, actuators 63%.`,
+ `<b>${bn} bottleneck nodes</b> carry the risk — actuators, reducers, roller screws, rare-earth magnets and mining — where supply is concentrated and substitution is hard.`,
+ `The reference robot's cost has fallen to <b>${D.cost_index[D.cost_index.length-1].ihci_western}%</b> of its January-2024 level on the Western track; the China track sits at ${D.cost_index[D.cost_index.length-1].ihci_china}%.`,
+ `<b>${K.programs_mass_production} of ${K.programs_total} tracked programs</b> are in mass production — all Chinese — while Western makers run paid pilots at BMW, Mercedes and GXO.`,
+ `The ${K.companies_total} tracked companies carry <b>$${K.total_market_cap_usd_tn}tn</b> of live market capitalisation — from NVIDIA's ~$5tn down to micro-cap reducer and screw specialists.`,
+ (()=>{const rs=D.supply_demand.find(s=>s.component_id==='planetary-roller-screw'),ra=D.supply_demand.find(s=>s.component_id==='rotary-actuator');return `At base-case 2030 volumes, demand for planetary roller screws runs ~<b>${rs.util_2030_pct}%</b> of assessed capacity and integrated actuators ~${ra.util_2030_pct}% — the build-out the supply chain must fund.`;})(),
+ `InfraMosaic's base case: <b>~550k units shipped in 2030</b> (~$13bn), rising to ~1.4M in 2035 (~$30bn).`
+].forEach(t=>f.appendChild($('li',{html:t})));
+
+// bottlenecks
+const bnodes=D.taxonomy.filter(n=>n.bottleneck==='Y').sort((a,b)=>b.criticality-a.criticality||b.china_pct-a.china_pct);
+tbl(document.getElementById('bottlenecks'),['Node','Segment','Crit','Companies','China %','Dependence'],
+  bnodes.map(n=>[$('b',{},n.node_name),n.segment,String(n.criticality),String(n.n),n.china_pct+'%',
+    $('span',{class:'badge '+depCls(n.china_dependence)},n.china_dependence)]));
+
+// china paragraph + segment bars
+document.getElementById('china-para').innerHTML=`Of the ${K.companies_total} public companies InfraMosaic tracks, ${K.china_share_pct}% are headquartered in China — and the overall supplier-country concentration index (HHI) sits at ${K.overall_hhi_country}, in moderately-concentrated territory. But the headline understates the Body, where the electro-mechanical guts of the robot are made. There, China's share climbs sharply, and in rare-earth magnets and refining it approaches totality.`;
+bars(document.getElementById('china-seg'),D.concentration_segment.map(s=>({label:s.segment,value:s.china_pct,sub:s.china_pct+'%'})),{max:100});
+
+// cost paragraph + IHCI
+const ci=D.cost_index,last=ci[ci.length-1];
+document.getElementById('cost-para').innerHTML=`Costs are collapsing faster than almost anyone forecast. A Western whole-robot cost of ~$200,000 in 2024 is on track for ~${fmt(K.bom_curve_western_2030)} by 2030; the China-supply track runs from ~$46,000 to ~${fmt(K.bom_curve_china_2030)}. On the InfraMosaic Humanoid Cost Index, the Western reference has fallen to ${last.ihci_western}% of its January-2024 level — a ${(100-last.ihci_western).toFixed(0)}% drop in thirty months.`;
+line(document.getElementById('ihci'),[
+  {color:'#d6455d',points:ci.map(r=>r.ihci_western)},
+  {color:'#1f8f86',points:ci.map(r=>r.ihci_china)}],ci.map(r=>r.month),100,v=>Math.round(v));
+document.getElementById('bom-figure').textContent=fmt(K.bom_material_total_usd);
+
+// programs
+document.getElementById('prog-para').innerHTML=`InfraMosaic tracks ${K.programs_total} humanoid programs from ${D.programs.filter(p=>p.maker_public==='Y').length>0?'public and private makers':'makers'} worldwide, from Tesla's Optimus and Figure's 03 to Unitree's $5,800 R1. ${K.programs_mass_production} are already in mass production — every one of them Chinese — even as the headline-grabbing Western pilots remain small.`;
+const showp=['tesla-optimus-gen3','figure-03','apptronik-apollo','unitree-g1','unitree-r1','ubtech-walker-s2','agibot-a2','1x-neo'];
+const sb=s=>{const m={'Mass-production':'b-High','Limited-production':'b-Medium','Pilot':'b-Medium','Pre-production':'b-Low','Prototype':'b-Low','RnD':'b-Low'};return $('span',{class:'badge '+(m[s]||'b-Low')},s);};
+tbl(document.getElementById('programs-tbl'),['Maker','Model','Status','Price','Region'],
+  showp.map(id=>D.programs.find(p=>p.program_id===id)).filter(Boolean).map(p=>[$('b',{},p.maker),p.model,sb(p.status),p.price_usd?fmt(p.price_usd):'n/d',p.region]));
+
+// market
+document.getElementById('market-para').innerHTML=`InfraMosaic's base case puts global humanoid shipments at <b>~${(K.market_units_2030/1000)}k units in 2030</b> (~$${K.market_value_2030_bn}bn of hardware) and ~${(K.market_units_2035/1e6).toFixed(1)}M by 2035. That is deliberately conservative against the bank forecasts below, which range from UBS's ~1M units to Macquarie's $139bn — a reminder that the long-run number is a matter of faith, but the near-term ramp is a matter of supply.`;
+tbl(document.getElementById('scenarios-tbl'),['House','Year','Metric','Value $bn','Note'],
+  D.market_scenarios.filter(s=>s.house.indexOf('InfraMosaic')<0).map(s=>[$('b',{},s.house),s.year,s.metric,s.value_usd_bn||'–',s.note]));
+
+document.getElementById('byline').textContent='InfraMosaic Research · Humanoid Robotics Vertical · '+D.meta.build_date;
+document.getElementById('bd').textContent=D.meta.build_date;
+document.getElementById('mv').textContent=D.meta.methodology;
+</script>
+</body>
+</html>
