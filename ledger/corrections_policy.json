@@ -1,0 +1,14 @@
+{
+ "approver_roles": [
+  "methodology_lead",
+  "committee",
+  "analyst"
+ ],
+ "correction_classes": [
+  "material",
+  "non-material",
+  "typographical"
+ ],
+ "min_retention_floor_years": 5,
+ "retention_years": 7
+}

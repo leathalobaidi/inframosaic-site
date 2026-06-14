@@ -1,0 +1,24 @@
+{
+ "log": "InfraMosaic Corrections + Retention Log",
+ "version": 1,
+ "policy_ref": "docs/CORRECTIONS_POLICY.md",
+ "chain_head": "4a830cdb69c73c2143aca79f199cdd577be1e3f3af42d6d3adb0a36ef45c4bf4",
+ "entries": [
+  {
+   "entry_id": "corr-0001",
+   "figure_id": "kpi.total_market_cap_usd_tn",
+   "old_value": 40.7,
+   "new_value": 41.3,
+   "unit": "usd_tn",
+   "reason": "Restated after Samsung dual-listing market-cap double-count fixed",
+   "correction_class": "material",
+   "superseded_content_hash": "e4646f2926b8a4a245aa1d9638ac384e955dec99ae4b2ad3a198133ac86a4c4e",
+   "corrected_by": "methodology_lead",
+   "approved_by": "committee",
+   "date": "2026-07-01",
+   "retention_until": "2033-07-01",
+   "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+   "content_hash": "4a830cdb69c73c2143aca79f199cdd577be1e3f3af42d6d3adb0a36ef45c4bf4"
+  }
+ ]
+}

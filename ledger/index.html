@@ -92,13 +92,35 @@ code,.mono{font-family:var(--mono);font-size:12.5px}
 </div></div>
 
 <script>
-let DATA=null, KIND='all', Q='';
+let DATA=null, CORR=null, KIND='all', Q='';
 const $=s=>document.querySelector(s);
 const shorth=h=>h?h.slice(0,10)+'…'+h.slice(-6):'—';
 const kindOf=r=>r.figure_id.split('.')[0];
 
+// Spec C — does a figure / its current hash have any logged correction?
+const corrEntriesFor=fid=>(CORR&&CORR.byEntryFigure[fid])?CORR.byEntryFigure[fid]:[];
+const isSuperseded=h=>!!(CORR&&CORR.superseded.has(h));
+const figHasCorrection=r=>corrEntriesFor(r.figure_id).length>0||isSuperseded(r.content_hash);
+
+// Load the corrections log (independent hash chain) alongside the ledger; absence is
+// a no-op (badges simply don't appear). The head also carries a non-chained
+// corrections sidecar (head.corrections) which we fall back to for the badge index.
+fetch('./corrections_log.json').then(r=>r.ok?r.json():null).then(log=>{
+  const entries=(log&&log.entries)||[];
+  const byFig={}; entries.forEach(e=>{(byFig[e.figure_id]=byFig[e.figure_id]||[]).push(e);});
+  Object.values(byFig).forEach(l=>l.sort((a,b)=>(a.date||'').localeCompare(b.date||'')||(a.entry_id||'').localeCompare(b.entry_id||'')));
+  CORR={entries, byEntryFigure:byFig,
+        superseded:new Set(entries.map(e=>e.superseded_content_hash).filter(Boolean))};
+  if(DATA) render();   // re-render rows so badges show once corrections load
+}).catch(()=>{CORR={entries:[],byEntryFigure:{},superseded:new Set()};});
+
 fetch('./publication_ledger.json').then(r=>r.json()).then(d=>{
   DATA=d;
+  if(!CORR && d.corrections){   // fall back to the non-chained head sidecar for badges
+    const byFig=d.corrections.by_figure||{};
+    CORR={entries:[], byEntryFigure:Object.fromEntries(Object.entries(byFig).map(([k,v])=>[k,v.map(id=>({entry_id:id}))])),
+          superseded:new Set(d.corrections.superseded_hashes||[])};
+  }
   $('#meta').innerHTML=
     `<span class="chip"><b>${d.n_records}</b> published figures</span>`+
     `<span class="chip">as of <b>${d.as_of}</b></span>`+
@@ -118,7 +140,8 @@ function render(){
     (!Q || r.figure_id.toLowerCase().includes(Q) || (r.label||'').toLowerCase().includes(Q)));
   $('#list').innerHTML=rows.slice(0,400).map((r,i)=>{
     const gi=DATA.records.indexOf(r);
-    return `<div class="row" data-i="${gi}"><div><span class="fid">${r.figure_id}</span>
+    const corr=figHasCorrection(r)?' <span class="badge b-warn" title="This figure has a logged correction">⚠ corrected</span>':'';
+    return `<div class="row" data-i="${gi}"><div><span class="fid">${r.figure_id}</span>${corr}
       <span class="lab">${r.label||''}</span></div><span class="val">${fmt(r.value)}</span></div>`;
   }).join('')||'<div class="empty">No matches.</div>';
   $('#list').querySelectorAll('.row').forEach(el=>el.onclick=()=>show(+el.dataset.i,el));
@@ -136,6 +159,23 @@ function show(i,el){
     return `<div class="inp"><div class="src">${link}</div>${sha}</div>`;
   }).join('');
   const apClass=a.status==='approved'?'b-ok':'b-rev';
+  // Spec C — corrections history for this figure (old->new, reason, who, retention,
+  // and the superseded content_hash linking back to the exact prior published record).
+  const cEntries=corrEntriesFor(r.figure_id);
+  let corrSec='';
+  if(cEntries.length){
+    const rows=cEntries.map(e=>{
+      const sup=e.superseded_content_hash||'';
+      const supLink=sup?`<div class="sha">supersedes <b>${shorth(sup)}</b>${sup===r.content_hash?' (the value shown above)':''}</div>`:'';
+      const who=(e.corrected_by||e.approved_by)?`<div class="sha">corrected by ${e.corrected_by||'?'} · approved by ${e.approved_by||'?'}${e.correction_class?' · '+e.correction_class:''}</div>`:'';
+      const ret=e.retention_until?`<div class="sha">retained until ${e.retention_until}</div>`:'';
+      const val=(e.old_value!==undefined)?`<div class="src">${fmt(e.old_value)} &rarr; <b>${fmt(e.new_value)}</b> ${e.unit||''}</div>`:'';
+      return `<div class="inp"><div class="src">${e.entry_id||''}${e.date?' · '+e.date:''}</div>${val}<div class="sha">${e.reason||''}</div>${who}${ret}${supLink}</div>`;
+    }).join('');
+    corrSec=`<div class="sec"><h3><span class="ic" style="color:var(--amber)">⚠</span> Corrections history</h3>
+      <div style="font-size:12.5px;color:var(--muted);margin-bottom:8px">This figure has been restated. Each entry is an append-only, hash-chained record (<code>ledger/corrections_log.json</code>) binding the new value to the exact prior published content hash it supersedes.</div>
+      ${rows}</div>`;
+  }
   $('#detail').innerHTML=`
     <div class="eyebrow">${r.label||kindOf(r)}</div>
     <h2>${fmt(r.value)} <span style="font-family:var(--sans);font-size:15px;color:var(--muted);font-weight:500">${r.unit||''}</span></h2>
@@ -159,6 +199,7 @@ function show(i,el){
         <span class="k">By</span><span class="v">${a.by}</span>
         <span class="k">Date</span><span class="v">${a.date}</span>
       </div></div>
+    ${corrSec}
     <div class="sec"><h3><span class="ic">◆</span> Chain position #${i}</h3>
       <div class="hash">prev&nbsp; ${r.prev_hash}</div>
       <div class="hash" style="margin-top:5px">this&nbsp; <b>${r.content_hash}</b></div></div>`;

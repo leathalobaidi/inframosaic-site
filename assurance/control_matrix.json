@@ -1,0 +1,135 @@
+{
+ "as_of": "2026-06-13",
+ "build_commit": "f5b7ef686b70ce28a16f591162d729b5d42ba055",
+ "controls": [
+  {
+   "artifact": "None — no independent external auditor engaged; this pack is the ISAE 3000 / IOSCO-PRA dry run that PREPARES for one",
+   "control_id": "annual-external-audit",
+   "evidence_path": null,
+   "evidence_sha256": null,
+   "iosco_principle": "Annual external audit",
+   "isae3000_objective": "An independent external auditor performs a periodic assurance engagement (e.g. ISAE 3000) over the benchmark controls.",
+   "ledger_figure_id": "assurance.annual-external-audit",
+   "notes": "HONEST GAP. No independent external auditor / ISAE 3000 engagement has occurred. QA_AQUA_REVIEW.md is explicitly an internal-style self-review and itself recommends a genuinely independent second-analyst review. This pack is the dry run that prepares for, but does not constitute, that audit.",
+   "status": "gap"
+  },
+  {
+   "artifact": "ledger/publication_ledger.json (hash-chained records, JSON + SQLite mirror) — re-verifiable via build/build_ledger.py --verify",
+   "control_id": "audit-trails",
+   "evidence_path": "build/build_ledger.py",
+   "evidence_sha256": "d59d99477b024f76c32f043a5a222962437076761aa892a5bd08cb302cc4a027",
+   "iosco_principle": "Audit trails available to regulators",
+   "isae3000_objective": "A complete, independently re-verifiable audit trail binds each published figure to its evidence, methodology and approval.",
+   "ledger_figure_id": "assurance.audit-trails",
+   "notes": "The strongest control in the pack. Every figure binds to evidence sha256 + methodology commit + method_sha256 + QA + approval and the records are hash-chained, so any retroactive edit is detectable. Independently re-verifiable via `python3 build/build_ledger.py --verify` (the cited artifact) and locked by tests/test_ledger.py. The pre-assurance chain head and base record count are pinned live in this matrix's header.",
+   "status": "met"
+  },
+  {
+   "artifact": "docs/policies/COMPLAINTS_POLICY.md + the append-only corrections log (ledger/corrections_log.json, supersedes-hash)",
+   "control_id": "complaints-handling",
+   "evidence_path": "docs/policies/COMPLAINTS_POLICY.md",
+   "evidence_sha256": "81c65ba14b181c981d4735cd1ef0ae4c9839411e40c2d3195124e2fa6d87a9ae",
+   "iosco_principle": "Complaints handling + records",
+   "isae3000_objective": "A documented complaints process exists with acknowledgement/resolution SLAs and a retained complaints record.",
+   "ledger_figure_id": "assurance.complaints-handling",
+   "notes": "The complaints policy (lodging, SLAs, escalation, 5-year record retention) and the append-only corrections log that a complaint-driven restatement writes to both exist. No intake channel is yet operationally staffed and the log is seeded empty — partial.",
+   "status": "partial"
+  },
+  {
+   "artifact": "docs/policies/CONFLICTS_POLICY.md + the build-actor != approver rule in the approval gate (and corrected_by != approved_by in corrections)",
+   "control_id": "conflicts-segregation",
+   "evidence_path": "docs/policies/CONFLICTS_POLICY.md",
+   "evidence_sha256": "1d468c156c9f4e9e90728a86c99b653ff2f42efe078b5a504df3f2bea7004968",
+   "iosco_principle": "Conflicts of interest / segregation of duties",
+   "isae3000_objective": "Build/production and approval are performed by independent parties; conflicts of interest are identified and managed.",
+   "ledger_figure_id": "assurance.conflicts-segregation",
+   "notes": "The conflicts policy and the neutrality firewall (METHODOLOGY §8) exist, and segregation is enforced as a write/resolve-time rule across the approval, corrections and registry registries (build_actor != approver). But identities are self-asserted strings, and at v1.0 build and approval are the same single operator — true independence (signed commits / SSO / 4-eyes) is not yet achieved. This is the key organisational gap — partial.",
+   "status": "partial"
+  },
+  {
+   "artifact": "Deterministic build + the automated test suite (live count in the ledger qa block) + the AQuA-framework review, all bound into the ledger",
+   "control_id": "internal-controls",
+   "evidence_path": "docs/QA_AQUA_REVIEW.md",
+   "evidence_sha256": "113f7f35cff490e4a348126f1fbbee60cea7af99da9ce5a6966aab0dc45dbc0f",
+   "iosco_principle": "Internal controls & quality",
+   "isae3000_objective": "Documented internal controls (deterministic build, automated testing, QA framework) operate effectively and are evidenced.",
+   "ledger_figure_id": "assurance.internal-controls",
+   "notes": "Strong and demonstrable today: a deterministic, network-free build; an automated test suite whose live pass count is pulled from the ledger qa block; an AQuA-framework review; and fail-closed gates (registry --check, --check-approvals) — all tamper-evident inside the hash chain.",
+   "status": "met"
+  },
+  {
+   "artifact": "docs/policies/METHODOLOGY_CHANGE_POLICY.md + the registry's fail-closed change gate (version bump + append-only changelog)",
+   "control_id": "methodology-change-procedure",
+   "evidence_path": "docs/policies/METHODOLOGY_CHANGE_POLICY.md",
+   "evidence_sha256": "cb8021b071c04864ceeb6ddcace7ece9d08de2cf58b8ba94ed37bd944cd65dfd",
+   "iosco_principle": "Methodology change procedure + consultation",
+   "isae3000_objective": "Material methodology changes follow a documented procedure with version increment, changelog and stakeholder consultation.",
+   "ledger_figure_id": "assurance.methodology-change-procedure",
+   "notes": "The mechanical change procedure is REAL and enforced — a formula edit without a version bump + changelog entry fails the build closed (methodology/build_registry.py --check). The CONSULTATION limb is documented but aspirational: no external constituency has yet been consulted, so this principle is partial.",
+   "status": "partial"
+  },
+  {
+   "artifact": "N/A — no concluded-transaction feed; IMES is forward-looking, prices are HARD/ASSESSED-tagged assessments (METHODOLOGY §5)",
+   "control_id": "prioritise-concluded-transactions",
+   "evidence_path": null,
+   "evidence_sha256": null,
+   "iosco_principle": "Prioritise concluded transactions",
+   "isae3000_objective": "Where a transaction-based input hierarchy exists, concluded transactions are prioritised over estimates/judgments.",
+   "ledger_figure_id": "assurance.prioritise-concluded-transactions",
+   "notes": "HONEST GAP and the defining limitation vs a true PRA. InfraMosaic has no submission/transaction window: IMES sub-scores are assessed forward-looking judgments and component prices are triangulated estimates tagged HARD vs ASSESSED. The HARD/ASSESSED confidence tag is the nearest analogue, but there is no concluded-transaction prioritisation. Roadmap: STRATEGY P3 (structured price-assessment window).",
+   "status": "gap"
+  },
+  {
+   "artifact": "docs/METHODOLOGY.md + methodology/registry.json (every figure's formula_ref resolves to a named, versioned, content-hashed method)",
+   "control_id": "published-methodology",
+   "evidence_path": "docs/METHODOLOGY.md",
+   "evidence_sha256": "b145fcd3e7e6922ce2ec7325c9106b0822322cd7170d3580d55d9c536304f2b9",
+   "iosco_principle": "Published methodology",
+   "isae3000_objective": "The methodology is documented, version-controlled and publicly available, and every published figure binds to it.",
+   "ledger_figure_id": "assurance.published-methodology",
+   "notes": "Fully public and reproducible: METHODOLOGY.md (v1.0, git-versioned) plus the methodology registry pin every figure to a method_sha256 carried inside its hash-chained ledger record.",
+   "status": "met"
+  },
+  {
+   "artifact": "docs/policies/RETENTION_SCHEDULE.md + the corrections retention clock (retention_until = date + N yrs, 5yr floor) + git history + hash chain",
+   "control_id": "record-retention",
+   "evidence_path": "docs/policies/RETENTION_SCHEDULE.md",
+   "evidence_sha256": "d8f61974cdcd55928b4d16c1948ce8f2911bfd9740ba223c05340a46a066b9ef",
+   "iosco_principle": "Document / record retention",
+   "isae3000_objective": "Records are retained for a defined period per record class with a tamper-evident immutability mechanism.",
+   "ledger_figure_id": "assurance.record-retention",
+   "notes": "Retention is genuinely enforced, not just stated: per-class periods in the schedule, a per-entry retention clock in the corrections log, the append-only ledger_hash_archive, and git history + the publication hash chain make source CSVs, ledger snapshots and approvals tamper-evident.",
+   "status": "met"
+  },
+  {
+   "artifact": "Registry review{cadence:annual,last_review,next_review_due} per method + docs/QA_AQUA_REVIEW.md (the first review cycle)",
+   "control_id": "routine-annual-review",
+   "evidence_path": "docs/QA_AQUA_REVIEW.md",
+   "evidence_sha256": "113f7f35cff490e4a348126f1fbbee60cea7af99da9ce5a6966aab0dc45dbc0f",
+   "iosco_principle": "Routine (annual) methodology review",
+   "isae3000_objective": "The methodology is reviewed on a defined periodic cadence; review outcomes are recorded.",
+   "ledger_figure_id": "assurance.routine-annual-review",
+   "notes": "An annual cadence and a queryable due-date driver exist (build_registry.py --review --due), and QA_AQUA_REVIEW.md is the first cycle. The recurring human review is a forward commitment, not yet a demonstrated multi-year track record — partial.",
+   "status": "partial"
+  }
+ ],
+ "framework": "IOSCO Principles for PRAs / Financial Benchmarks + ISAE 3000",
+ "generated_by": "build/build_assurance.py",
+ "ledger_head_pre_assurance": "f1764c63567ecdd366f28eb9e9254e54a647efe479926fc5f7227928d9178613",
+ "matrix": "InfraMosaic External-Assurance Control Matrix",
+ "methodology_version": "v1.0",
+ "n_base_records": 353,
+ "pack_version": "1.0",
+ "qa": {
+  "n_tests_declared": 134,
+  "tests_failed": 0,
+  "tests_passed": 134
+ },
+ "schema_version": 1,
+ "scorecard": {
+  "gap": 2,
+  "met": 4,
+  "partial": 4,
+  "total": 10
+ }
+}
