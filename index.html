@@ -557,8 +557,19 @@ document.querySelectorAll('.stats').forEach(s=>io.observe(s));
     if(!name||!okEmail||!company){ err.style.display='block'; return; }
     err.style.display='none';
     const sub=document.getElementById('gate-submit'); sub.textContent='…'; sub.disabled=true;
-    const lead={name,email,company,role:val('role'),use:val('use'),ref:location.pathname};
-    try{ await fetch('/api/lead',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(lead)}); }catch(_){/* best-effort: never block access */}
+    try{
+      await fetch('https://formsubmit.co/ajax/alobaidi.leath@gmail.com',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({
+          _subject:'InfraMosaic — new access request',
+          _template:'table',
+          _replyto:email,
+          Name:name, 'Work email':email, Company:company,
+          Role:val('role'), 'Use case':val('use'), Page:location.pathname
+        })
+      });
+    }catch(_){/* best-effort: never block access on a delivery hiccup */}
     try{ localStorage.setItem(KEY,JSON.stringify({email,company,ts:Date.now()})); }catch(_){}
     formWrap.style.display='none'; okBox.style.display='';
     setTimeout(enter,1100);
