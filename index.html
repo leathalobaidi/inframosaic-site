@@ -531,7 +531,10 @@ document.querySelectorAll('.stats').forEach(s=>io.observe(s));
         err=document.getElementById('gate-err'), okBox=document.getElementById('gate-ok'),
         formWrap=document.getElementById('gate-form-wrap'), goBtn=document.getElementById('gate-go');
   let pending='dashboard/';
-  const registered=()=>{try{return !!JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return false}};
+  // OPEN_ACCESS: while true the whole site is free to browse as a member — no register
+  // wall on the dashboard. Flip to false to re-enable the email+employer sign-in gate.
+  const OPEN_ACCESS=true;
+  const registered=()=>OPEN_ACCESS||(function(){try{return !!JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return false}})();
   function open(target){ pending=target||'dashboard/'; goBtn.href=pending;
     okBox.style.display='none'; formWrap.style.display='';
     ov.classList.add('open'); document.body.style.overflow='hidden';
