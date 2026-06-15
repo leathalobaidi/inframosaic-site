@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insights — Humanoid Intelligence | InfraMosaic</title>
+<meta name="description" content="Insights from the InfraMosaic Humanoid Intelligence desk — asset-level analysis of the humanoid-robotics value chain: the bill of materials, the mechanical chokepoints, the deployment wave, China's grip and the cost-down curve. Every figure resolves to the Publication Ledger.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2b'/%3E%3Crect x='6' y='6' width='7' height='7' fill='%2313966b'/%3E%3Crect x='15' y='6' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='6' y='15' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='15' y='15' width='7' height='7' fill='%233fcf9a'/%3E%3Crect x='6' y='24' width='4' height='2' fill='%23cdd6df'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1a2b; --navy2:#0f2940; --navy3:#16395a; --ink:#0e1c29;
+  --green:#13966b; --green-d:#0b6e4f; --green-br:#3fcf9a;
+  --paper:#ffffff; --bg:#eef1f4; --warm:#f4f2ec;
+  --line:#dbe2e9; --line-d:#1d3b56; --muted:#5b6a78; --faint:#8696a4;
+  --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);
+     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.serif{font-family:var(--serif)}
+.mono{font-family:var(--mono)}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(10,26,43,.86);
+           backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;font-size:19px;
+      font-family:var(--serif);letter-spacing:.01em}
+.logo .mark{width:26px;height:26px;border-radius:5px;flex:0 0 26px}
+.logo small{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.22em;
+            text-transform:uppercase;color:var(--green-br);display:block;margin-top:-3px}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{color:#aebecd;font-size:14.5px;font-weight:500;transition:color .2s}
+.navlinks a:hover{color:#fff}
+.navlinks a.here{color:#fff}
+.btn{font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:7px;
+     padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:all .2s;display:inline-block}
+.btn-g{background:var(--green);color:#fff}
+.btn-g:hover{background:var(--green-br);color:var(--navy)}
+.btn-ghost{border-color:#2b4a68;color:#cdd9e4}
+.btn-ghost:hover{border-color:var(--green-br);color:#fff}
+
+/* ---------- masthead ---------- */
+.masthead{background:
+   radial-gradient(1100px 600px at 80% -12%,rgba(19,150,107,.20),transparent 60%),
+   linear-gradient(168deg,#0a1a2b 0%,#0d2338 58%,#0a1c30 100%);
+   color:#eaf2f8;border-bottom:1px solid var(--line-d)}
+.masthead .wrap{padding-top:66px;padding-bottom:58px;max-width:880px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+         color:var(--green-br);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--green-br)}
+.masthead h1{font-family:var(--serif);font-weight:500;font-size:52px;line-height:1.06;
+         letter-spacing:-.02em;margin-bottom:20px}
+.masthead h1 em{font-style:italic;color:var(--green-br)}
+.masthead .lede{font-size:18.5px;color:#b3c6d6;max-width:660px;line-height:1.6}
+.masthead .meta{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#8ba4b8;
+                margin-top:26px;display:flex;gap:20px;flex-wrap:wrap}
+.masthead .meta b{color:var(--green-br);font-weight:600}
+
+/* ---------- listing ---------- */
+.listing{padding:70px 0 88px}
+.lhead{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+       margin-bottom:34px;flex-wrap:wrap}
+.lhead .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+        color:var(--green-d);font-weight:500}
+.lhead .count{font-family:var(--mono);font-size:12.5px;color:var(--faint);letter-spacing:.04em}
+
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.acard{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;
+       background:var(--paper);overflow:hidden;position:relative;
+       transition:transform .25s,box-shadow .25s,border-color .25s}
+.acard:hover{transform:translateY(-4px);box-shadow:0 22px 50px rgba(13,35,56,.12);border-color:#bfe6d6}
+.acard .topbar{height:4px;background:linear-gradient(90deg,var(--green),var(--green-br))}
+.acard .inner{padding:28px 30px 26px;flex:1;display:flex;flex-direction:column}
+.acard .tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+            color:var(--green-d);margin-bottom:14px}
+.acard h2{font-family:var(--serif);font-size:25px;font-weight:600;line-height:1.16;
+          letter-spacing:-.01em;color:var(--ink);margin-bottom:13px}
+.acard h2 em{font-style:italic;color:var(--green-d)}
+.acard .dek{font-size:15px;color:var(--muted);line-height:1.58;margin-bottom:22px;flex:1}
+.acard .foot{display:flex;align-items:center;justify-content:space-between;gap:12px;
+             padding-top:18px;border-top:1px solid var(--line)}
+.acard .src{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink);font-weight:500}
+.acard .date{font-family:var(--mono);font-size:11.5px;color:var(--faint);letter-spacing:.03em}
+.acard .go{margin-top:14px;font-family:var(--mono);font-size:13px;color:var(--green-d);font-weight:600}
+.acard .go::after{content:" \2192";transition:margin-left .2s}
+.acard:hover .go::after{margin-left:4px}
+
+/* ---------- method strip ---------- */
+.method{background:var(--warm);border-top:1px solid var(--line)}
+.method .wrap{padding:54px 32px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.method h3{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.14;
+           letter-spacing:-.01em;color:var(--ink);margin-bottom:12px}
+.method p{font-size:16px;color:var(--muted);line-height:1.6}
+.method .links{display:flex;gap:14px;flex-wrap:wrap}
+
+/* ---------- footer ---------- */
+footer{background:#071420;color:#8ba4b8;padding:58px 0 34px;font-size:14px}
+.fcols{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:34px;padding-bottom:36px;
+       border-bottom:1px solid var(--line-d)}
+footer .logo{margin-bottom:14px}
+footer .blurb{max-width:330px;line-height:1.6;color:#7e96aa}
+footer h5{color:#cdd9e4;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;font-weight:600}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+footer li a{color:#8ba4b8;transition:color .2s}
+footer li a:hover{color:var(--green-br)}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:24px;
+      font-size:12.5px;color:#5e7488;flex-wrap:wrap;gap:10px}
+.fbot .disc{max-width:680px;line-height:1.5}
+
+@media(max-width:920px){
+  .masthead h1{font-size:38px}
+  .cards{grid-template-columns:1fr}
+  .method .wrap{grid-template-columns:1fr}
+  .navlinks{display:none}
+  .fcols{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav"><div class="wrap">
+  <a class="logo" href="../">
+    <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+      <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+      <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+    <span>InfraMosaic<small>Frontier-tech intelligence</small></span>
+  </a>
+  <nav class="navlinks">
+    <a href="./" class="here">Insights</a>
+    <a href="../report/humanoid100_2026.html">Humanoid&nbsp;100</a>
+    <a href="../dashboard/">Live&nbsp;data</a>
+    <a href="../ledger/">Ledger</a>
+  </nav>
+  <a class="btn btn-g" href="../dashboard/">Explore the data</a>
+</div></header>
+
+<!-- MASTHEAD -->
+<section class="masthead"><div class="wrap">
+  <div class="eyebrow">InfraMosaic Research · Humanoid Intelligence desk</div>
+  <h1>Insights — <em>Humanoid Intelligence</em></h1>
+  <p class="lede">Asset-level analysis of the humanoid-robotics value chain — the bill of materials, the mechanical chokepoints, the deployment wave, China's grip and the cost-down curve. Each figure resolves to hash-chained evidence in the Publication Ledger.</p>
+  <div class="meta">
+    <span><b>6</b> insights</span>
+    <span><b>255</b> companies tracked</span>
+    <span><b>$40.7tn</b> live market cap</span>
+    <span><b>v1.0</b> methodology</span>
+  </div>
+</div></section>
+
+<!-- LISTING -->
+<section class="listing"><div class="wrap">
+  <div class="lhead">
+    <div class="kicker">Latest from the desk</div>
+    <div class="count">6 insights · June 2026</div>
+  </div>
+  <div class="cards">
+
+    <a class="acard" href="./sensors-are-the-number-one-humanoid-bom-cost.html">
+      <div class="topbar"></div>
+      <div class="inner">
+        <div class="tag">Bill of materials</div>
+        <h2>Sensors, not actuators, are humanoid robotics' <em>#1 cost</em> — at 37% of the bill of materials</h2>
+        <p class="dek">The single largest line in a humanoid's ~$55,000 material BOM is sensing — ahead of motors and screws at 20% each. The six-axis force-torque sensor that tops the cost stack is also the tightest 2030 bottleneck, at 440% of assessed capacity. The number was hiding in Morgan Stanley's own exhibit.</p>
+        <div class="foot">
+          <span class="src">InfraMosaic Research</span>
+          <span class="date">15 Jun 2026</span>
+        </div>
+        <span class="go">Read the insight</span>
+      </div>
+    </a>
+
+    <a class="acard" href="./the-brain-is-already-priced.html">
+      <div class="topbar"></div>
+      <div class="inner">
+        <div class="tag">Market structure</div>
+        <h2>The humanoid "Brain" is now <em>79.5%</em> of a $40.7&nbsp;trillion universe — and almost none of that value is a humanoid bet</h2>
+        <p class="dek">The AI/memory super-cycle repriced the Brain — NVIDIA ~$4.97tn, Micron ~$1.1tn, SK Hynix ~$1.0tn. The Brain is 79.5% of the universe but its humanoid optionality is a rounding error. The genuinely humanoid-levered return sits in the small/mid Body names.</p>
+        <div class="foot">
+          <span class="src">InfraMosaic Research</span>
+          <span class="date">15 Jun 2026</span>
+        </div>
+        <span class="go">Read the insight</span>
+      </div>
+    </a>
+
+    <a class="acard" href="./china-surgical-dominance-rare-earth-magnets.html">
+      <div class="topbar"></div>
+      <div class="inner">
+        <div class="tag">Supply-chain risk</div>
+        <h2>China's grip on humanoid robotics isn't broad — <em>it's surgical.</em></h2>
+        <p class="dek">By company count China holds 40.4% of the value chain. By irreplaceable part it holds the whole thing: ~100% of rare-earth sintered magnets, and an export-control lever sitting precisely on the three nodes a humanoid cannot move without — magnets, reducers and roller screws.</p>
+        <div class="foot">
+          <span class="src">InfraMosaic Research</span>
+          <span class="date">15 Jun 2026</span>
+        </div>
+        <span class="go">Read the insight</span>
+      </div>
+    </a>
+
+    <a class="acard" href="./roller-screws-tightest-mechanical-chokepoint.html">
+      <div class="topbar"></div>
+      <div class="inner">
+        <div class="tag">Supply / demand</div>
+        <h2>Roller screws, not chips, are the humanoid ramp's tightest <em>mechanical</em> chokepoint — demand runs to 770% of 2030 capacity</h2>
+        <p class="dek">In InfraMosaic's supply/demand order book, planetary roller screws run to ~770% of assessed 2030 capacity — the single tightest mechanical node in the humanoid value chain. Integrated actuators sit at ~385%, six-axis force-torque sensors at ~440%. China holds the cost-down template.</p>
+        <div class="foot">
+          <span class="src">InfraMosaic Research</span>
+          <span class="date">13 Jun 2026</span>
+        </div>
+        <span class="go">Read the insight</span>
+      </div>
+    </a>
+
+    <a class="acard" href="./deployment-has-started.html">
+      <div class="topbar"></div>
+      <div class="inner">
+        <div class="tag">Deployment</div>
+        <h2>Deployment has started: <em>122,302</em> humanoid units are now on order or on the floor</h2>
+        <p class="dek">Across 26 tracked programs, the world's automakers, logistics giants and Chinese pure-plays have moved humanoids off the keynote stage and onto the payroll — Figure→BMW, Apptronik→Mercedes, Agility→GXO. The transition Morgan Stanley could only sketch as a forecast is now a counted number.</p>
+        <div class="foot">
+          <span class="src">InfraMosaic Research</span>
+          <span class="date">13 Jun 2026</span>
+        </div>
+        <span class="go">Read the insight</span>
+      </div>
+    </a>
+
+    <a class="acard" href="./humanoid-cost-down-curve-ihci.html">
+      <div class="topbar"></div>
+      <div class="inner">
+        <div class="tag">Cost index · IHCI</div>
+        <h2>A Western humanoid robot fell from <em>~$200k to ~$95k</em> in 18 months — the cost-down curve that flips "too expensive"</h2>
+        <p class="dek">The InfraMosaic Humanoid Cost Index now reads 47.3 for a Western reference robot and 65.0 for China — a ~53% Western cost-down in 18 months. The objection that anchored every bear case is weakening on schedule, and the bill of materials shows exactly where the next leg comes from.</p>
+        <div class="foot">
+          <span class="src">InfraMosaic Research</span>
+          <span class="date">13 Jun 2026</span>
+        </div>
+        <span class="go">Read the insight</span>
+      </div>
+    </a>
+
+  </div>
+</div></section>
+
+<!-- METHOD STRIP -->
+<section class="method"><div class="wrap">
+  <div>
+    <h3>Every figure resolves to evidence.</h3>
+    <p>InfraMosaic Insights are written off the live database, not around it. The market caps, the bill of materials, the supply/demand order book and the cost index all trace to hash-chained entries in the Publication Ledger — and to the live dashboard you can open and query yourself.</p>
+  </div>
+  <div class="links">
+    <a class="btn btn-g" href="../dashboard/" style="background:var(--green);color:#fff">Open the dashboard</a>
+    <a class="btn btn-ghost" href="../ledger/" style="border-color:#bcd0c6;color:var(--green-d)">View the ledger</a>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="fcols">
+    <div>
+      <a class="logo" href="../" style="color:#fff">
+        <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+          <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+          <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+        <span>InfraMosaic</span></a>
+      <p class="blurb">The price-reporting agency and asset-level database for the frontier hard-tech economy. Published by the Humanoid Intelligence desk.</p>
+    </div>
+    <div><h5>Research</h5><ul>
+      <li><a href="./">Insights</a></li>
+      <li><a href="../report/index.html">State of Humanoids 2026</a></li>
+      <li><a href="../report/humanoid100_2026.html">Humanoid 100 — 2026 update</a></li>
+      <li><a href="../dashboard/">Live dashboard</a></li></ul></div>
+    <div><h5>Method</h5><ul>
+      <li><a href="../ledger/">Publication ledger</a></li>
+      <li><a href="../dashboard/">Supply/demand order book</a></li>
+      <li><a href="../">About InfraMosaic</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <span>© <span id="yr">2026</span> InfraMosaic · Independent research</span>
+    <span class="disc">Independent research and analysis. Not affiliated with, endorsed by, or sponsored by Morgan Stanley; the MS Humanoid 100 and its Exhibit 54 are used solely as a published cross-reference. Nothing herein is investment advice.</span>
+  </div>
+</div></footer>
+
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

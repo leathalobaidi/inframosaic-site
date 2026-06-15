@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Brain is already priced: buying the humanoid "Brain" is now mostly buying the AI trade — InfraMosaic Insight</title>
+<meta name="description" content="The AI/memory super-cycle repriced the humanoid Brain — NVIDIA ~$4.97tn, Micron ~$1.1tn, SK Hynix ~$1.0tn. The Brain is 79.5% of the $40.7tn universe but its humanoid optionality is a rounding error. The genuinely humanoid-levered return sits in the small/mid Body names.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2b'/%3E%3Crect x='6' y='6' width='7' height='7' fill='%2313966b'/%3E%3Crect x='15' y='6' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='6' y='15' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='15' y='15' width='7' height='7' fill='%233fcf9a'/%3E%3Crect x='6' y='24' width='4' height='2' fill='%23cdd6df'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1a2b; --navy2:#0f2940; --navy3:#16395a; --ink:#0e1c29;
+  --green:#13966b; --green-d:#0b6e4f; --green-br:#3fcf9a;
+  --paper:#ffffff; --bg:#eef1f4; --warm:#f4f2ec;
+  --line:#dbe2e9; --line-d:#1d3b56; --muted:#5b6a78; --faint:#8696a4;
+  --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);
+     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.serif{font-family:var(--serif)}
+.mono{font-family:var(--mono)}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(10,26,43,.86);
+           backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;font-size:19px;
+      font-family:var(--serif);letter-spacing:.01em}
+.logo .mark{width:26px;height:26px;border-radius:5px;flex:0 0 26px}
+.logo small{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.22em;
+            text-transform:uppercase;color:var(--green-br);display:block;margin-top:-3px}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{color:#aebecd;font-size:14.5px;font-weight:500;transition:color .2s}
+.navlinks a:hover{color:#fff}
+.btn{font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:7px;
+     padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:all .2s;display:inline-block}
+.btn-g{background:var(--green);color:#fff}
+.btn-g:hover{background:var(--green-br);color:var(--navy)}
+.btn-ghost{border-color:#2b4a68;color:#cdd9e4}
+.btn-ghost:hover{border-color:var(--green-br);color:#fff}
+
+/* ---------- article header ---------- */
+.ahead{background:
+   radial-gradient(900px 480px at 84% -20%,rgba(19,150,107,.20),transparent 60%),
+   linear-gradient(168deg,#0a1a2b 0%,#0d2338 60%,#0a1c30 100%);
+   color:#eaf2f8;padding:64px 0 56px;border-bottom:1px solid var(--line-d)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+         color:var(--green-br);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--green-br)}
+.ahead h1{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1.07;
+         letter-spacing:-.018em;max-width:960px;margin-bottom:22px}
+.ahead h1 em{font-style:italic;color:var(--green-br)}
+.byline{font-family:var(--mono);font-size:13px;color:#9fb6c8;letter-spacing:.02em;
+        display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-top:8px}
+.byline b{color:#dbe8f1;font-weight:600}
+.byline .dot{color:#3a587a}
+
+/* ---------- article body ---------- */
+.article{max-width:760px;margin:0 auto;padding:56px 32px 24px}
+.lede{font-family:var(--serif);font-size:23px;line-height:1.5;font-weight:500;color:var(--ink);
+      margin-bottom:38px;letter-spacing:-.005em}
+.lede b{color:var(--green-d)}
+.article h2{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.15;
+            letter-spacing:-.01em;margin:42px 0 16px;color:var(--ink)}
+.article h3{font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:.02em;
+            text-transform:none;margin:34px 0 10px;color:var(--green-d)}
+.article p{margin-bottom:20px;color:#23323f}
+.article p a{color:var(--green-d);border-bottom:1px solid rgba(19,150,107,.35);font-weight:500}
+.article p a:hover{border-color:var(--green-d)}
+.article strong{font-weight:700;color:var(--ink)}
+.article em{font-style:italic}
+.fignum{font-family:var(--mono);font-size:13px;color:var(--green-d)}
+
+/* stat band */
+.statband{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+          border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:32px 0}
+.statband .s{background:var(--paper);padding:24px 20px}
+.statband .n{font-family:var(--serif);font-size:33px;font-weight:600;line-height:1;color:var(--navy)}
+.statband .n .u{color:var(--green);font-size:21px}
+.statband .l{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:9px;line-height:1.4}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;margin:26px 0;font-size:14.5px}
+.tbl caption{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:left;
+             margin-bottom:12px;letter-spacing:.02em}
+.tbl th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+        color:var(--muted);text-align:left;padding:9px 12px;border-bottom:2px solid var(--line-d)}
+.tbl th.r,.tbl td.r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl td{padding:9px 12px;border-bottom:1px solid var(--line);color:#23323f}
+.tbl tr:hover td{background:#f6f9f7}
+.tbl .name{font-weight:600;color:var(--ink)}
+.tbl .mono{font-family:var(--mono);font-size:13px}
+.tbl .hi{color:var(--green-d);font-weight:600}
+.tbl tfoot td{border-top:2px solid var(--line-d);font-weight:600;color:var(--ink);border-bottom:none}
+
+/* pull */
+.pull{font-family:var(--serif);font-size:25px;line-height:1.38;font-weight:500;color:var(--navy2);
+      border-left:3px solid var(--green);padding:6px 0 6px 26px;margin:36px 0;letter-spacing:-.005em}
+
+/* verify callout */
+.verify{background:var(--navy);color:#dce8f1;border-radius:16px;padding:30px 32px;margin:42px 0;
+        position:relative;overflow:hidden;border:1px solid var(--line-d)}
+.verify::before{content:"";position:absolute;inset:0;background:
+   radial-gradient(420px 200px at 92% 0%,rgba(63,207,154,.16),transparent 65%);pointer-events:none}
+.verify .tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+             color:var(--green-br);margin-bottom:12px}
+.verify h4{font-family:var(--serif);font-size:22px;font-weight:600;color:#fff;margin-bottom:12px;line-height:1.2}
+.verify p{font-size:15.5px;line-height:1.6;color:#b9cad8;margin-bottom:16px;position:relative}
+.verify .chain{font-family:var(--mono);font-size:12px;color:#7e98ad;word-break:break-all;
+               background:rgba(255,255,255,.04);border:1px solid var(--line-d);border-radius:8px;
+               padding:11px 13px;margin-bottom:18px}
+.verify .chain b{color:var(--green-br);font-weight:600}
+.verify a.vbtn{display:inline-block;font-family:var(--sans);font-weight:600;font-size:14px;
+               background:var(--green);color:#fff;border-radius:7px;padding:10px 18px;position:relative}
+.verify a.vbtn:hover{background:var(--green-br);color:var(--navy)}
+
+/* node list */
+.nodebox{background:var(--warm);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin:28px 0}
+.nodebox h4{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+            color:var(--green-d);margin-bottom:14px}
+.nodebox ul{list-style:none}
+.nodebox li{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px solid var(--line);
+            font-size:15px}
+.nodebox li:last-child{border-bottom:none}
+.nodebox li b{color:var(--ink);font-weight:600}
+.nodebox li .v{font-family:var(--mono);font-size:14px;color:var(--green-d);white-space:nowrap}
+
+/* cta */
+.ctarow{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0 8px}
+.cta-end{background:var(--warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+         padding:48px 0;margin-top:48px}
+.cta-end .wrap{max-width:760px}
+.cta-end h3{font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.cta-end p{color:var(--muted);margin-bottom:22px}
+
+/* footer */
+footer{background:#071420;color:#8ba4b8;padding:54px 0 34px;font-size:14px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+footer .logo{margin-bottom:14px}
+footer .blurb{max-width:320px;line-height:1.6;color:#7e96aa}
+footer h5{color:#cdd9e4;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;font-weight:600}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+footer li a{color:#8ba4b8;transition:color .2s}
+footer li a:hover{color:var(--green-br)}
+footer .base{border-top:1px solid #122636;margin-top:38px;padding-top:20px;font-size:12.5px;color:#5f7689;
+             display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media(max-width:720px){
+  .ahead h1{font-size:33px}.lede{font-size:20px}
+  .statband{grid-template-columns:1fr}
+  footer .cols{grid-template-columns:1fr}
+  .tbl{font-size:13px}.tbl th,.tbl td{padding:7px 8px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="wrap">
+  <a class="logo" href="../">
+    <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13966b"/><rect x="6" y="6" width="7" height="7" fill="#0a1a2b"/><rect x="15" y="6" width="7" height="7" fill="#fff"/><rect x="6" y="15" width="7" height="7" fill="#fff"/><rect x="15" y="15" width="7" height="7" fill="#cdeede"/></svg>
+    <span>InfraMosaic<small>Humanoid Intelligence</small></span>
+  </a>
+  <nav class="navlinks">
+    <a href="../report/humanoid100_2026.html">Humanoid&nbsp;100</a>
+    <a href="../dashboard/">Live&nbsp;data</a>
+    <a href="../ledger/">Ledger</a>
+  </nav>
+  <a class="btn btn-g" href="../dashboard/">Explore the data</a>
+</div></header>
+
+<div class="ahead"><div class="wrap">
+  <div class="eyebrow">Humanoid Robotics &middot; Insight &middot; June 2026</div>
+  <h1>The humanoid "Brain" is now <em>79.5%</em> of a $40.7&nbsp;trillion universe — and almost none of that value is a humanoid bet</h1>
+  <div class="byline">
+    <b>InfraMosaic Research</b><span class="dot">&mdash;</span>The Humanoid Intelligence desk
+    <span class="dot">|</span> 15 June 2026 <span class="dot">|</span> Methodology v1.0 <span class="dot">|</span> 255 companies, live caps
+  </div>
+</div></div>
+
+<article class="article">
+
+  <p class="lede"><b>An AI and memory super-cycle has turned the humanoid "Brain" into the most expensive — and least humanoid — part of the value chain.</b> Across InfraMosaic's 255-company universe, the Brain carries <b>$32.4tn</b> of live value — <b>79.5%</b> of the $40.7tn total — led by NVIDIA at <b>~$4.97tn</b>, Micron at <b>~$1.11tn</b> (52-week range $103 &rarr; $1,089) and SK Hynix at <b>~$1.01tn</b>. The 147-name Body is worth just $3.24tn. Buying the Brain for humanoid exposure is now mostly buying the AI trade — according to InfraMosaic's live Market-Cap &amp; Exposure dataset.</p>
+
+  <div class="statband">
+    <div class="s"><div class="n">$40.7<span class="u">tn</span></div><div class="l">Live market cap, 255-co universe</div></div>
+    <div class="s"><div class="n">79.5<span class="u">%</span></div><div class="l">Sits in the Brain layer (67 names)</div></div>
+    <div class="s"><div class="n">8.0<span class="u">%</span></div><div class="l">In the Body — 147 names, $3.24tn</div></div>
+  </div>
+
+  <h2>The mechanism: a memory cycle, not a robotics cycle</h2>
+
+  <p>When the Humanoid 100 was first struck in February 2025, memory sat in a footnote — a Brain annex behind compute and foundation models. Sixteen months later it is two of the index's twelve largest names. <strong>Micron Technology</strong> now carries a market value of <strong>$1,106.99bn</strong> against a 52-week range of <strong>$103 &rarr; $1,089</strong>; <strong>SK Hynix</strong> is at <strong>$1,005.47bn</strong> (a KRW 238k &rarr; 2,407k swing). Both re-ratings were driven by high-bandwidth-memory demand from data-center AI — not by a single humanoid joint shipping.</p>
+
+  <p>That is the whole point. The Brain layer — foundation models, AI compute, EDA, simulation, vision, and now memory — has <em>already been paid for</em> by the AI trade. Its internal concentration is the highest of the three segments (an HHI of <strong>3,232</strong>; compute is an oligopoly), and the value sits in a handful of names whose humanoid revenue today rounds to zero. NVIDIA's humanoid exposure is real in <em>narrative</em> — Isaac, GR00T, the simulation stack — but its $4.97tn capitalisation is set by GPUs sold into hyperscale, not by Optimus or Figure unit economics.</p>
+
+  <table class="tbl">
+    <caption>The Brain's top six — live caps vs. their humanoid exposure score (IMES, 0–100)</caption>
+    <thead><tr><th>Company</th><th>Sub-segment</th><th class="r">Market cap</th><th class="r">IMES</th><th>Exposure</th></tr></thead>
+    <tbody>
+      <tr><td class="name">NVIDIA</td><td>AI compute / GPU</td><td class="r mono">$4,969.9bn</td><td class="r mono">76</td><td class="hi">High</td></tr>
+      <tr><td class="name">Alphabet (Google)</td><td>AI / foundation models</td><td class="r mono">$4,386.3bn</td><td class="r mono">68</td><td class="hi">High</td></tr>
+      <tr><td class="name">Apple</td><td>Consumer / silicon</td><td class="r mono">$4,275.9bn</td><td class="r mono">54</td><td>Medium</td></tr>
+      <tr><td class="name">Microsoft</td><td>AI / foundation models</td><td class="r mono">$2,902.6bn</td><td class="r mono">61</td><td>Medium</td></tr>
+      <tr><td class="name">Micron Technology</td><td>Memory / HBM</td><td class="r mono">$1,107.0bn</td><td class="r mono">64</td><td>Medium</td></tr>
+      <tr><td class="name">SK Hynix</td><td>Memory / HBM</td><td class="r mono">$1,005.5bn</td><td class="r mono">64</td><td>Medium</td></tr>
+    </tbody>
+    <tfoot><tr><td colspan="2">Brain layer — 67 names</td><td class="r mono">$32,395.5bn</td><td class="r mono">—</td><td>79.5% of universe</td></tr></tfoot>
+  </table>
+
+  <p>Notice the disconnect: the three biggest Brain names by value — NVIDIA, Alphabet, Microsoft — alone account for <strong>$13.63tn</strong>, or <strong>42%</strong> of the entire Brain segment. Cap-weight any "Humanoid 100" basket and your return is overwhelmingly determined by these few AI mega-caps. The index's move since February 2025 is, in InfraMosaic's read, <em>overwhelmingly an AI-compute and memory story, not a humanoid story.</em></p>
+
+  <p class="pull">Owning the Brain for humanoid exposure is a lottery ticket stapled to an already-expensive AI stock.</p>
+
+  <h2>Where the humanoid-levered return actually sits</h2>
+
+  <p>Flip the database from market cap to <strong>humanoid exposure</strong> and the leaderboard inverts completely. The top of InfraMosaic's IMES table — the names whose revenue, strategic position and moat are most tied to the humanoid build-out — is <em>entirely Body</em>, and almost entirely small- and mid-cap. Of the 147 Body names, <strong>129 carry caps under $50bn</strong>; the highest-conviction reads are an order of magnitude smaller than that.</p>
+
+  <table class="tbl">
+    <caption>The genuinely humanoid-levered names — top of the IMES table, all Body, mostly small/mid-cap</caption>
+    <thead><tr><th>Company</th><th>Node</th><th class="r">Market cap</th><th class="r">IMES</th></tr></thead>
+    <tbody>
+      <tr><td class="name">Harmonic Drive Systems</td><td>Strain-wave reducers</td><td class="r mono">$3.9bn</td><td class="r hi">92</td></tr>
+      <tr><td class="name">Moog Inc</td><td>Actuators / servo &amp; drives</td><td class="r mono">$12.5bn</td><td class="r hi">92</td></tr>
+      <tr><td class="name">Renishaw</td><td>Precision encoders</td><td class="r mono">$4.9bn</td><td class="r hi">85</td></tr>
+      <tr><td class="name">Nabtesco</td><td>Cycloidal / RV reducers</td><td class="r mono">$3.5bn</td><td class="r hi">84</td></tr>
+      <tr><td class="name">Aeva Technologies</td><td>LiDAR</td><td class="r mono">$1.7bn</td><td class="r hi">81</td></tr>
+      <tr><td class="name">SBB Tech</td><td>Harmonic reducers</td><td class="r mono">$0.3bn</td><td class="r hi">76</td></tr>
+      <tr><td class="name">Leader Harmonious Drive</td><td>Harmonic reducers</td><td class="r mono">$9.5bn</td><td class="r hi">75</td></tr>
+      <tr><td class="name">Shanghai Beite Technology</td><td>Ball / roller screws</td><td class="r mono">$2.2bn</td><td class="r hi">75</td></tr>
+    </tbody>
+  </table>
+
+  <p>Harmonic Drive Systems and Moog both score <strong>92</strong> on exposure — the two highest in the universe — at $3.9bn and $12.5bn of market value. That is roughly <strong>one four-hundredth</strong> of NVIDIA's capitalisation, scoring higher on the only axis that measures humanoid leverage. The Body holds <strong>29 of the universe's High-exposure names</strong>; the Brain, despite being four-fifths of the value, holds only nine — and most of those, like NVIDIA itself, owe their score to platform narrative rather than humanoid revenue.</p>
+
+  <h2>The bottleneck that the cap weighting points away from</h2>
+
+  <p>This is not a stylistic preference for small caps — it is where the physical scarcity lives. InfraMosaic's supply/demand order book — robot ramp &times; per-robot bill-of-quantities versus assessed capacity — shows the tightest 2030 nodes sitting squarely in this small/mid Body cohort:</p>
+
+  <div class="nodebox">
+    <h4>2030 supply/demand verdicts — the deficit-risk nodes</h4>
+    <ul>
+      <li><b>Roller screws</b><span class="v">770% demand vs. capacity</span></li>
+      <li><b>Force-torque sensors</b><span class="v">440%</span></li>
+      <li><b>Integrated actuators</b><span class="v">385%</span></li>
+      <li><b>Rare-earth magnets (Dy/Tb input)</b><span class="v">~100% China — the real constraint</span></li>
+    </ul>
+  </div>
+
+  <p>Every one of those bottlenecks is owned by a Body name a fraction of NVIDIA's size — the reducer, screw and actuator makers at the top of the IMES table. China's dominance here isn't broad, it's surgical: it owns the three or four parts that can't be substituted, and the dysprosium/terbium export-control regime now sits directly on the highest-criticality nodes. The country concentration across the universe is an HHI of <strong>2,468</strong>, but on magnets and reducers it is far higher. The cap weighting — and therefore any passive "Humanoid 100" exposure — points <em>away</em> from exactly this scarcity.</p>
+
+  <div class="verify">
+    <div class="tag">The InfraMosaic differentiator</div>
+    <h4>Verify every number</h4>
+    <p>Rystad asks you to trust the trace; InfraMosaic lets you check it — every figure here resolves to hash-chained evidence. The headline $40.7tn carries the figure id <b>kpi.total_market_cap_usd_tn</b>; the live caps for NVIDIA, Micron and SK Hynix were flagged as super-cycle outliers and verified against 52-week range and previous close before ingest.</p>
+    <div class="chain">figure_id <b>kpi.total_market_cap_usd_tn</b> = 40.7 usd_tn &middot; as_of 2026-06-13 &middot; chain_head <b>15a725e0…41c29d</b> &middot; 363 hash-chained records</div>
+    <a class="vbtn" href="../ledger/#kpi.total_market_cap_usd_tn">Verify in the ledger &rarr;</a>
+  </div>
+
+  <h2>What to watch</h2>
+
+  <p><strong>1. The Brain's beta decoupling.</strong> The cleanest tell that a true humanoid cycle has begun will be a Body name moving on a humanoid deployment headline while NVIDIA and Micron sit still. Until then, treat any "Humanoid 100" return as an AI-compute and memory print, and watch the memory pair — Micron and SK Hynix — as the swing factor in cap-weighted baskets.</p>
+
+  <p><strong>2. The reducer and screw makers re-rating.</strong> Harmonic Drive, Nabtesco, Moog, Renishaw and the Chinese reducer/screw cohort are where the deficit-risk meets the highest exposure scores. A pricing or order-book inflection there is the first place humanoid demand becomes visible in equity terms — long before it touches a $4.97tn AI mega-cap.</p>
+
+  <p><strong>3. The rare-earth chokepoint.</strong> Magnets register as a capacity glut on the order book yet near-100% China sourcing on the input — the constraint is the dysprosium/terbium feedstock, not the magnet line. Any tightening of the Dy/Tb export regime hits the highest-criticality, lowest-cap part of the chain first.</p>
+
+  <p>The Brain has been priced. The Body has not. The work of separating the AI trade from the humanoid trade is exactly what the live database is built to do — node by node, name by name, with every figure checkable.</p>
+
+</article>
+
+<div class="cta-end"><div class="wrap">
+  <h3>See the split for yourself</h3>
+  <p>Filter the 255-company universe by segment, exposure and node — then trace any figure to its evidence.</p>
+  <div class="ctarow">
+    <a class="btn btn-g" href="../dashboard/">Explore the live data &rarr;</a>
+    <a class="btn btn-ghost" style="border-color:#bcd0c6;color:var(--green-d)" href="../ledger/">Verify in the ledger &rarr;</a>
+  </div>
+</div></div>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div>
+      <a class="logo" href="../" style="color:#fff">
+        <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13966b"/><rect x="6" y="6" width="7" height="7" fill="#0a1a2b"/><rect x="15" y="6" width="7" height="7" fill="#fff"/><rect x="6" y="15" width="7" height="7" fill="#fff"/><rect x="15" y="15" width="7" height="7" fill="#cdeede"/></svg>
+        <span>InfraMosaic<small>Humanoid Intelligence</small></span>
+      </a>
+      <p class="blurb">Asset-level intelligence for the humanoid robot value chain. Every company, component and bottleneck — with every figure resolvable to hash-chained evidence.</p>
+    </div>
+    <div>
+      <h5>Data</h5>
+      <ul>
+        <li><a href="../dashboard/">Live dashboard</a></li>
+        <li><a href="../ledger/">Publication ledger</a></li>
+        <li><a href="../report/humanoid100_2026.html">Humanoid 100 — 2026</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Research</h5>
+      <ul>
+        <li><a href="../report/index.html">State of Humanoids 2026</a></li>
+        <li><a href="../">InfraMosaic home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="base">
+    <span>&copy; 2026 InfraMosaic Research &middot; Humanoid Intelligence desk</span>
+    <span class="mono">Methodology v1.0 &middot; as_of 2026-06-13 &middot; 363 ledger records</span>
+  </div>
+</div></footer>
+
+</body>
+</html>

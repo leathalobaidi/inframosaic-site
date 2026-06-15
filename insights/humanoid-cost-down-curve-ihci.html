@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Western humanoid fell from $200k to ~$95k in 18 months — InfraMosaic Insight</title>
+<meta name="description" content="The InfraMosaic Humanoid Cost Index (IHCI, 2024-01=100) now reads 47.3 for a Western reference robot and 65.0 for China — a ~53% Western cost-down in 18 months. This is the curve that flips the 'too expensive' objection and sets the adoption S-curve.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2b'/%3E%3Crect x='6' y='6' width='7' height='7' fill='%2313966b'/%3E%3Crect x='15' y='6' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='6' y='15' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='15' y='15' width='7' height='7' fill='%233fcf9a'/%3E%3Crect x='6' y='24' width='4' height='2' fill='%23cdd6df'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1a2b; --navy2:#0f2940; --navy3:#16395a; --ink:#0e1c29;
+  --green:#13966b; --green-d:#0b6e4f; --green-br:#3fcf9a;
+  --paper:#ffffff; --bg:#eef1f4; --warm:#f4f2ec;
+  --line:#dbe2e9; --line-d:#1d3b56; --muted:#5b6a78; --faint:#8696a4;
+  --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);
+     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.serif{font-family:var(--serif)}
+.mono{font-family:var(--mono)}
+
+/* ---------- ticker ---------- */
+.ticker{background:var(--navy);color:#bcd;border-bottom:1px solid var(--line-d);
+        overflow:hidden;white-space:nowrap;font-family:var(--mono);font-size:12px;
+        letter-spacing:.04em;padding:8px 0}
+.ticker .run{display:inline-block;animation:scroll 42s linear infinite;padding-left:100%}
+.ticker:hover .run{animation-play-state:paused}
+.ticker b{color:#fff;font-weight:600}
+.ticker .up{color:var(--green-br)}
+.ticker .sep{color:#3a587a;margin:0 18px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(10,26,43,.86);
+           backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;font-size:19px;
+      font-family:var(--serif);letter-spacing:.01em}
+.logo .mark{width:26px;height:26px;border-radius:5px;flex:0 0 26px}
+.logo small{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.22em;
+            text-transform:uppercase;color:var(--green-br);display:block;margin-top:-3px}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{color:#aebecd;font-size:14.5px;font-weight:500;transition:color .2s}
+.navlinks a:hover{color:#fff}
+.btn{font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:7px;
+     padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:all .2s;display:inline-block}
+.btn-g{background:var(--green);color:#fff}
+.btn-g:hover{background:var(--green-br);color:var(--navy)}
+.btn-ghost{border-color:#2b4a68;color:#cdd9e4}
+.btn-ghost:hover{border-color:var(--green-br);color:#fff}
+
+/* ---------- article head ---------- */
+.ahead{background:
+   radial-gradient(1000px 520px at 82% -12%,rgba(19,150,107,.20),transparent 60%),
+   linear-gradient(168deg,#0a1a2b 0%,#0d2338 58%,#0a1c30 100%);
+   color:#eaf2f8;border-bottom:1px solid var(--line-d)}
+.ahead .wrap{padding-top:62px;padding-bottom:54px;max-width:880px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+         color:var(--green-br);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--green-br)}
+.ahead h1{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1.08;
+          letter-spacing:-.018em;margin-bottom:20px;max-width:18ch}
+.ahead h1 em{font-style:italic;color:var(--green-br)}
+.ahead .dek{font-size:19px;color:#b3c6d6;max-width:660px;line-height:1.6}
+.byline{display:flex;align-items:center;gap:14px;margin-top:30px;
+        font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:#8ba4b8;flex-wrap:wrap}
+.byline .desk{color:#cdd9e4;font-weight:600}
+.byline .dot{color:#3a587a}
+
+/* ---------- article body ---------- */
+.article{max-width:760px;margin:0 auto;padding:60px 32px 30px}
+.lede{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.46;
+      color:var(--ink);margin-bottom:38px;letter-spacing:-.005em}
+.lede .hl{background:linear-gradient(transparent 62%,rgba(63,207,154,.34) 0);padding:0 1px}
+.article h2{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.18;
+            color:var(--ink);margin:44px 0 16px;letter-spacing:-.01em}
+.article p{font-size:17.5px;color:#26323d;line-height:1.72;margin-bottom:20px}
+.article p strong{color:var(--ink);font-weight:600}
+.article .kx{font-family:var(--mono);font-size:.92em;color:var(--green-d);font-weight:500}
+.article a.inl{color:var(--green-d);font-weight:600;border-bottom:1px solid rgba(11,110,79,.3)}
+.article a.inl:hover{border-color:var(--green-d)}
+
+/* figure / chart */
+figure{margin:34px 0 30px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
+figure .ftop{padding:18px 22px 6px}
+figure .fk{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-d);font-weight:600}
+figure h4{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--ink);margin-top:6px;line-height:1.22}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:13px;color:var(--muted);padding:12px 22px 18px;border-top:1px solid var(--line);
+           font-family:var(--mono);letter-spacing:.01em;line-height:1.5}
+
+/* BOM table */
+.tbl{width:100%;border-collapse:collapse;font-size:14.5px}
+.tbl thead th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+              color:var(--muted);text-align:left;padding:10px 22px;border-bottom:1px solid var(--line);font-weight:600}
+.tbl thead th.r,.tbl td.r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl td{padding:11px 22px;border-bottom:1px solid #eef2f5;color:#26323d}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td.sub{font-weight:600;color:var(--ink)}
+.tbl td.r{font-family:var(--mono);font-size:13.5px}
+.tbl .top td{background:#f1faf6}
+.bar{height:7px;border-radius:4px;background:var(--green);display:inline-block;vertical-align:middle;margin-right:8px}
+
+/* callout — the differentiator */
+.verify{background:linear-gradient(165deg,#0a1a2b,#0e2740);color:#eaf2f8;border-radius:16px;
+        padding:30px 32px;margin:40px 0;position:relative;overflow:hidden;border:1px solid var(--line-d)}
+.verify::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:var(--green-br)}
+.verify .vk{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--green-br);margin-bottom:12px;font-weight:600}
+.verify h3{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.2;margin-bottom:12px}
+.verify p{font-size:15.5px;color:#bcd0de;line-height:1.6;margin-bottom:16px}
+.verify .fids{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.verify .fid{font-family:var(--mono);font-size:12px;background:rgba(63,207,154,.1);border:1px solid rgba(63,207,154,.28);
+             color:#bdeed8;border-radius:7px;padding:6px 11px;letter-spacing:.01em}
+.verify .fid b{color:#fff;font-weight:600}
+.verify a.vbtn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-weight:600;font-size:14px;
+               background:var(--green);color:#fff;border-radius:8px;padding:10px 18px;transition:all .2s}
+.verify a.vbtn:hover{background:var(--green-br);color:var(--navy)}
+
+/* pull quote */
+.pull{font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.4;color:var(--ink);
+      border-left:3px solid var(--green);padding:6px 0 6px 26px;margin:34px 0;letter-spacing:-.005em}
+
+/* watch box */
+.watch{background:var(--warm);border:1px solid var(--line);border-radius:14px;padding:26px 28px;margin:36px 0}
+.watch .wk{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--green-d);font-weight:600;margin-bottom:14px}
+.watch ul{list-style:none;display:grid;gap:13px}
+.watch li{display:flex;gap:13px;font-size:15.5px;color:#26323d;line-height:1.55}
+.watch li::before{content:"▸";color:var(--green);font-size:14px;margin-top:2px;flex:0 0 auto}
+.watch li b{color:var(--ink);font-weight:600}
+
+/* method note */
+.method{font-size:13.5px;color:var(--muted);line-height:1.6;border-top:1px solid var(--line);padding-top:22px;margin-top:40px}
+.method b{color:var(--ink)}
+
+/* ---------- CTA band ---------- */
+.ctaband{background:var(--navy);color:#eaf2f8;text-align:center;margin-top:14px}
+.ctaband .wrap{padding:72px 32px}
+.ctaband h2{font-family:var(--serif);font-weight:500;font-size:34px;line-height:1.12;margin-bottom:14px;letter-spacing:-.01em}
+.ctaband h2 em{font-style:italic;color:var(--green-br)}
+.ctaband p{color:#b3c6d6;font-size:17px;max-width:540px;margin:0 auto 28px}
+.ctaband .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* footer */
+footer{background:#071420;color:#8ba4b8;padding:54px 0 32px;font-size:14px}
+.fcols{display:grid;grid-template-columns:1.8fr 1fr 1fr;gap:34px;padding-bottom:34px;border-bottom:1px solid var(--line-d)}
+footer .logo{margin-bottom:14px}
+footer .blurb{max-width:320px;line-height:1.6;color:#7e96aa}
+footer h5{color:#cdd9e4;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;font-weight:600}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+footer li a{color:#8ba4b8;transition:color .2s}
+footer li a:hover{color:var(--green-br)}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:22px;font-size:12.5px;color:#5e7488;flex-wrap:wrap;gap:10px}
+.fbot .disc{max-width:720px;line-height:1.5}
+
+@media(max-width:760px){
+  .ahead h1{font-size:33px}
+  .article{padding:44px 22px 20px}
+  .lede{font-size:20px}
+  .fcols{grid-template-columns:1fr 1fr}
+  .navlinks{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker"><div class="run">
+  <b>IHCI · WEST</b> <span class="up">47.3 ▼ cost</span> <span class="sep">|</span>
+  <b>IHCI · CHINA</b> 65.0 <span class="sep">|</span>
+  <b>WEST REF ROBOT</b> ~$94.6k <span class="sep">|</span>
+  <b>CHINA REF ROBOT</b> ~$29.9k <span class="sep">|</span>
+  <b>CHINA DISCOUNT</b> ~68% <span class="sep">|</span>
+  <b>SENSORS</b> 37% of BOM <span class="sep">|</span>
+  <b>MATERIAL BOM</b> ~$55k <span class="sep">|</span>
+  <b>HUMANOID UNIVERSE</b> 255 cos <span class="sep">|</span>
+  <b>TRACKED CAP</b> <span class="up">$40.7tn ▲</span> <span class="sep">|</span>
+  <b>IHCI · WEST</b> <span class="up">47.3 ▼ cost</span> <span class="sep">|</span>
+  <b>IHCI · CHINA</b> 65.0 <span class="sep">|</span>
+  <b>WEST REF ROBOT</b> ~$94.6k <span class="sep">|</span>
+</div></div>
+
+<!-- NAV -->
+<header class="nav"><div class="wrap">
+  <a class="logo" href="../">
+    <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+      <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+      <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+    <span>InfraMosaic<small>Frontier-tech intelligence</small></span>
+  </a>
+  <nav class="navlinks">
+    <a href="../dashboard/">Dashboard</a>
+    <a href="../ledger/">Ledger</a>
+    <a href="../#research">Research</a>
+    <a class="btn btn-ghost" href="../dashboard/">Explore the data</a>
+  </nav>
+</div></header>
+
+<!-- ARTICLE HEAD -->
+<section class="ahead"><div class="wrap">
+  <div class="eyebrow">Humanoid Robotics &middot; Insight &middot; June 2026</div>
+  <h1>A Western humanoid robot fell from <em>~$200k to ~$95k</em> in 18 months — the cost-down curve that flips "too expensive"</h1>
+  <p class="dek">The InfraMosaic Humanoid Cost Index now reads 47.3 for a Western reference robot and 65.0 for China. The objection that anchored every bear case is weakening on schedule — and the bill of materials shows exactly where the next leg comes from.</p>
+  <div class="byline">
+    <span class="desk">InfraMosaic Research</span>
+    <span class="dot">&bull;</span>
+    <span>Humanoid Intelligence desk</span>
+    <span class="dot">&bull;</span>
+    <span>Build of 13 June 2026</span>
+  </div>
+</div></section>
+
+<!-- ARTICLE BODY -->
+<article class="article">
+
+  <p class="lede"><span class="hl">A Western reference humanoid robot cost roughly <strong>$200,000</strong> to build in January 2024. By June 2026 the same machine costs about <strong>$94,600</strong> — a fall of ~53% in 18 months.</span> China's curve runs lower and parallel: ~$46,000 to ~$29,900, a 35% cut. On the index that is <strong>IHCI-West 47.3</strong> and <strong>IHCI-China 65.0</strong> (2024-01 = 100). Sensors — not actuators — lead a ~$55,000 bill at 37%, and they are where the next leg is won or lost — according to InfraMosaic's Humanoid Cost Index (IHCI).</p>
+
+  <p>For two years the loudest argument against humanoid robots was a price tag. Morgan Stanley's February 2025 build estimates put a Western machine near $200,000; at that level the labour-substitution math only worked in a handful of niches. The InfraMosaic Humanoid Cost Index (IHCI) was built to do one thing the point estimates could not: <strong>track the number monthly</strong>, on a consistent reference design, so the cost-down can be watched rather than asserted.</p>
+
+  <p>The track is unambiguous. Indexed to 100 at January 2024, the Western reference robot has dropped to <strong>47.3</strong> as of June 2026 — a 52.7% decline — while the Chinese reference, already cheap, has eased from 100 to <strong>65.0</strong>, or 35%. In dollar terms the Western machine moved $200,000 → ~$94,600 and the Chinese machine $46,000 → ~$29,900. China still builds for roughly <strong>a 68% discount</strong> to the West, but the gap is the story's second act; the first is that <em>both</em> curves are bending down fast enough to change the adoption calendar.</p>
+
+  <h2>Why the curve matters more than the level</h2>
+
+  <p>Adoption of an expensive durable good is governed by where its cost crosses the value of the labour it displaces — and, crucially, by how fast that crossing approaches. Morgan Stanley's own framework sketched negligible humanoid adoption to about 2035, then an S-curve toward a ~$3 trillion US labour-substitution TAM by 2050. The shape of that S-curve is set by the cost-down rate. <strong>A robot that is merely cheap invites a pilot; a robot that is visibly halving every 18 months invites a capital plan.</strong></p>
+
+  <p class="pull">The "too expensive" objection doesn't need the robot to be cheap today. It needs the buyer to believe it will be cheap on the depreciation schedule they're signing — and the IHCI is what makes that believable.</p>
+
+  <p>That is why InfraMosaic moves "cost" out of the bear column. The cost gap closed <strong>faster than the con-side assumed</strong>: a Western reference machine at ~$94,600 already clears the substitution threshold for structured, high-duty tasks, and the slope says the addressable task set widens every quarter. What stays in the con column is not price — it is reliability and autonomy in unstructured environments. The economics objection is being retired on schedule.</p>
+
+  <figure>
+    <div class="ftop"><div class="fk">Figure 1 &middot; IHCI, 2024-01 = 100</div>
+      <h4>The cost-down curve: Western and China reference robots, monthly</h4></div>
+    <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IHCI line chart from 2024 to 2030">
+      <defs>
+        <linearGradient id="gw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b6e4f" stop-opacity="0.18"/><stop offset="1" stop-color="#0b6e4f" stop-opacity="0"/></linearGradient>
+      </defs>
+      <!-- gridlines -->
+      <g stroke="#e6ebf0" stroke-width="1">
+        <line x1="60" y1="40" x2="720" y2="40"/><line x1="60" y1="95" x2="720" y2="95"/>
+        <line x1="60" y1="150" x2="720" y2="150"/><line x1="60" y1="205" x2="720" y2="205"/>
+        <line x1="60" y1="260" x2="720" y2="260"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="10" fill="#8696a4">
+        <text x="52" y="44" text-anchor="end">100</text><text x="52" y="99" text-anchor="end">75</text>
+        <text x="52" y="154" text-anchor="end">50</text><text x="52" y="209" text-anchor="end">25</text>
+        <text x="52" y="264" text-anchor="end">0</text>
+        <text x="60" y="280">2024</text><text x="170" y="280">2025</text><text x="280" y="280" font-weight="600" fill="#0b6e4f">2026 (now)</text>
+        <text x="500" y="280">2028</text><text x="700" y="280" text-anchor="end">2030</text>
+      </g>
+      <!-- China area + line: 100 -> 65.0 (2026) projected to 39.1 (2030). y = 260 - idx*2.2 -->
+      <!-- West line: 100 -> 47.3 (2026) projected to 20.0 (2030) -->
+      <!-- x scale: 2024-01 at x=60 ... 2026-06 at x=300 ... 2030 at x=700 -->
+      <path d="M60,40 L300,156 L700,216 L700,260 L60,260 Z" fill="url(#gw)"/>
+      <!-- West solid (history) to now, dashed (projection) after -->
+      <polyline points="60,40 180,106 300,156" fill="none" stroke="#0b6e4f" stroke-width="3"/>
+      <polyline points="300,156 500,205 700,216" fill="none" stroke="#0b6e4f" stroke-width="2.4" stroke-dasharray="6 5"/>
+      <!-- China solid then dashed -->
+      <polyline points="60,40 180,57 300,117" fill="none" stroke="#3fcf9a" stroke-width="3"/>
+      <polyline points="300,117 500,164 700,174" fill="none" stroke="#3fcf9a" stroke-width="2.4" stroke-dasharray="6 5"/>
+      <!-- now marker -->
+      <line x1="300" y1="40" x2="300" y2="260" stroke="#5b6a78" stroke-width="1" stroke-dasharray="3 4"/>
+      <circle cx="300" cy="156" r="4.5" fill="#0b6e4f"/><circle cx="300" cy="117" r="4.5" fill="#13966b"/>
+      <g font-family="IBM Plex Mono, monospace" font-size="11" font-weight="600">
+        <text x="312" y="152" fill="#0b6e4f">West 47.3 &middot; ~$94.6k</text>
+        <text x="312" y="113" fill="#0e7a59">China 65.0 &middot; ~$29.9k</text>
+      </g>
+      <g font-family="Hanken Grotesk, sans-serif" font-size="10.5" fill="#8696a4">
+        <text x="64" y="33">$200k / $46k start</text>
+        <text x="700" y="210" text-anchor="end">proj. $40k</text>
+        <text x="700" y="168" text-anchor="end">proj. $18k</text>
+      </g>
+    </svg>
+    <figcaption>Solid = observed monthly track (Jan 2024 – Jun 2026); dashed = InfraMosaic projection on the modelled BOM cost-curve to 2030. Source: InfraMosaic IHCI &amp; BOM cost-curve, build of 13 Jun 2026.</figcaption>
+  </figure>
+
+  <h2>Node by node: where the $55,000 sits</h2>
+
+  <p>The IHCI is not a black box. Underneath it sits a reference bill of materials re-based directly on Morgan Stanley's Exhibit 54 (Optimus Gen-2, by component), and it carries a correction worth stating plainly: <strong>the headline cost driver is sensors, not joint modules.</strong> The original analysis repeatedly anchored on "joint drive modules = 60–70% of cost," yet its own exhibit shows sensors as the #1 line. InfraMosaic foregrounds the data — and locks it with a regression test so the correction cannot silently revert.</p>
+
+  <figure>
+    <div class="ftop"><div class="fk">Figure 2 &middot; Reference BOM ~$55,000</div>
+      <h4>Sensors lead the bill of materials — at 37%, ahead of motors and screws</h4></div>
+    <table class="tbl">
+      <thead><tr><th>Subsystem</th><th class="r">Assessed cost</th><th>Share of BOM</th></tr></thead>
+      <tbody>
+        <tr class="top"><td class="sub">Sensors <span style="font-weight:400;color:#5b6a78">(6-axis force-torque + IMU + encoders + vision + tactile)</span></td><td class="r">$20,350</td><td><span class="bar" style="width:148px"></span>37%</td></tr>
+        <tr><td class="sub">Motors <span style="font-weight:400;color:#5b6a78">(frameless + BLDC)</span></td><td class="r">$11,165</td><td><span class="bar" style="width:80px"></span>20%</td></tr>
+        <tr><td class="sub">Screws <span style="font-weight:400;color:#5b6a78">(planetary roller + ball)</span></td><td class="r">$11,110</td><td><span class="bar" style="width:80px"></span>20%</td></tr>
+        <tr><td class="sub">Reducers <span style="font-weight:400;color:#5b6a78">(harmonic + cycloidal)</span></td><td class="r">$6,930</td><td><span class="bar" style="width:52px"></span>13%</td></tr>
+        <tr><td class="sub">Encoders</td><td class="r">$2,145</td><td><span class="bar" style="width:16px"></span>4%</td></tr>
+        <tr><td class="sub">Compute <span style="font-weight:400;color:#5b6a78">(SoC + chips + ISP)</span></td><td class="r">$2,090</td><td><span class="bar" style="width:16px"></span>4%</td></tr>
+        <tr><td class="sub">Bearings, battery &amp; structure</td><td class="r">$1,210</td><td><span class="bar" style="width:8px"></span>~2%</td></tr>
+      </tbody>
+    </table>
+    <figcaption>Re-based on MS Humanoid-100 Exhibit 54 (Optimus Gen-2). Sensors locked as the #1 line by the <span style="color:#0b6e4f">test_sensors_are_top_cost</span> integrity check. Source: InfraMosaic BOM reference, build of 13 Jun 2026.</figcaption>
+  </figure>
+
+  <p>This matters for the curve's slope. <strong>Motors at $11,165 (20%) and screws at $11,110 (20%)</strong> are the classic China-scale story — and they are already deflating fast. The proven template is the planetary roller screw, which fell from roughly <strong>$3,000 to ~$800</strong> as Tesla-scale linear-actuator volume arrived. Multiply that mechanism across 28 actuators, 14 screws and 14 reducers per robot, layer in Chinese supply for <span class="kx">reducers ($6,930, 13%)</span> and <span class="kx">encoders ($2,145, 4%)</span>, and most of the Western cost-down to date is explained. The mechanical stack is doing what mechanical stacks do at volume.</p>
+
+  <p>The bottleneck — and the reason the curve could stall rather than glide — is the line that leads the BOM. The <strong>six-axis force-torque sensor</strong> embedded in the hands and feet is both the top cost <em>and</em> the tightest supply node InfraMosaic tracks: the order-book model flags force-torque sensors at <strong>440% of projected 2030 capacity</strong>, behind only planetary roller screws at 770%. A component that is simultaneously the most expensive and the most supply-constrained is precisely the one that resists the cost-down. If sensors don't follow the screw template, IHCI-West flattens above its projected path; if they do, the curve continues toward the modelled ~$40,000 Western / ~$18,000 China endpoints by 2030.</p>
+
+  <!-- VERIFY CALLOUT -->
+  <div class="verify">
+    <div class="vk">The InfraMosaic difference</div>
+    <h3>Verify every number</h3>
+    <p>Rystad asks you to trust the trace; InfraMosaic lets you check it — every figure here resolves to hash-chained evidence in the Publication Ledger. The cost-curve endpoints carry their own ledger figure-IDs; click through to the inputs, methodology, QA and content hash behind each one.</p>
+    <div class="fids">
+      <span class="fid"><b>kpi.bom_material_total_usd</b> = $55,000</span>
+      <span class="fid"><b>kpi.bom_curve_western_2030</b> = $40,000</span>
+      <span class="fid"><b>kpi.bom_curve_china_2030</b> = $18,000</span>
+    </div>
+    <a class="vbtn" href="../ledger/">Verify in the ledger &rarr;</a>
+  </div>
+
+  <h2>What to watch</h2>
+
+  <div class="watch">
+    <div class="wk">The next four prints</div>
+    <ul>
+      <li><b>Force-torque sensors.</b> The hero line and the hardest node: 37% of BOM, 440% of 2030 capacity. Whether it follows the roller-screw cost-down decides if IHCI-West stays on its projected glide path or flattens above it.</li>
+      <li><b>The China discount.</b> Holding near 68% today. The 2030 model has it compressing toward ~55% as Western scale catches up — watch whether each monthly print narrows or holds the gap.</li>
+      <li><b>Rare-earth export controls.</b> The magnet input behind the motors line is a named near-term hurdle. A supply shock there reverses part of the actuator cost-down regardless of factory scale.</li>
+      <li><b>The 2028 inflection.</b> Nothing in 2025–26 deployment data (122,302 cumulative units across 26 programs) argues for pulling the at-scale S-curve earlier — pilots are hundreds-to-thousands of units, not millions. The cost curve leads; the volume curve follows.</li>
+    </ul>
+  </div>
+
+  <p>The bear case used to start with a price. As of June 2026 the price is roughly half what it was, the track is public and monthly, and the bottleneck has a name. That is the difference between an objection and a forecast — and it is the difference InfraMosaic was built to measure.</p>
+
+  <p class="method"><b>Methodology.</b> The IHCI indexes a Western and a Chinese reference humanoid build to 100 at January 2024, tracked monthly against a bill of materials re-based on Morgan Stanley Humanoid-100 Exhibit 54 and triangulated with Goldman Sachs, Bain and observed factory-gate prices (Unitree, Beijing pilot lines). Pre-2026 points are HARD; the forward cost-curve to 2030 is ASSESSED. Material BOM totals ~$55,000; whole-robot figures include integration, assembly and margin. Every headline figure resolves to a hash-chained record in the <a class="inl" href="../ledger/">Publication Ledger</a> (build of 13 Jun 2026). Figures cited from the live dataset: IHCI-West 47.3 (~$94,583), IHCI-China 65.0 (~$29,917).</p>
+
+</article>
+
+<!-- CTA BAND -->
+<section class="ctaband"><div class="wrap">
+  <h2>The cost-down curve is <em>live</em>, and every point is checkable.</h2>
+  <p>Watch the IHCI update monthly, drill into the node-by-node BOM, and verify each figure against its hash-chained source.</p>
+  <div class="cta">
+    <a class="btn btn-g" href="../dashboard/">Explore the live data &rarr;</a>
+    <a class="btn btn-ghost" href="../ledger/">Verify in the ledger</a>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="fcols">
+    <div>
+      <a class="logo" href="../">
+        <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+          <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+          <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+        <span>InfraMosaic<small>Frontier-tech intelligence</small></span>
+      </a>
+      <p class="blurb">The price-reporting agency and asset-level database for frontier hard-tech supply chains. Every figure resolves to hash-chained evidence.</p>
+    </div>
+    <div>
+      <h5>Product</h5>
+      <ul>
+        <li><a href="../dashboard/">Live dashboard</a></li>
+        <li><a href="../ledger/">Publication ledger</a></li>
+        <li><a href="../#research">Research</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>This insight</h5>
+      <ul>
+        <li><a href="../ledger/">IHCI &amp; BOM figure-IDs</a></li>
+        <li><a href="../dashboard/">Cost-index chart</a></li>
+        <li><a href="../dashboard/">Supply/demand order book</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>&copy; 2026 InfraMosaic Research &middot; Humanoid Intelligence desk</span>
+    <span class="disc">Insight published under the InfraMosaic Research desk. Figures reflect the database build of 13 June 2026 and resolve to the Publication Ledger. Not investment advice.</span>
+  </div>
+</div></footer>
+
+</body>
+</html>

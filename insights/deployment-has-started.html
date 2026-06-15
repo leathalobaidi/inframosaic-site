@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>122,302 humanoid units are on order or on the floor — the demo-to-deployment inflection is now measurable | InfraMosaic Insight</title>
+<meta name="description" content="InfraMosaic tracks 122,302 cumulative humanoid units on order or deployed across 26 programs — Figure→BMW, Apptronik→Mercedes, Agility→GXO, with UBTech and AgiBot shipping by the thousand. The demo-to-floor inflection Morgan Stanley could only forecast is now measurable, and every figure resolves to hash-chained evidence.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2b'/%3E%3Crect x='6' y='6' width='7' height='7' fill='%2313966b'/%3E%3Crect x='15' y='6' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='6' y='15' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='15' y='15' width='7' height='7' fill='%233fcf9a'/%3E%3Crect x='6' y='24' width='4' height='2' fill='%23cdd6df'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1a2b; --navy2:#0f2940; --navy3:#16395a; --ink:#0e1c29;
+  --green:#13966b; --green-d:#0b6e4f; --green-br:#3fcf9a;
+  --paper:#ffffff; --bg:#eef1f4; --warm:#f4f2ec;
+  --line:#dbe2e9; --line-d:#1d3b56; --muted:#5b6a78; --faint:#8696a4;
+  --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);
+     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.serif{font-family:var(--serif)}
+.mono{font-family:var(--mono)}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(10,26,43,.86);
+           backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;font-size:19px;
+      font-family:var(--serif);letter-spacing:.01em}
+.logo .mark{width:26px;height:26px;border-radius:5px;flex:0 0 26px}
+.logo small{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.22em;
+            text-transform:uppercase;color:var(--green-br);display:block;margin-top:-3px}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{color:#aebecd;font-size:14.5px;font-weight:500;transition:color .2s}
+.navlinks a:hover{color:#fff}
+.btn{font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:7px;
+     padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:all .2s;display:inline-block}
+.btn-g{background:var(--green);color:#fff}
+.btn-g:hover{background:var(--green-br);color:var(--navy)}
+.btn-ghost{border-color:#2b4a68;color:#cdd9e4}
+.btn-ghost:hover{border-color:var(--green-br);color:#fff}
+
+/* ---------- article shell ---------- */
+.arthead{background:
+   radial-gradient(1100px 600px at 80% -12%,rgba(19,150,107,.20),transparent 60%),
+   linear-gradient(168deg,#0a1a2b 0%,#0d2338 58%,#0a1c30 100%);
+   color:#eaf2f8;border-bottom:1px solid var(--line-d)}
+.arthead .wrap{max-width:880px;padding-top:70px;padding-bottom:64px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+         color:var(--green-br);margin-bottom:26px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--green-br)}
+.arthead h1{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1.08;
+            letter-spacing:-.018em;margin-bottom:22px;color:#fff}
+.arthead h1 em{font-style:italic;color:var(--green-br)}
+.dek{font-size:20px;color:#b3c6d6;line-height:1.55;max-width:680px}
+.byline{display:flex;align-items:center;gap:14px;margin-top:30px;flex-wrap:wrap;
+        font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:#8ba4b8}
+.byline b{color:#dceaf2;font-weight:600}
+.byline .dot{width:4px;height:4px;border-radius:50%;background:#3a587a}
+
+/* ---------- stat band ---------- */
+.stats{background:var(--navy);color:#fff;border-top:1px solid var(--line-d)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1180px}
+.stat{padding:26px 22px;border-right:1px solid var(--line-d)}
+.stat:last-child{border-right:none}
+.stat .n{font-family:var(--serif);font-size:34px;font-weight:600;line-height:1;color:#fff}
+.stat .n .u{color:var(--green-br);font-size:21px}
+.stat .l{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:#8ba4b8;margin-top:9px;line-height:1.4}
+
+/* ---------- body ---------- */
+article{padding:60px 0 30px}
+article .wrap{max-width:760px}
+.lede{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.5;color:var(--ink);
+      margin-bottom:36px;letter-spacing:-.005em}
+.lede .src{color:var(--green-d);font-style:italic}
+article h2{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.18;
+           letter-spacing:-.012em;color:var(--ink);margin:44px 0 16px}
+article p{font-size:17.5px;line-height:1.68;color:#26333f;margin-bottom:20px}
+article p strong{color:var(--ink);font-weight:600}
+.figref{color:var(--green-d);font-family:var(--mono);font-size:.86em;font-weight:500;
+        border-bottom:1px dotted var(--green);padding-bottom:1px}
+.figref:hover{background:rgba(19,150,107,.08)}
+
+/* table */
+.tbl-wrap{margin:30px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+caption{caption-side:top;text-align:left;font-family:var(--mono);font-size:11.5px;
+        letter-spacing:.1em;text-transform:uppercase;color:var(--green-d);padding:14px 16px 4px;font-weight:500}
+thead th{background:var(--warm);font-family:var(--sans);font-weight:600;text-align:left;
+         padding:11px 16px;color:var(--ink);font-size:13px;letter-spacing:.02em;border-bottom:1px solid var(--line)}
+tbody td{padding:10px 16px;border-bottom:1px solid var(--line);color:#2a3742}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even) td{background:#fafbfc}
+td.num{font-family:var(--mono);text-align:right;font-size:13.5px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;padding:2px 8px;border-radius:999px;
+     font-weight:600;display:inline-block;white-space:nowrap}
+.t-comm{background:var(--green);color:#fff}
+.t-order{background:#e8f3ee;color:var(--green-d)}
+.t-pilot{background:#eef2f6;color:#5b6a78}
+
+/* pull quote */
+.pull{border-left:3px solid var(--green);background:var(--warm);padding:22px 26px;
+      margin:32px 0;font-family:var(--serif);font-size:21px;line-height:1.45;color:var(--ink);
+      font-weight:500;letter-spacing:-.005em}
+
+/* verify box */
+.verify{background:linear-gradient(165deg,#0a1a2b,#0f2940);color:#dceaf2;border:1px solid var(--line-d);
+        border-radius:16px;padding:30px 32px;margin:40px 0}
+.verify .vk{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;
+            color:var(--green-br);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.verify .vk::before{content:"";width:26px;height:1px;background:var(--green-br)}
+.verify h3{font-family:var(--serif);font-weight:600;font-size:23px;color:#fff;margin-bottom:12px;line-height:1.2}
+.verify p{font-size:15.5px;color:#aec3d4;line-height:1.6;margin-bottom:16px}
+.verify .hashrow{font-family:var(--mono);font-size:12px;color:#7e98ac;background:rgba(0,0,0,.22);
+                 border:1px solid var(--line-d);border-radius:8px;padding:11px 14px;margin-bottom:16px;
+                 word-break:break-all;line-height:1.7}
+.verify .hashrow b{color:var(--green-br);font-weight:600}
+.verify a.vbtn{display:inline-block;background:var(--green);color:#fff;font-family:var(--sans);
+               font-weight:600;font-size:14px;border-radius:7px;padding:9px 18px;transition:all .2s}
+.verify a.vbtn:hover{background:var(--green-br);color:var(--navy)}
+
+/* cta */
+.ctaband{background:var(--warm);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ctaband .wrap{max-width:760px;padding:40px 32px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.ctaband .lab{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--ink);margin-right:auto}
+.btn-d{background:var(--navy);color:#fff;border:1px solid var(--navy)}
+.btn-d:hover{background:var(--navy3)}
+.btn-o{border-color:var(--green);color:var(--green-d)}
+.btn-o:hover{background:var(--green);color:#fff}
+
+/* footer */
+footer{background:var(--navy);color:#9fb3c4;padding:40px 0;font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+footer .fl{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:#6f8aa0}
+footer a{color:#bcd}
+
+.note{font-family:var(--mono);font-size:12px;color:var(--faint);line-height:1.6;margin-top:8px}
+
+@media(max-width:760px){
+  .stats .wrap{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .arthead h1{font-size:34px}
+  .lede{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="../index.html">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="6" fill="#0a1a2b"/>
+        <rect x="6" y="6" width="7" height="7" fill="#13966b"/>
+        <rect x="15" y="6" width="7" height="7" fill="#cdd6df"/>
+        <rect x="6" y="15" width="7" height="7" fill="#cdd6df"/>
+        <rect x="15" y="15" width="7" height="7" fill="#3fcf9a"/>
+      </svg>
+      <span>InfraMosaic<small>Humanoid Intelligence</small></span>
+    </a>
+    <nav class="navlinks">
+      <a href="../dashboard/">Dashboard</a>
+      <a href="../ledger/">Ledger</a>
+      <a href="../index.html">About</a>
+      <a class="btn btn-ghost" href="../dashboard/">Explore the data</a>
+    </nav>
+  </div>
+</header>
+
+<div class="arthead">
+  <div class="wrap">
+    <div class="eyebrow">Humanoid Robotics · Insight · June 2026</div>
+    <h1>Deployment has started: <em>122,302</em> humanoid units are now on order or on the floor — the demo-to-deployment inflection is finally measurable</h1>
+    <p class="dek">Across 26 tracked programs, the world's automakers, logistics giants and Chinese pure-plays have moved humanoids off the keynote stage and onto the payroll. The transition Morgan Stanley could only sketch as a forecast is now a counted number.</p>
+    <div class="byline">
+      <b>InfraMosaic Research</b>
+      <span class="dot"></span>
+      <span>Humanoid Intelligence desk</span>
+      <span class="dot"></span>
+      <span>Build 13 Jun 2026 · v1.0</span>
+    </div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat"><div class="n">122,302</div><div class="l">Units on order or deployed</div></div>
+    <div class="stat"><div class="n">26</div><div class="l">Tracked deployment programs</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">In commercial deployment</div></div>
+    <div class="stat"><div class="n">4 <span class="u">/ 58</span></div><div class="l">Programs at mass production</div></div>
+  </div>
+</div>
+
+<article>
+  <div class="wrap">
+
+    <p class="lede">Humanoid robotics has crossed from demonstration to deployment. InfraMosaic now tracks <strong>122,302 cumulative units on order or already working</strong> across <strong>26 distinct customer programs</strong> — Figure at BMW, Apptronik at Mercedes-Benz, Agility's Digit at GXO, with China's UBTech and AgiBot shipping by the thousand. Five of those programs are in live commercial deployment, six are firm orders, and four of 58 catalogued robot programs have reached mass production — a status that did not exist when the canonical 2025 forecasts were drawn — <span class="src">according to InfraMosaic's Deployment Tracker.</span></p>
+
+    <p>For a year and a half, the bull case for humanoids rested on a single chart that nobody could yet populate: the curve where pilots become fleets. Morgan Stanley's February 2025 Humanoid 100 framed it honestly as a forecast — humanoids would "move from demo to deployment over the decade," reaching tens of millions of US units and, on Musk's telling, more than a billion globally by the 2040s. What the paper could not do was count. In early 2025 there was, in effect, nothing on the floor to tally. That is what has changed.</p>
+
+    <h2>The mechanism: orders, not announcements</h2>
+
+    <p>InfraMosaic's tracker deliberately separates three things the hype cycle tends to blur — robots being <strong>paid to work</strong>, robots <strong>under firm order</strong>, and robots in <strong>supervised pilots</strong>. The 122,302-unit figure is the sum of disclosed unit estimates across all 26 programs, and its composition is the story. It is not 122,302 robots clocking in tomorrow; it is a backlog whose largest lines are forward commitments that have now been signed, priced and dated.</p>
+
+    <p>Two orders dominate the total. Figure AI's general-purpose backlog targets <strong>100,000 units over four years</strong> — vendor-claimed, and flagged as such — while 1X Technologies has a disclosed <strong>10,000-unit deal</strong> for its NEO home robot. Strip those two forward commitments out and the remainder — roughly 12,300 units — is what is genuinely shipping or imminently shipping right now: Unitree's <strong>5,500+ units shipped in 2025</strong>, AgiBot's <strong>5,100+</strong>, Tesla's ~1,000 internal Optimus target at Fremont, UBTech's 500-plus Walker S pre-orders into Foxconn, BYD and Geely, and a 200-robot Chinese eldercare cohort. The split matters: the demo-to-floor inflection is real, but it is still measured in thousands of working units against a backlog measured in six figures.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Selected programs from the InfraMosaic Deployment Tracker (26 total)</caption>
+        <thead>
+          <tr><th>Maker → Customer</th><th>Model</th><th>Region</th><th>Status</th><th class="num">Units (est.)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Figure AI → backlog</td><td>Figure 02/03</td><td>N. America</td><td><span class="tag t-order">Order</span></td><td class="num">100,000</td></tr>
+          <tr><td>1X → undisclosed partner</td><td>NEO</td><td>N. America</td><td><span class="tag t-order">Order</span></td><td class="num">10,000</td></tr>
+          <tr><td>Unitree → mixed</td><td>G1 / H1 / R1</td><td>Asia-China</td><td><span class="tag t-comm">Commercial</span></td><td class="num">5,500</td></tr>
+          <tr><td>AgiBot → mixed</td><td>A2</td><td>Asia-China</td><td><span class="tag t-comm">Commercial</span></td><td class="num">5,100</td></tr>
+          <tr><td>Tesla → internal (Fremont)</td><td>Optimus</td><td>N. America</td><td><span class="tag t-pilot">Pilot</span></td><td class="num">1,000</td></tr>
+          <tr><td>UBTech → Foxconn/BYD/Geely</td><td>Walker S</td><td>Asia-China</td><td><span class="tag t-order">Pre-order</span></td><td class="num">500</td></tr>
+          <tr><td>Apptronik → Mercedes-Benz</td><td>Apollo</td><td>Europe</td><td><span class="tag t-pilot">Pilot</span></td><td class="num">—</td></tr>
+          <tr><td>Agility → GXO Logistics</td><td>Digit</td><td>N. America</td><td><span class="tag t-comm">Commercial</span></td><td class="num">—</td></tr>
+          <tr><td>Figure AI → BMW (Spartanburg)</td><td>Figure 02</td><td>N. America</td><td><span class="tag t-pilot">Pilot</span></td><td class="num">2</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Node by node: where the robots are landing</h2>
+
+    <p>By status, the 26 programs break down as <strong>12 supervised pilots, 6 firm orders, 5 commercial deployments and 3 pre-order books</strong>. By geography they cluster in two poles: <strong>12 programs in North America and 10 in Asia-China</strong>, with three in Europe (the German automakers) and one in Korea (Boston Dynamics' Atlas into Hyundai). That bimodal map is the single most important pattern in the data. The West is deploying through marquee enterprise pilots — automotive assembly and warehouse logistics, two robots here, a small fleet there — while China is deploying through volume: Unitree and AgiBot are out-shipping the Western brands outright, and UBTech's Walker S2 has booked more than 800 million yuan of industrial orders.</p>
+
+    <p>The application mix is narrower than the marketing. Of the 26 programs, the overwhelming majority sit in just two verticals — <strong>automotive assembly and warehouse/manufacturing logistics</strong> — the structured, repetitive, high-wage environments where a humanoid's economics close first. Consumer (1X NEO), retail (Galbot, XPeng IRON) and care (eldercare and clinical trials) appear, but as pilots and pre-orders, not fleets. This is exactly the order an economist would predict: deployment follows the marginal value of the task, and the factory floor pays best.</p>
+
+    <div class="pull">The West is deploying in marquee pilots; China is deploying in volume. The demo-to-floor inflection is no longer a single curve — it is two, running at different speeds and through different doors.</div>
+
+    <h2>The bottleneck: the body, not the brain</h2>
+
+    <p>Here is the implication the unit count forces. The robots being deployed are not constrained by intelligence — the Brain layer has already been paid for by the AI trade. They are constrained by the <strong>body</strong>, and specifically by what they cost to build. InfraMosaic's bill-of-materials work, re-based on Morgan Stanley's own Exhibit 54, shows that <strong>sensors are the single largest cost line at 37%</strong> of an Optimus-class BOM — ahead of motors and screws — with six-axis force-torque sensors flagged at 440% of projected 2030 capacity. A 100,000-unit Figure order or a 10,000-unit NEO deal is a demand signal pointed straight at the tightest, most China-and-near-monopoly-exposed nodes in the chain.</p>
+
+    <p>That is why the deployment number is the leading indicator now, and why mentions and unveils are the lagging ones. The question for 2026 is no longer "who showed a robot" but "who can build the one they already sold." Total material cost still sits near <strong>$55,000 per unit</strong> and is modelled down to roughly $40,000 (Western) and $18,000 (China) by 2030 — and every signed order tightens the race down that curve.</p>
+
+    <h2>What to watch</h2>
+
+    <p>Three things will tell us whether the inflection accelerates or stalls. <strong>First, conversion:</strong> how much of the 110,000-unit forward backlog (Figure plus NEO) actually ships on schedule — vendor-claimed lines are tracked as exactly that until they post. <strong>Second, the China volume curve:</strong> Unitree and AgiBot already out-ship the West on count; if UBTech's S2 order book and XPeng's end-2026 mass-production target convert, the centre of gravity in <em>deployed</em> units moves decisively east. <strong>Third, the sensor bottleneck:</strong> watch force-torque capacity, because that is the node where a six-figure order book meets a physical supply ceiling. The base-case market path — <strong>550,000 units by 2030</strong> — assumes that ceiling lifts in time.</p>
+
+    <div class="verify">
+      <div class="vk">The InfraMosaic difference</div>
+      <h3>Verify every number</h3>
+      <p>Rystad asks you to trust the trace. InfraMosaic lets you check it — every figure in this article resolves to a hash-chained record in the Publication Ledger, with its inputs, methodology and QA suite attached. The headline figure is on record:</p>
+      <div class="hashrow">
+        <b>kpi.deployment_units_tracked</b> = 122,302 units · content_hash <b>34aa8de0fe820627…</b><br>
+        <b>kpi.deployments_total</b> = 26 programs · content_hash <b>6b1b05f6eaa88f0a…</b><br>
+        ledger chain_head <b>15a725e0…41c29d</b> · as-of 2026-06-13 · 363 records
+      </div>
+      <a class="vbtn" href="../ledger/">Open the Publication Ledger →</a>
+    </div>
+
+    <p class="note">Composition of the 122,302-unit total: 100,000 (Figure backlog, vendor-claimed) + 10,000 (1X NEO order) + 5,500 (Unitree 2025 shipments) + 5,100 (AgiBot 2025 shipments) + 1,000 (Tesla Optimus internal target) + 500 (UBTech Walker S pre-orders) + 200 (China eldercare cohort) + 2 (Figure–BMW Spartanburg pilot). Programs without a disclosed unit estimate (small fleets, undisclosed networks) are counted in the 26-program total but contribute zero to the unit tally — the figure is therefore a conservative floor.</p>
+
+  </div>
+</article>
+
+<div class="ctaband">
+  <div class="wrap">
+    <span class="lab">See it live, then check the maths.</span>
+    <a class="btn btn-d" href="../dashboard/">Explore the live data →</a>
+    <a class="btn btn-o" href="../ledger/">Verify in the ledger →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="logo" style="font-size:16px;margin-bottom:6px"><span>InfraMosaic</span></div>
+      <div class="fl">Humanoid Intelligence desk · Insight · June 2026</div>
+    </div>
+    <div class="fl">© 2026 InfraMosaic Research · <a href="../dashboard/">Dashboard</a> · <a href="../ledger/">Ledger</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

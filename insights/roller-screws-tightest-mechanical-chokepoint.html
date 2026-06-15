@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roller screws are humanoid robotics' tightest mechanical chokepoint — demand runs to 770% of 2030 capacity | InfraMosaic Insight</title>
+<meta name="description" content="In InfraMosaic's supply/demand order book, planetary roller screws run to ~770% of assessed 2030 capacity — the single tightest mechanical node in the humanoid value chain. Integrated actuators sit at ~385%, six-axis force-torque sensors at ~440%. China holds the cost-down template. Every figure resolves to hash-chained evidence in the Publication Ledger.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2b'/%3E%3Crect x='6' y='6' width='7' height='7' fill='%2313966b'/%3E%3Crect x='15' y='6' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='6' y='15' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='15' y='15' width='7' height='7' fill='%233fcf9a'/%3E%3Crect x='6' y='24' width='4' height='2' fill='%23cdd6df'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,0,700;9..144,1,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1a2b; --navy2:#0f2940; --navy3:#16395a; --ink:#0e1c29;
+  --green:#13966b; --green-d:#0b6e4f; --green-br:#3fcf9a;
+  --paper:#ffffff; --bg:#eef1f4; --warm:#f4f2ec;
+  --line:#dbe2e9; --line-d:#1d3b56; --muted:#5b6a78; --faint:#8696a4;
+  --amber:#b8862f; --red:#b5462f;
+  --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);
+     font-size:18px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.serif{font-family:var(--serif)}
+.mono{font-family:var(--mono)}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(10,26,43,.9);
+           backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+.nav .inner{max-width:1080px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;font-size:18px;
+      font-family:var(--serif);letter-spacing:.01em}
+.logo .mark{width:25px;height:25px;border-radius:5px;flex:0 0 25px}
+.logo small{font-family:var(--sans);font-weight:500;font-size:9.5px;letter-spacing:.22em;
+            text-transform:uppercase;color:var(--green-br);display:block;margin-top:-3px}
+.navlinks{display:flex;gap:26px;align-items:center}
+.navlinks a{color:#aebecd;font-size:14px;font-weight:500;transition:color .2s}
+.navlinks a:hover{color:#fff}
+.btn{font-family:var(--sans);font-weight:600;font-size:14px;border-radius:7px;
+     padding:9px 16px;cursor:pointer;border:1px solid transparent;transition:all .2s;display:inline-block}
+.btn-g{background:var(--green);color:#fff}
+.btn-g:hover{background:var(--green-br);color:var(--navy)}
+.btn-ghost{border-color:#2b4a68;color:#cdd9e4}
+.btn-ghost:hover{border-color:var(--green-br);color:#fff}
+
+/* ---------- article frame ---------- */
+.art{max-width:760px;margin:0 auto;padding:0 28px}
+.hd{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+         color:var(--green-d);margin-bottom:26px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--green-d)}
+h1{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1.08;
+   letter-spacing:-.02em;color:var(--ink);margin-bottom:22px}
+h1 em{font-style:italic;color:var(--green-d)}
+.byline{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+        font-size:14px;color:var(--muted);margin-top:8px}
+.byline .who{font-weight:600;color:var(--ink)}
+.byline .dot{color:var(--faint)}
+.byline .desk{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--green-d)}
+
+.body{padding:40px 0 20px}
+.lede{font-family:var(--serif);font-weight:500;font-size:23px;line-height:1.45;
+      color:var(--ink);margin-bottom:34px;letter-spacing:-.005em}
+.lede .src{color:var(--green-d);font-style:italic}
+.body p{margin-bottom:22px}
+.body h2{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.2;
+         letter-spacing:-.01em;color:var(--ink);margin:44px 0 16px}
+.body h3{font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:.02em;
+         color:var(--green-d);margin:32px 0 10px;text-transform:uppercase}
+.body strong{font-weight:700;color:var(--ink)}
+.body em{font-style:italic}
+.lead-cap::first-letter{font-family:var(--serif);font-weight:600;font-size:62px;line-height:.82;
+   float:left;margin:6px 12px 0 0;color:var(--green-d)}
+
+/* pull figure */
+.figrow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0}
+.figbox{background:var(--warm);border:1px solid var(--line);border-radius:13px;padding:20px 18px;position:relative}
+.figbox.hot{border-color:#e3c08f;background:#fbf6ec}
+.figbox .n{font-family:var(--serif);font-size:34px;font-weight:600;line-height:1;color:var(--ink)}
+.figbox .n .u{color:var(--green-d);font-size:21px}
+.figbox.hot .n{color:var(--amber)}
+.figbox .l{font-size:12.5px;color:var(--muted);margin-top:9px;line-height:1.4}
+.figbox .tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+             color:var(--green-d);margin-top:10px;display:block}
+.figbox.hot .tag{color:var(--amber)}
+
+/* data table */
+.tbl{width:100%;border-collapse:collapse;margin:28px 0;font-size:15px}
+.tbl caption{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+             color:var(--green-d);text-align:left;padding-bottom:12px}
+.tbl th{font-family:var(--sans);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+        color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink);font-weight:600}
+.tbl th.r,.tbl td.r{text-align:right;font-family:var(--mono)}
+.tbl td{padding:11px 12px;border-bottom:1px solid var(--line)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .comp{font-weight:600;color:var(--ink)}
+.tbl .def{color:var(--red);font-weight:600}
+.tbl .tight{color:var(--amber);font-weight:600}
+.tbl .ok{color:var(--green-d);font-weight:600}
+.tbl tr.lead td{background:#fbf6ec}
+
+/* verify callout */
+.verify{background:linear-gradient(165deg,#0a1a2b,#0e2740);color:#eaf2f8;border-radius:16px;
+        padding:30px 32px;margin:38px 0;border:1px solid var(--line-d);position:relative;overflow:hidden}
+.verify::after{content:"";position:absolute;top:-40px;right:-40px;width:150px;height:150px;
+               background:radial-gradient(circle,rgba(63,207,154,.18),transparent 70%)}
+.verify .vk{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;
+            color:var(--green-br);margin-bottom:12px;position:relative}
+.verify h4{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.25;margin-bottom:12px;color:#fff;position:relative}
+.verify p{font-size:15.5px;color:#b3c6d6;margin-bottom:16px;position:relative;line-height:1.55}
+.verify .chips{display:flex;flex-wrap:wrap;gap:9px;position:relative}
+.verify .chip{font-family:var(--mono);font-size:11.5px;color:#cdd9e4;background:rgba(255,255,255,.05);
+              border:1px solid var(--line-d);border-radius:7px;padding:7px 11px;transition:all .2s}
+.verify .chip:hover{border-color:var(--green-br);color:#fff}
+.verify .chip b{color:var(--green-br);font-weight:600}
+
+/* blockquote */
+.bq{border-left:3px solid var(--green);padding:6px 0 6px 24px;margin:30px 0;
+    font-family:var(--serif);font-weight:500;font-size:21px;line-height:1.4;color:var(--navy2);font-style:italic}
+
+/* methodology note */
+.note{background:var(--warm);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin:30px 0;
+      font-size:14.5px;color:var(--muted);line-height:1.6}
+.note b{color:var(--ink)}
+
+/* cta band */
+.ctaband{background:linear-gradient(165deg,#0a1a2b,#0e2740);color:#fff;margin-top:54px}
+.ctaband .inner{max-width:760px;margin:0 auto;padding:54px 28px;text-align:center}
+.ctaband h3{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.15;margin-bottom:14px}
+.ctaband h3 em{font-style:italic;color:var(--green-br)}
+.ctaband p{color:#b3c6d6;font-size:16px;max-width:520px;margin:0 auto 26px}
+.ctaband .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* footer */
+footer{background:#071420;color:#8ba4b8;padding:46px 0 34px;font-size:14px}
+footer .inner{max-width:1080px;margin:0 auto;padding:0 28px}
+footer .ftop{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start;padding-bottom:26px;border-bottom:1px solid var(--line-d)}
+footer .blurb{max-width:320px;line-height:1.6;color:#7e96aa;margin-top:12px}
+footer .flinks{display:flex;gap:48px;flex-wrap:wrap}
+footer h5{color:#cdd9e4;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:13px;font-weight:600}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+footer li a{color:#8ba4b8;transition:color .2s}
+footer li a:hover{color:var(--green-br)}
+footer .fbot{padding-top:22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12.5px;color:#5f7488}
+footer .disc{max-width:560px;line-height:1.5}
+
+@media(max-width:680px){
+  h1{font-size:34px}
+  .lede{font-size:20px}
+  .figrow{grid-template-columns:1fr}
+  .tbl{font-size:13.5px}
+  .tbl th,.tbl td{padding:9px 8px}
+  .lead-cap::first-letter{font-size:50px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="inner">
+  <a class="logo" href="../">
+    <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+      <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+      <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+    <span>InfraMosaic<small>Humanoid Intelligence</small></span></a>
+  <nav class="navlinks">
+    <a href="../dashboard/">Dashboard</a>
+    <a href="../ledger/">Ledger</a>
+    <a href="../report/index.html">Research</a>
+    <a class="btn btn-g" href="../dashboard/">Explore the data</a>
+  </nav>
+</div></header>
+
+<article>
+<div class="art">
+  <header class="hd">
+    <div class="eyebrow">Humanoid Robotics · Insight · June 2026</div>
+    <h1>Roller screws, not chips, are the humanoid ramp's tightest <em>mechanical</em> chokepoint — demand runs to 770% of assessed 2030 capacity</h1>
+    <div class="byline">
+      <span class="who">InfraMosaic Research</span>
+      <span class="dot">·</span>
+      <span class="desk">Humanoid Intelligence desk</span>
+      <span class="dot">·</span>
+      <span>13 June 2026 build</span>
+    </div>
+  </header>
+
+  <div class="body">
+    <p class="lede">
+      The planetary roller screw — the part that turns a spinning motor into a robot's linear push — is the tightest mechanical node in the humanoid value chain. At 14 screws per robot and 7.7 million units of 2030 demand against roughly 1 million units of assessed capacity, the order book points to utilisation near <strong>770%</strong>. Integrated rotary actuators sit at <strong>385%</strong>, six-axis force-torque sensors at <strong>440%</strong>, and four of ten modelled mechanical nodes carry a deficit-risk verdict — <span class="src">according to InfraMosaic's supply/demand order book</span>.
+    </p>
+
+    <p class="lead-cap">Most of the public anxiety about scaling humanoid robots fixates on silicon and software — the onboard AI, the data, the GPUs to train it. That is the loud bottleneck. The quiet one is a machined steel cylinder the size of a thumb. InfraMosaic's supply/demand order book — robot ramp multiplied by a per-robot bill-of-quantities, set against assessed node capacity — flags the <strong>planetary roller screw (PRS)</strong> as the part most likely to bind first. It is not a software problem you can fix with a better model; it is a metallurgy-and-grinding problem measured in six-to-nine-month lead times.</p>
+
+    <p>The mechanism is straightforward. A humanoid like Tesla's Optimus uses roughly <strong>14 linear actuators</strong>, each built around one roller screw, to drive the limbs that need high force in a compact envelope. Unlike a ball screw, a roller screw distributes load across multiple threaded rollers, surviving the shock and dead-stop loads of a walking machine. There is no easy substitute. So per-robot demand for screws scales one-for-one with the linear-actuator count, and the order book translates the ramp directly into a units number.</p>
+
+    <div class="figrow">
+      <div class="figbox hot">
+        <div class="n">770<span class="u">%</span></div>
+        <div class="l">Planetary roller screws — 2030 demand vs assessed capacity</div>
+        <span class="tag">Deficit-risk · tightest node</span>
+      </div>
+      <div class="figbox">
+        <div class="n">440<span class="u">%</span></div>
+        <div class="l">Six-axis force-torque sensors — #1 BOM cost line, also tightening</div>
+        <span class="tag">Tightening</span>
+      </div>
+      <div class="figbox">
+        <div class="n">385<span class="u">%</span></div>
+        <div class="l">Integrated rotary actuators — module assembly capacity</div>
+        <span class="tag">Tightening</span>
+      </div>
+    </div>
+
+    <h2>The node-by-node tightness map</h2>
+
+    <p>Run the same arithmetic across every mechanical node and the picture is not uniformly tight — it is <em>surgically</em> tight. A handful of parts dominate the risk while the headline-grabbing components are, on InfraMosaic's numbers, comfortably oversupplied. LiDAR units sit at about <strong>5.5%</strong> of 2030 capacity; battery packs and rare-earth magnet tonnage are effectively a capital glut. The constraint is concentrated in three precision-mechanical buckets where Western and Japanese incumbents — Rollvis, GSA, Ewellix, NSK, THK — still hold the high-precision share.</p>
+
+    <table class="tbl">
+      <caption>Supply/demand order book — 2030 utilisation by node</caption>
+      <thead><tr>
+        <th>Component node</th>
+        <th class="r">Per robot</th>
+        <th class="r">2030 demand</th>
+        <th class="r">2030 capacity</th>
+        <th class="r">Utilisation</th>
+        <th>Verdict</th>
+      </tr></thead>
+      <tbody>
+        <tr class="lead">
+          <td class="comp">Planetary roller screw</td>
+          <td class="r">14</td>
+          <td class="r">7.70m</td>
+          <td class="r">1.00m</td>
+          <td class="r def">770%</td>
+          <td class="def">Deficit-risk</td>
+        </tr>
+        <tr>
+          <td class="comp">6-axis force-torque sensor</td>
+          <td class="r">4</td>
+          <td class="r">2.20m</td>
+          <td class="r">0.50m</td>
+          <td class="r tight">440%</td>
+          <td class="tight">Tightening</td>
+        </tr>
+        <tr>
+          <td class="comp">Integrated rotary actuator</td>
+          <td class="r">14</td>
+          <td class="r">7.70m</td>
+          <td class="r">2.00m</td>
+          <td class="r tight">385%</td>
+          <td class="tight">Tightening</td>
+        </tr>
+        <tr>
+          <td class="comp">Dexterous hand (5-finger)</td>
+          <td class="r">2</td>
+          <td class="r">1.10m</td>
+          <td class="r">5.00m</td>
+          <td class="r ok">22%</td>
+          <td class="tight">Tightening</td>
+        </tr>
+        <tr>
+          <td class="comp">LiDAR</td>
+          <td class="r">1</td>
+          <td class="r">0.55m</td>
+          <td class="r">10.0m</td>
+          <td class="r ok">5.5%</td>
+          <td class="ok">Balanced (glut)</td>
+        </tr>
+        <tr>
+          <td class="comp">NdFeB magnet (tonnes)</td>
+          <td class="r">3.5kg</td>
+          <td class="r">1,925t</td>
+          <td class="r">400k t</td>
+          <td class="r ok">0.5%</td>
+          <td class="def">Input-constrained*</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="note" style="margin-top:-8px">*Magnet <em>capacity</em> is a glut, but the rare-earth <em>input</em> (dysprosium, terbium) sits under Chinese export control — the real magnet constraint is upstream, not at the press. The order book separates the two so the tightness signal is not double-counted.</p>
+
+    <div class="verify">
+      <div class="vk">◆ Verify every number</div>
+      <h4>Rystad asks you to trust the trace. InfraMosaic lets you check it.</h4>
+      <p>Every figure in this article resolves to a hash-chained record in the InfraMosaic Publication Ledger — input source, methodology version, QA suite and approver, bound together and tamper-evident. The supply/demand order book is one of four versioned models; the deficit-risk count is a published KPI.</p>
+      <div class="chips">
+        <a class="chip" href="../ledger/"><b>kpi.deficit_components</b> = 4</a>
+        <a class="chip" href="../ledger/"><b>kpi.sd_components</b> = 10</a>
+        <a class="chip" href="../ledger/"><b>kpi.bom_material_total_usd</b> = $55,000</a>
+        <a class="chip" href="../ledger/"><b>kpi.nodes</b> = 25</a>
+        <a class="chip" href="../ledger/">chain head 15a725e0…1c29d</a>
+      </div>
+    </div>
+
+    <h2>Why screws bind before everything else</h2>
+
+    <p>Three properties make the roller screw the first domino. First, the <strong>count</strong>: at 14 per robot it is tied with the actuator for the most numerous precision-machined part, so it inherits the full force of the ramp. Second, the <strong>process</strong>: roller screws need precision-ground alloy-steel threads and matched roller sets, a low-throughput, high-skill operation with multi-month lead times that cannot be conjured by adding a shift. Third, the <strong>supplier base</strong>: high-precision PRS output has historically been an EU/Japan specialty (Rollvis, GSA, Ewellix, Rexroth), thin and export-controlled, only now being chased by Chinese entrants such as Xinjian Transmission, which broke ground on a million-unit line in 2025.</p>
+
+    <p>That is also why screws matter to the cost story, not just the supply story. On InfraMosaic's reference bill of materials — rebased on Morgan Stanley's own Exhibit 54 — a roughly <strong>$55,000</strong> material BOM splits as sensors $20.4k (37%), motors $11.2k (20%) and <strong>screws $11.1k (20%)</strong>, ahead of reducers at 13%. Screws are a fifth of the build cost <em>and</em> the tightest node. Where they go, the unit economics follow.</p>
+
+    <h2>China holds the cost-down template</h2>
+
+    <p>Here is the part that should reframe the whole debate. The roller screw is not only the tightest node — it is the node with a <em>proven</em> path down the cost curve. In the Chinese supply chain the per-unit roller-screw cost has been tracked falling from roughly <strong>$3,000 to $800 at Tesla-scale volumes</strong>: a near-four-fold reduction driven by localisation, line throughput and grinding-process maturity. That is the template the rest of the BOM is expected to follow.</p>
+
+    <div class="bq">The roller screw is the proving ground: the part that is hardest to make is also the part where China has already demonstrated the steepest cost-down. Whoever industrialises the screw first sets the floor for the whole machine.</div>
+
+    <p>The whole-robot curve carries the same fingerprint. InfraMosaic's cost track has the Western build falling from <strong>$200,000 in 2024 toward $40,000 by 2030</strong>, while the China build moves from <strong>$46,000 to roughly $18,000</strong> over the same window — a discount that starts near 77% and only narrows to about 55% as Western localisation catches up. The gap is not a labour-arbitrage story; it is a precision-components story, and the roller screw is its sharpest edge. A reader betting on humanoid <em>hardware</em> deflation is, in large part, betting on who industrialises the screw line.</p>
+
+    <h2>What to watch</h2>
+
+    <p>The order book is a forward map, not a verdict — capacity is the variable, and the deficit signal is precisely the thing that pulls investment in. Three near-term tells will show whether the 770% closes or bites:</p>
+
+    <p><strong>Greenfield PRS lines reaching grade.</strong> Announcing a million-unit roller-screw line is easy; shipping C3/C5-class precision at yield is the hard part. Watch whether Chinese entrants convert groundbreakings into qualified, in-spec output — that is what actually moves the capacity denominator.</p>
+
+    <p><strong>Actuator-maker vertical integration.</strong> With screws at 770% and integrated actuators at 385%, expect module builders to pull screw-making in-house to secure allocation. Vertical integration is the rational response to a single-point chokepoint — and the early warning that the node is binding.</p>
+
+    <p><strong>The cost-down spreading.</strong> The $3,000→$800 screw curve is the leading indicator. If force-torque sensors — the #1 cost line at 37% of the BOM and a 440% deficit — begin a comparable descent, the humanoid unit economics inflect years ahead of consensus. If they don't, sensors and screws together keep the floor under the price of a robot. Either way, the mechanical stack, not the compute stack, is where the 2030 ramp is won or lost.</p>
+
+    <div class="note">
+      <b>Methodology.</b> The supply/demand order book multiplies the InfraMosaic robot-ramp scenario by a per-robot bill-of-quantities and sets the result against assessed node capacity; utilisation above 100% is flagged deficit-risk or tightening. Ten mechanical nodes are modelled across a 25-node value-chain map and a 255-company universe ($40.7tn live market cap). Capacity figures are assessed estimates with stated confidence; where a node's 2030 capacity is not yet assessable it is marked tightening rather than scored. Full method versions live in <span class="mono">docs/METHODOLOGY.md</span>; every published figure is bound in the Publication Ledger.
+    </div>
+  </div>
+</div>
+
+<div class="ctaband"><div class="inner">
+  <h3>The bottleneck is <em>mechanical</em>, and it's already in the data.</h3>
+  <p>Explore the live order book, the BOM cost curve and node-by-node utilisation — then verify any figure against its hash-chained evidence record.</p>
+  <div class="cta">
+    <a class="btn btn-g" href="../dashboard/">Explore the live data →</a>
+    <a class="btn btn-ghost" href="../ledger/">Verify in the ledger →</a>
+  </div>
+</div></div>
+</article>
+
+<footer><div class="inner">
+  <div class="ftop">
+    <div>
+      <a class="logo" href="../">
+        <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+          <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+          <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+        <span>InfraMosaic</span></a>
+      <p class="blurb">The price-reporting agency and asset-level database for the frontier hard-tech economy. Humanoid robotics, live.</p>
+    </div>
+    <div class="flinks">
+      <div><h5>Platform</h5><ul>
+        <li><a href="../dashboard/">Live dashboard</a></li>
+        <li><a href="../ledger/">Publication ledger</a></li>
+        <li><a href="../report/index.html">State of Humanoids 2026</a></li>
+      </ul></div>
+      <div><h5>Research</h5><ul>
+        <li><a href="../report/humanoid100_2026.html">Humanoid 100 — 2026</a></li>
+        <li><a href="../">Insights</a></li>
+      </ul></div>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© <span id="yr">2026</span> InfraMosaic · Independent research</span>
+    <span class="disc">Independent research and analysis. Not affiliated with, endorsed by, or sponsored by Morgan Stanley; the MS Humanoid 100 is used solely as a published cross-reference. Nothing herein is investment advice.</span>
+  </div>
+</div></footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

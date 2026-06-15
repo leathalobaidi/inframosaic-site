@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sensors, not actuators, are humanoid robotics' #1 cost — at 37% of the bill of materials — InfraMosaic Insight</title>
+<meta name="description" content="Morgan Stanley's own Exhibit 54 shows sensors are the single largest line in a humanoid's ~$55,000 material bill of materials — 37%, ahead of motors and screws at 20% each — yet the report's prose anchors on 'joint modules 60–70%.' The six-axis force-torque sensor is also the tightest 2030 bottleneck at 440% of assessed capacity.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2b'/%3E%3Crect x='6' y='6' width='7' height='7' fill='%2313966b'/%3E%3Crect x='15' y='6' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='6' y='15' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='15' y='15' width='7' height='7' fill='%233fcf9a'/%3E%3Crect x='6' y='24' width='4' height='2' fill='%23cdd6df'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1a2b; --navy2:#0f2940; --navy3:#16395a; --ink:#0e1c29;
+  --green:#13966b; --green-d:#0b6e4f; --green-br:#3fcf9a;
+  --paper:#ffffff; --bg:#eef1f4; --warm:#f4f2ec;
+  --line:#dbe2e9; --line-d:#1d3b56; --muted:#5b6a78; --faint:#8696a4;
+  --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);
+     font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.serif{font-family:var(--serif)}
+.mono{font-family:var(--mono)}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(10,26,43,.86);
+           backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;font-size:19px;
+      font-family:var(--serif);letter-spacing:.01em}
+.logo .mark{width:26px;height:26px;border-radius:5px;flex:0 0 26px}
+.logo small{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.22em;
+            text-transform:uppercase;color:var(--green-br);display:block;margin-top:-3px}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{color:#aebecd;font-size:14.5px;font-weight:500;transition:color .2s}
+.navlinks a:hover{color:#fff}
+.btn{font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:7px;
+     padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:all .2s;display:inline-block}
+.btn-g{background:var(--green);color:#fff}
+.btn-g:hover{background:var(--green-br);color:var(--navy)}
+.btn-ghost{border-color:#2b4a68;color:#cdd9e4}
+.btn-ghost:hover{border-color:var(--green-br);color:#fff}
+
+/* ---------- article masthead ---------- */
+.masthead{background:
+   radial-gradient(1100px 600px at 80% -12%,rgba(19,150,107,.20),transparent 60%),
+   linear-gradient(168deg,#0a1a2b 0%,#0d2338 58%,#0a1c30 100%);
+   color:#eaf2f8;border-bottom:1px solid var(--line-d)}
+.masthead .wrap{padding-top:60px;padding-bottom:54px;max-width:880px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+         color:var(--green-br);margin-bottom:26px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--green-br)}
+.masthead h1{font-family:var(--serif);font-weight:500;font-size:46px;line-height:1.08;
+         letter-spacing:-.018em;margin-bottom:22px}
+.masthead h1 em{font-style:italic;color:var(--green-br)}
+.dek{font-size:20px;color:#b9cbd9;line-height:1.5;max-width:720px;margin-bottom:30px}
+.byline{display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+        font-family:var(--mono);font-size:12.5px;color:#8ba4b8;letter-spacing:.04em;
+        border-top:1px solid var(--line-d);padding-top:20px}
+.byline b{color:#cdd9e4;font-weight:600}
+.byline .dot{color:#3a587a}
+
+/* ---------- article body ---------- */
+.article{padding:60px 0 30px}
+.article .wrap{max-width:760px}
+.lede{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.5;
+      color:var(--ink);margin-bottom:34px;letter-spacing:-.005em}
+.lede b{font-weight:600}
+.article h2{font-family:var(--serif);font-weight:600;font-size:27px;line-height:1.18;
+            letter-spacing:-.01em;color:var(--ink);margin:42px 0 14px}
+.article h3{font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:.02em;
+            color:var(--green-d);margin:34px 0 10px;text-transform:uppercase}
+.article p{font-size:17.5px;line-height:1.68;color:#22323f;margin-bottom:20px}
+.article p b{color:var(--ink);font-weight:700}
+.article a.inl{color:var(--green-d);font-weight:600;border-bottom:1px solid #bfe6d6}
+.article a.inl:hover{border-bottom-color:var(--green-d)}
+.article ul{margin:0 0 22px 0;padding-left:0;list-style:none}
+.article li{position:relative;padding-left:26px;margin-bottom:11px;font-size:17px;line-height:1.6;color:#22323f}
+.article li::before{content:"";position:absolute;left:4px;top:11px;width:8px;height:8px;
+                    border-radius:2px;background:var(--green)}
+
+.pull{font-family:var(--serif);font-weight:500;font-size:25px;line-height:1.32;color:var(--navy);
+      border-left:3px solid var(--green);padding:6px 0 6px 26px;margin:34px 0;letter-spacing:-.008em}
+
+/* ---------- BOM table ---------- */
+.tablewrap{margin:30px 0 12px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+table.bom{width:100%;border-collapse:collapse;font-size:15px}
+table.bom th{background:var(--navy);color:#cdd9e4;font-family:var(--mono);font-size:11px;
+             letter-spacing:.08em;text-transform:uppercase;text-align:left;padding:12px 16px;font-weight:600}
+table.bom th.r,table.bom td.r{text-align:right;font-variant-numeric:tabular-nums}
+table.bom td{padding:11px 16px;border-top:1px solid var(--line);color:#22323f}
+table.bom tr.lead td{background:#eafaf3;font-weight:600;color:var(--ink)}
+table.bom tr.lead td .tag{font-family:var(--mono);font-size:10px;background:var(--green);color:#fff;
+        padding:2px 7px;border-radius:999px;margin-left:8px;letter-spacing:.06em;vertical-align:middle}
+table.bom td.mono{font-family:var(--mono);font-size:13.5px}
+table.bom tr.tot td{border-top:2px solid var(--navy);font-weight:700;color:var(--ink);background:#f7f9fb}
+.tnote{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin:8px 2px 0;line-height:1.5}
+
+/* ---------- figure callout (data card) ---------- */
+.figcard{background:var(--warm);border:1px solid var(--line);border-radius:14px;padding:26px 28px;margin:32px 0}
+.figcard .k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-d);margin-bottom:14px}
+.figrow{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.figrow .f .n{font-family:var(--serif);font-size:34px;font-weight:600;color:var(--navy);line-height:1}
+.figrow .f .n .u{color:var(--green-d);font-size:21px}
+.figrow .f .l{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.4}
+
+/* ---------- verify box (the differentiator) ---------- */
+.verify{background:linear-gradient(165deg,#0a1a2b,#0e2740);color:#eaf2f8;border-radius:16px;
+        padding:30px 32px;margin:40px 0;position:relative;overflow:hidden}
+.verify::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;
+        background:radial-gradient(circle,rgba(63,207,154,.18),transparent 70%)}
+.verify .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+           color:var(--green-br);margin-bottom:12px;position:relative}
+.verify h3{font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.22;
+           color:#fff;margin-bottom:12px;text-transform:none;position:relative}
+.verify p{font-size:15.5px;color:#b9cbd9;line-height:1.6;margin-bottom:16px;position:relative}
+.verify .chain{font-family:var(--mono);font-size:12px;color:#8ba4b8;line-height:1.7;
+               background:rgba(255,255,255,.04);border:1px solid var(--line-d);border-radius:9px;
+               padding:13px 15px;margin-bottom:18px;position:relative;word-break:break-all}
+.verify .chain b{color:var(--green-br);font-weight:600}
+.verify .vcta{display:flex;gap:12px;flex-wrap:wrap;position:relative}
+
+/* ---------- CTA band ---------- */
+.ctaband{background:var(--navy);color:#eaf2f8;text-align:center;margin-top:20px}
+.ctaband .wrap{padding:64px 32px}
+.ctaband h2{font-family:var(--serif);font-weight:500;font-size:32px;line-height:1.14;margin-bottom:14px;letter-spacing:-.01em;color:#fff}
+.ctaband h2 em{font-style:italic;color:var(--green-br)}
+.ctaband p{color:#b3c6d6;font-size:17px;max-width:540px;margin:0 auto 26px}
+.ctaband .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- footer ---------- */
+footer{background:#071420;color:#8ba4b8;padding:54px 0 32px;font-size:14px}
+.fcols{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:34px;padding-bottom:34px;border-bottom:1px solid var(--line-d)}
+footer .logo{margin-bottom:14px}
+footer .blurb{max-width:320px;line-height:1.6;color:#7e96aa}
+footer h5{color:#cdd9e4;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;font-weight:600}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+footer li a{color:#8ba4b8;transition:color .2s}
+footer li a:hover{color:var(--green-br)}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:22px;
+      font-size:12.5px;color:#5e7488;flex-wrap:wrap;gap:10px}
+.fbot .disc{max-width:700px;line-height:1.5}
+
+@media(max-width:780px){
+  .masthead h1{font-size:33px}
+  .dek{font-size:17px}
+  .article p,.lede{font-size:17px}
+  .lede{font-size:19px}
+  .figrow{grid-template-columns:1fr}
+  .fcols{grid-template-columns:1fr 1fr}
+  .navlinks{display:none}
+  table.bom th,table.bom td{padding:9px 11px;font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav"><div class="wrap">
+  <a class="logo" href="../">
+    <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+      <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+      <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+    <span>InfraMosaic<small>Frontier-tech intelligence</small></span>
+  </a>
+  <nav class="navlinks">
+    <a href="../report/humanoid100_2026.html">Humanoid&nbsp;100</a>
+    <a href="../dashboard/">Live&nbsp;data</a>
+    <a href="../ledger/">Ledger</a>
+  </nav>
+  <a class="btn btn-g" href="../dashboard/">Explore the data</a>
+</div></header>
+
+<!-- MASTHEAD -->
+<section class="masthead"><div class="wrap">
+  <div class="eyebrow">Humanoid Robotics &middot; Insight &middot; June 2026</div>
+  <h1>Sensors, not actuators, are humanoid robotics' <em>#1 cost</em> — at 37% of the bill of materials</h1>
+  <p class="dek">The single largest line in a humanoid's ~$55,000 material BOM is sensing — ahead of motors and screws at 20% each. The six-axis force-torque sensor that tops the cost stack is also the tightest 2030 bottleneck, at 440% of assessed capacity. The number was hiding in Morgan Stanley's own exhibit.</p>
+  <div class="byline">
+    <span><b>InfraMosaic Research</b> &middot; Humanoid Intelligence desk</span>
+    <span class="dot">|</span>
+    <span>Published 15 June 2026</span>
+    <span class="dot">|</span>
+    <span>Source: InfraMosaic reference BOM &amp; supply/demand order book</span>
+  </div>
+</div></section>
+
+<!-- ARTICLE -->
+<article class="article"><div class="wrap">
+
+  <p class="lede"><b>Sensors are the most expensive thing in a humanoid robot.</b> At an assessed <b>$20,350 — 37% of a ~$55,000 material bill of materials</b> — the sensing stack outweighs actuator motors and screws, each ~20%, and dwarfs compute at 4%. The six-axis force-torque sensor anchoring that line is also the supply chain's tightest knot: 2030 demand runs to <b>440% of assessed capacity</b>. That corrects the "joint modules are 60–70% of cost" framing in Morgan Stanley's own Humanoid 100 — contradicted by its Exhibit 54 — according to InfraMosaic's humanoid reference BOM and supply/demand order book.</p>
+
+  <p>The conventional shorthand for humanoid economics is the actuator. Morgan Stanley's influential Humanoid 100 (February 2025) put it bluntly in prose: <b>"joint drive modules are 60–70% of a humanoid's cost."</b> That framing has propagated through sell-side notes and supplier pitches ever since, training investor attention on reducers, roller screws and frameless motors as the parts that matter.</p>
+
+  <p>It is the wrong cut of the data — and the corrective sits in the same report. Morgan Stanley's Exhibit 54, a component-level teardown of Tesla's Optimus Gen-2, ranks the bill of materials as: <b>Sensor 37%, Motor 20.3%, Screw 20.2%, Reducer 12.6%, Encoder 3.9%, compute 3.8%, bearing 0.8%, battery 0.5%.</b> Sensing leads. The "60–70%" figure is real, but only at the sub-system cut — once you bundle motors, screws, reducers, encoders and bearings into a "joint module," that envelope dominates. Slice the BOM the way a procurement team actually buys it — by component — and the single largest line you negotiate is the sensor.</p>
+
+  <h2>The bill of materials, line by line</h2>
+
+  <p>InfraMosaic re-bases its humanoid reference BOM directly on Exhibit 54, mapped onto a ~$55,000 material build. The breakdown, in dollars:</p>
+
+  <div class="tablewrap">
+    <table class="bom">
+      <thead><tr><th>Subsystem</th><th class="r">Assessed cost</th><th class="r">Share of BOM</th></tr></thead>
+      <tbody>
+        <tr class="lead"><td>Sensors — 6-axis force-torque + IMU + encoders + vision + tactile <span class="tag">#1</span></td><td class="r mono">$20,350</td><td class="r mono">37%</td></tr>
+        <tr><td>Motors — frameless + BLDC actuator motors</td><td class="r mono">$11,165</td><td class="r mono">20%</td></tr>
+        <tr><td>Screws — planetary roller + ball screws</td><td class="r mono">$11,110</td><td class="r mono">20%</td></tr>
+        <tr><td>Reducers — harmonic + cycloidal</td><td class="r mono">$6,930</td><td class="r mono">13%</td></tr>
+        <tr><td>Encoders — joint position feedback</td><td class="r mono">$2,145</td><td class="r mono">4%</td></tr>
+        <tr><td>Compute — SoC + chips + camera ISP</td><td class="r mono">$2,090</td><td class="r mono">4%</td></tr>
+        <tr><td>Bearings — cross-roller + ball</td><td class="r mono">$440</td><td class="r mono">1%</td></tr>
+        <tr><td>Battery pack — 2.3 kWh</td><td class="r mono">$275</td><td class="r mono">1%</td></tr>
+        <tr><td>Others — frame, structure, wiring, power electronics</td><td class="r mono">$495</td><td class="r mono">1%</td></tr>
+        <tr class="tot"><td>Material BOM total</td><td class="r mono">~$55,000</td><td class="r mono">100%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tnote">Source: InfraMosaic reference BOM, re-based on MS Humanoid 100 Exhibit 54 (Optimus Gen-2). Total resolves to ledger figure <b>kpi.bom_material_total_usd</b>. Shares rounded; columns may not sum to 100.</p>
+
+  <p>Three things stand out. First, sensing is not one part — it is a stack: the six-axis force-torque sensors in the wrists and ankles, MEMS IMUs, joint encoders, vision and an emerging tactile layer. Second, the cost density sits in force-torque: InfraMosaic assesses a six-axis F-T sensor at <b>~$6,000 a unit</b> (range $4,000–$10,000), with four per robot in the hands and feet — the single most expensive discrete component class in the body. Third, the cheap stuff is genuinely cheap: a 2.3 kWh battery pack is $275, an automotive-grade MEMS IMU is a few dollars. The robot's intelligence about the physical world, not its battery, is what runs up the bill.</p>
+
+  <p class="pull">Slice the bill of materials the way a buyer actually negotiates it — by component — and the single largest line is the sensor, not the actuator.</p>
+
+  <h2>The same part is also the tightest bottleneck</h2>
+
+  <p>Cost concentration would be a curiosity if supply were elastic. It is not. InfraMosaic's supply/demand order book — robot production ramp multiplied by per-robot bill-of-quantities, set against assessed manufacturing capacity — flags the six-axis force-torque sensor as one of the three deficit-risk nodes for 2030.</p>
+
+  <div class="figcard">
+    <div class="k">Six-axis force-torque sensor &middot; 2030 supply/demand</div>
+    <div class="figrow">
+      <div class="f"><div class="n">2.2<span class="u">M</span></div><div class="l">sets/yr demand at the 2030 ramp (4 sets per robot)</div></div>
+      <div class="f"><div class="n">500<span class="u">k</span></div><div class="l">assessed 2030 capacity, sets/yr</div></div>
+      <div class="f"><div class="n">440<span class="u">%</span></div><div class="l">implied demand vs capacity — deficit-risk</div></div>
+    </div>
+  </div>
+
+  <p>At 440%, demand outruns assessed capacity more than fourfold. The supplier base is thin — ATI, Kunwei and Hypersen sit at the top of the order book — and the technology does not scale like a commodity sensor. A six-axis cell must resolve forces and torques across three axes simultaneously, with the temperature stability and crosstalk rejection that lets a robot grade its grip on a fragile object. That is a precision-machining and calibration problem, not a lithography one. The cost <em>is</em> falling — InfraMosaic tracks the F-T sensor on a ~44% cost-down trajectory — but the capacity to make them is the gating variable.</p>
+
+  <p>It is not alone. The order book's other 2030 deficit-risk verdicts run alongside it:</p>
+
+  <ul>
+    <li><b>Planetary roller screws — 770%</b> of assessed 2030 capacity. The single tightest node in the body.</li>
+    <li><b>Integrated rotary actuators — 385%.</b> The "joint module" the old narrative obsessed over, also short.</li>
+    <li><b>Six-axis force-torque sensors — 440%.</b> Top cost line and a top-three bottleneck at once.</li>
+  </ul>
+
+  <p>The pattern is the point. The parts that cost the most are, disproportionately, the parts the world cannot yet build at scale. The glut sits elsewhere — LiDAR at 5.5% of capacity, battery packs near zero — exactly the components a generic "EV supply chain" instinct would worry about. For humanoids, the binding constraints are the precision-mechatronic nodes, and force-torque sits at the intersection of dearest and scarcest.</p>
+
+  <h2>Why the framing matters</h2>
+
+  <p>The cost curve is moving fast underneath all of this. InfraMosaic's whole-robot BOM curve has the Western build falling from ~$200,000 in 2024 to ~$40,000 by 2030, and the Chinese build from ~$46,000 to ~$18,000. As the actuator drivetrain commoditises — the planetary roller screw alone is on a path from roughly $3,000 to $800 at Tesla scale — the sensor share of the remaining bill only grows. Getting the largest cost line wrong in 2026 means mis-pricing the bottleneck that will still be binding in 2030.</p>
+
+  <p>For investors and procurement teams, the re-frame changes where to look. The "joint module 60–70%" story points you at motors, reducers and screws — a crowded, increasingly Chinese, increasingly commoditised field. The component story points you at the force-torque sensor: dearest line, thinnest supplier base, hardest to scale, and the node where a 440% deficit gives incumbents real pricing power through the decade. Morgan Stanley's report had the right number in its own exhibit; the prose buried it.</p>
+
+  <!-- VERIFY BOX — the InfraMosaic differentiator -->
+  <div class="verify">
+    <div class="k">Verify every number</div>
+    <h3>Rystad asks you to trust the trace. InfraMosaic lets you check it.</h3>
+    <p>Every figure in this article resolves to a hash-chained record in the InfraMosaic Publication Ledger — input file, SHA-256, methodology version, test suite and named approver. The headline BOM figure is logged as:</p>
+    <div class="chain">
+      figure_id <b>kpi.bom_material_total_usd</b> = $55,000 &middot; as_of 2026-06-13<br>
+      content_hash <b>abb1125afeddf999&hellip;7872c014e</b><br>
+      ledger v1 &middot; 363 records &middot; chain_head <b>15a725e0&hellip;ee41c29d</b> &middot; 134/134 tests passed
+    </div>
+    <div class="vcta">
+      <a class="btn btn-g" href="../ledger/">Verify in the ledger &rarr;</a>
+      <a class="btn btn-ghost" href="../report/humanoid100_2026.html">Read the Humanoid 100 re-write</a>
+    </div>
+  </div>
+
+  <h2>What to watch</h2>
+
+  <ul>
+    <li><b>Force-torque capacity announcements.</b> Any meaningful greenfield from ATI, Kunwei, Hypersen or a new entrant is the single most important signal for whether the 440% deficit eases before the 2030 ramp.</li>
+    <li><b>The sensor cost-down rate.</b> If the F-T unit price falls faster than ~44%/yr, the sensor share of BOM compresses and the bottleneck loosens together. Slower, and sensing's cost lead over motors widens further.</li>
+    <li><b>Tactile-skin integration.</b> A full tactile layer would push the sensing share above 37% — the one move that could extend, rather than erode, sensing's #1 position.</li>
+    <li><b>Whose narrative the market adopts.</b> Watch whether sell-side BOM models migrate from the "joint module 60–70%" sub-system cut to the component cut. The re-rating of the force-torque supply base depends on it.</li>
+  </ul>
+
+</div></article>
+
+<!-- CTA BAND -->
+<section class="ctaband"><div class="wrap">
+  <h2>The whole humanoid value chain, <em>on one screen.</em></h2>
+  <p>255 companies, 25 component nodes, the price board and a node-by-node supply/demand order book — every figure traceable to the ledger.</p>
+  <div class="cta">
+    <a class="btn btn-g" href="../dashboard/">Explore the live data</a>
+    <a class="btn btn-ghost" href="../ledger/">Verify in the ledger</a>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="fcols">
+    <div>
+      <a class="logo" href="../" style="color:#fff">
+        <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+          <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+          <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+        <span>InfraMosaic</span></a>
+      <p class="blurb">The price-reporting agency and asset-level database for the frontier hard-tech economy. Published by the Humanoid Intelligence desk.</p>
+    </div>
+    <div><h5>Research</h5><ul>
+      <li><a href="../report/index.html">State of Humanoids 2026</a></li>
+      <li><a href="../report/humanoid100_2026.html">Humanoid 100 — 2026 update</a></li>
+      <li><a href="../dashboard/">Live dashboard</a></li></ul></div>
+    <div><h5>Method</h5><ul>
+      <li><a href="../ledger/">Publication ledger</a></li>
+      <li><a href="../dashboard/">Supply/demand order book</a></li>
+      <li><a href="../">About InfraMosaic</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <span>© <span id="yr">2026</span> InfraMosaic · Independent research</span>
+    <span class="disc">Independent research and analysis. Not affiliated with, endorsed by, or sponsored by Morgan Stanley; the MS Humanoid 100 and its Exhibit 54 are used solely as a published cross-reference. Nothing herein is investment advice.</span>
+  </div>
+</div></footer>
+
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>

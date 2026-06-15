@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>China's grip on humanoid robotics isn't broad — it's surgical | InfraMosaic Insight</title>
+<meta name="description" content="China holds 40.4% of the humanoid-robotics universe by company count — but ~100% of rare-earth sintered magnets, and its Dy/Tb export-control regime sits directly on the highest-criticality value-chain nodes: magnets, reducers and roller screws. Country HHI 2,468.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1a2b'/%3E%3Crect x='6' y='6' width='7' height='7' fill='%2313966b'/%3E%3Crect x='15' y='6' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='6' y='15' width='7' height='7' fill='%23cdd6df'/%3E%3Crect x='15' y='15' width='7' height='7' fill='%233fcf9a'/%3E%3Crect x='6' y='24' width='4' height='2' fill='%23cdd6df'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a1a2b; --navy2:#0f2940; --navy3:#16395a; --ink:#0e1c29;
+  --green:#13966b; --green-d:#0b6e4f; --green-br:#3fcf9a;
+  --paper:#ffffff; --bg:#eef1f4; --warm:#f4f2ec;
+  --line:#dbe2e9; --line-d:#1d3b56; --muted:#5b6a78; --faint:#8696a4;
+  --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--paper);
+     font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+.serif{font-family:var(--serif)}
+.mono{font-family:var(--mono)}
+
+/* ---------- ticker ---------- */
+.ticker{background:var(--navy);color:#bcd;border-bottom:1px solid var(--line-d);
+        overflow:hidden;white-space:nowrap;font-family:var(--mono);font-size:12px;
+        letter-spacing:.04em;padding:8px 0}
+.ticker .run{display:inline-block;animation:scroll 42s linear infinite;padding-left:100%}
+.ticker:hover .run{animation-play-state:paused}
+.ticker b{color:#fff;font-weight:600}
+.ticker .up{color:var(--green-br)}
+.ticker .dn{color:#ff9b8a}
+.ticker .sep{color:#3a587a;margin:0 18px}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky;top:0;z-index:50;background:rgba(10,26,43,.86);
+           backdrop-filter:blur(12px);border-bottom:1px solid var(--line-d)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-weight:700;font-size:19px;
+      font-family:var(--serif);letter-spacing:.01em}
+.logo .mark{width:26px;height:26px;border-radius:5px;flex:0 0 26px}
+.logo small{font-family:var(--sans);font-weight:500;font-size:10px;letter-spacing:.22em;
+            text-transform:uppercase;color:var(--green-br);display:block;margin-top:-3px}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{color:#aebecd;font-size:14.5px;font-weight:500;transition:color .2s}
+.navlinks a:hover{color:#fff}
+.btn{font-family:var(--sans);font-weight:600;font-size:14.5px;border-radius:7px;
+     padding:10px 18px;cursor:pointer;border:1px solid transparent;transition:all .2s;display:inline-block}
+.btn-g{background:var(--green);color:#fff}
+.btn-g:hover{background:var(--green-br);color:var(--navy)}
+.btn-ghost{border-color:#2b4a68;color:#cdd9e4}
+.btn-ghost:hover{border-color:var(--green-br);color:#fff}
+
+/* ---------- article head ---------- */
+.ahead{background:
+   radial-gradient(1100px 600px at 80% -12%,rgba(19,150,107,.20),transparent 60%),
+   linear-gradient(168deg,#0a1a2b 0%,#0d2338 58%,#0a1c30 100%);
+   color:#eaf2f8;border-bottom:1px solid var(--line-d)}
+.ahead .wrap{padding:64px 32px 58px;max-width:920px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.26em;text-transform:uppercase;
+         color:var(--green-br);margin-bottom:26px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--green-br)}
+.ahead h1{font-family:var(--serif);font-weight:500;font-size:50px;line-height:1.06;
+          letter-spacing:-.02em;margin-bottom:22px;max-width:18ch}
+.ahead h1 em{font-style:italic;color:var(--green-br)}
+.ahead .dek{font-size:20px;color:#b9cbda;max-width:62ch;line-height:1.5}
+.byline{display:flex;align-items:center;gap:14px;margin-top:30px;
+        font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:#8ba4b8}
+.byline .dot{width:4px;height:4px;border-radius:50%;background:#3a587a}
+.byline b{color:#cdd9e4;font-weight:600}
+
+/* ---------- article body ---------- */
+.article{max-width:760px;margin:0 auto;padding:56px 32px 40px}
+.lede{font-family:var(--serif);font-size:24px;font-weight:500;line-height:1.4;letter-spacing:-.01em;
+      color:var(--ink);margin-bottom:38px}
+.lede a{color:var(--green-d);text-decoration:underline;text-decoration-color:rgba(19,150,107,.4);text-underline-offset:3px}
+.lede a:hover{text-decoration-color:var(--green)}
+.article h2{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1.18;letter-spacing:-.01em;
+            color:var(--ink);margin:42px 0 16px}
+.article p{margin-bottom:22px;color:#1d2c39}
+.article p a{color:var(--green-d);text-decoration:underline;text-decoration-color:rgba(19,150,107,.35);text-underline-offset:2px}
+.article p a:hover{text-decoration-color:var(--green)}
+.article strong{font-weight:700;color:var(--ink)}
+.article em{font-style:italic}
+.fig-ref{font-family:var(--mono);font-size:11px;color:var(--green-d);vertical-align:super;
+         letter-spacing:.02em;text-decoration:none;padding-left:2px}
+.fig-ref:hover{text-decoration:underline}
+
+/* pull stat */
+.pull{border-left:3px solid var(--green);padding:6px 0 6px 26px;margin:34px 0}
+.pull .n{font-family:var(--serif);font-size:46px;font-weight:600;line-height:1;color:var(--ink)}
+.pull .n .u{color:var(--green-d);font-size:30px}
+.pull .l{font-size:15.5px;color:var(--muted);margin-top:10px;max-width:46ch;line-height:1.5}
+
+/* node table */
+.tbl-wrap{margin:30px 0;border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.tbl-cap{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+         color:var(--green-d);background:var(--warm);padding:13px 18px;border-bottom:1px solid var(--line);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+   color:var(--muted);font-weight:600;background:#fbfcfd}
+tbody tr:last-child td{border-bottom:none}
+td.node{font-weight:600;color:var(--ink)}
+td.num{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.crit{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;
+      padding:2px 8px;border-radius:999px;background:#fdeceb;color:#b3261e}
+.china-hi{color:#b3261e;font-weight:700}
+.tag-ec{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.06em;
+        background:#0a1a2b;color:#ff9b8a;padding:2px 7px;border-radius:4px;margin-left:6px;vertical-align:middle}
+
+/* verify callout */
+.verify{background:linear-gradient(165deg,#0a1a2b,#0e2740);color:#eaf2f8;border-radius:16px;
+        padding:30px 32px;margin:42px 0;position:relative;overflow:hidden}
+.verify::before{content:"";position:absolute;inset:0;
+        background:radial-gradient(420px 200px at 88% 0%,rgba(19,150,107,.22),transparent 62%);pointer-events:none}
+.verify .k{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+           color:var(--green-br);margin-bottom:12px;display:flex;align-items:center;gap:9px;position:relative}
+.verify .k::before{content:"⛓";font-size:14px}
+.verify h3{font-family:var(--serif);font-weight:600;font-size:23px;line-height:1.22;margin-bottom:12px;position:relative}
+.verify p{color:#b9cbda;font-size:16px;margin-bottom:18px;position:relative}
+.verify .chips{display:flex;flex-wrap:wrap;gap:10px;position:relative}
+.verify .chip{font-family:var(--mono);font-size:12px;color:#cdd9e4;background:rgba(255,255,255,.05);
+              border:1px solid var(--line-d);border-radius:8px;padding:9px 13px;transition:all .2s}
+.verify .chip:hover{border-color:var(--green-br);color:#fff;background:rgba(19,150,107,.14)}
+.verify .chip b{color:var(--green-br);font-weight:600}
+
+/* inline CTA row */
+.ctarow{display:flex;gap:14px;flex-wrap:wrap;margin:30px 0 8px}
+
+/* dek / what to watch */
+.watch{background:var(--warm);border-radius:14px;padding:26px 30px;margin:36px 0}
+.watch h3{font-family:var(--serif);font-size:21px;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.watch ul{list-style:none;margin-top:14px}
+.watch li{position:relative;padding-left:24px;margin-bottom:13px;font-size:16px;color:#1d2c39;line-height:1.5}
+.watch li::before{content:"▸";position:absolute;left:0;top:1px;color:var(--green-d);font-size:14px}
+.watch li b{color:var(--ink)}
+
+/* method note */
+.method{font-size:13.5px;color:var(--faint);border-top:1px solid var(--line);
+        padding-top:22px;margin-top:42px;line-height:1.6}
+.method a{color:var(--green-d);text-decoration:underline}
+
+/* footer */
+footer{background:#071420;color:#8ba4b8;padding:54px 0 32px;font-size:14px;margin-top:48px}
+.fcols{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:34px;padding-bottom:34px;border-bottom:1px solid var(--line-d)}
+footer .logo{margin-bottom:14px}
+footer .blurb{max-width:320px;line-height:1.6;color:#7e96aa}
+footer h5{color:#cdd9e4;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;font-weight:600}
+footer ul{list-style:none}
+footer li{margin-bottom:9px}
+footer li a{color:#8ba4b8;transition:color .2s}
+footer li a:hover{color:var(--green-br)}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:22px;
+      font-size:12.5px;color:#5e7488;flex-wrap:wrap;gap:10px}
+.fbot .disc{max-width:700px;line-height:1.5}
+
+@media(max-width:820px){
+  .ahead h1{font-size:36px}
+  .ahead .dek{font-size:17px}
+  .lede{font-size:21px}
+  .article h2{font-size:24px}
+  .navlinks{display:none}
+  .fcols{grid-template-columns:1fr 1fr}
+  table{font-size:13px}
+  th,td{padding:10px 11px}
+}
+@media(prefers-reduced-motion:reduce){.ticker .run{animation:none}}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker"><div class="run">
+  <b>RARE-EARTH MAGNETS</b> <span class="dn">~100% China ▲</span> <span class="sep">|</span>
+  <b>COUNTRY HHI</b> 2,468 <span class="sep">|</span>
+  <b>CHINA SHARE · BY NAME</b> 40.4% <span class="sep">|</span>
+  <b>REDUCERS</b> 63.6% China <span class="sep">|</span>
+  <b>SCREWS</b> 72.7% China <span class="sep">|</span>
+  <b>Dy OXIDE</b> <span class="dn">$230 CN vs $800 EU ▲</span> <span class="sep">|</span>
+  <b>Tb OXIDE</b> $1,600/kg <span class="sep">|</span>
+  <b>ROLLER SCREWS</b> 770% util <span class="sep">|</span>
+  <b>RARE-EARTH MAGNETS</b> <span class="dn">~100% China ▲</span> <span class="sep">|</span>
+  <b>COUNTRY HHI</b> 2,468 <span class="sep">|</span>
+  <b>CHINA SHARE · BY NAME</b> 40.4% <span class="sep">|</span>
+</div></div>
+
+<!-- NAV -->
+<header class="nav"><div class="wrap">
+  <a class="logo" href="../">
+    <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+      <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+      <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+    <span>InfraMosaic<small>Humanoid Intelligence</small></span>
+  </a>
+  <nav class="navlinks">
+    <a href="../dashboard/">Live&nbsp;data</a>
+    <a href="../ledger/">Ledger</a>
+    <a href="../report/index.html">State&nbsp;of&nbsp;Humanoids</a>
+    <a href="../report/humanoid100_2026.html">Humanoid&nbsp;100</a>
+  </nav>
+  <a class="btn btn-g" href="../dashboard/">Explore the live data</a>
+</div></header>
+
+<!-- ARTICLE HEAD -->
+<div class="ahead"><div class="wrap">
+  <div class="eyebrow">Humanoid Robotics · Insight · June 2026</div>
+  <h1>China's grip on humanoid robotics isn't broad — <em>it's surgical.</em></h1>
+  <p class="dek">By company count China holds 40.4% of the value chain. By <em>irreplaceable part</em> it holds the whole thing: ~100% of rare-earth sintered magnets, and an export-control lever sitting precisely on the three nodes a humanoid cannot move without.</p>
+  <div class="byline">
+    <b>InfraMosaic Research</b><span class="dot"></span><span>Humanoid Intelligence desk</span><span class="dot"></span><span>15 June 2026</span>
+  </div>
+</div></div>
+
+<!-- ARTICLE -->
+<article class="article">
+
+  <p class="lede"><strong>China holds 40.4% of the 255-company humanoid universe by name and a moderate-looking country <a href="../ledger/">HHI of 2,468</a> — the numbers of a leader, not a chokepoint. The chokepoint is one node down: China supplies roughly 100% of the rare-earth sintered magnets every joint motor needs (94% of NdFeB by mass), 72.7% of precision screws and 63.6% of reducers, and since April 2025 its dysprosium and terbium export licences sit on exactly those parts — according to InfraMosaic's Humanoid Value-Chain database.</strong></p>
+
+  <h2>A national average that hides the weapon</h2>
+  <p>Concentration indices are built to reassure. The humanoid universe's country <a href="../ledger/" title="kpi.overall_hhi_country">HHI of 2,468</a><a class="fig-ref" href="../ledger/" title="Verify figure kpi.overall_hhi_country in the Publication Ledger">[ledger]</a> sits only just inside the "moderately concentrated" band — below semiconductors, below EV cells. China's <a href="../ledger/" title="kpi.china_share_pct">40.4% share by company count</a><a class="fig-ref" href="../ledger/" title="Verify figure kpi.china_share_pct in the Publication Ledger">[ledger]</a> looks like dominance you could engineer around: the United States holds 23.9%, Japan 14.5%, and twelve other countries carry a name apiece. The headline number is the number of a crowded, contestable market.</p>
+
+  <p>That average is the wrong lens. A humanoid robot is not 255 companies in proportion — it is a bill of materials in which a handful of parts are load-bearing for everything else. When you re-weight the same universe by <em>where the value chain actually narrows</em>, the picture inverts. China does not own 40% of every node. It owns ~100% of the nodes that cannot be substituted, and a contestable slice of everything that can. That is not a broad lead. It is a surgical one.</p>
+
+  <div class="pull">
+    <div class="n">~100<span class="u">%</span></div>
+    <div class="l">of rare-earth sintered magnets — the highest-criticality, highest-China-dependence node in the entire humanoid value chain (NdFeB output 94% by mass).</div>
+  </div>
+
+  <h2>The three nodes that decide everything</h2>
+  <p>InfraMosaic scores every one of the 25 value-chain nodes on a 1–5 criticality scale and a China-dependence band. Four Body nodes carry the maximum criticality of 5 <em>and</em> a "High" or "Very High" China-dependence band — and they are the four that move every limb a humanoid has. Three are the irreplaceable trio:</p>
+
+  <div class="tbl-wrap">
+    <div class="tbl-cap">The surgical nodes — criticality 5, where China's grip is decisive</div>
+    <table>
+      <thead><tr><th>Value-chain node</th><th>Crit.</th><th class="num">China share</th><th class="num">Node HHI</th><th>Export-control lever</th></tr></thead>
+      <tbody>
+        <tr><td class="node">Rare-earth magnets</td><td><span class="crit">5</span></td><td class="num china-hi">~100%</td><td class="num">10,000</td><td>Dy / Tb feedstock<span class="tag-ec">CONTROLLED</span></td></tr>
+        <tr><td class="node">Screws &amp; linear motion</td><td><span class="crit">5</span></td><td class="num china-hi">72.7%</td><td class="num">5,703</td><td>roller-screw alloy &amp; grind</td></tr>
+        <tr><td class="node">Reducers &amp; precision gears</td><td><span class="crit">5</span></td><td class="num china-hi">63.6%</td><td class="num">4,545</td><td>harmonic / RV gearing</td></tr>
+        <tr><td class="node">Actuators &amp; servo motors</td><td><span class="crit">5</span></td><td class="num china-hi">55.6%</td><td class="num">4,012</td><td>inherits magnet constraint</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Notice what the HHI column is doing. The <em>universe</em> HHI is 2,468 — moderate. But every one of these nodes is two-to-four times more concentrated than the headline, and the magnet node maxes the scale at 10,000: a single-country monopoly. The "moderate" national average is an arithmetic artefact of averaging a monopoly node against software nodes the West still owns. Strip out the parts a robot can live without, and the concentration of the parts it can't lives at the very top of the scale.</p>
+
+  <h2>Why magnets are the keystone — and why Dy/Tb is the lever</h2>
+  <p>A humanoid carries roughly 3.5 kg of NdFeB sintered magnet across its 28-plus frameless joint motors. There is no non-magnetic substitute at the torque density humanoids need, and China produces about 94% of global NdFeB by mass. That alone is a chokepoint. What makes it a <em>policy</em> chokepoint is the heavy rare earths that make those magnets survive a hot joint: dysprosium and terbium. Both sit under China's export-licence regime introduced in April 2025, and both are roughly 90% China-supplied.</p>
+
+  <p>The price tells you the regime is binding. Dysprosium oxide assesses at about <strong>$230/kg inside China against roughly $800/kg in Europe</strong> — a 3.5× export-control premium on the same oxide. Terbium oxide runs to about $1,600/kg. These are not mined-scarcity prices; they are licence prices. The lever is precise: it does not touch the 40% of the value chain China merely competes in. It touches the dopant that turns a commodity magnet into one that can run inside an actuator — which is to say, it touches all of it, one molecule deep.</p>
+
+  <div class="verify">
+    <div class="k">Verify every number</div>
+    <h3>Rystad asks you to trust the trace. InfraMosaic lets you check it.</h3>
+    <p>Every headline figure in this article resolves to a hash-chained record in the Publication Ledger — source files, SHA-256 inputs, the formula reference and the AQuA sign-off. Don't take the desk's word for it. Open the record.</p>
+    <div class="chips">
+      <a class="chip" href="../ledger/"><b>kpi.china_share_pct</b> · 40.4%</a>
+      <a class="chip" href="../ledger/"><b>kpi.overall_hhi_country</b> · 2,467.6</a>
+      <a class="chip" href="../ledger/">363 hash-chained records →</a>
+    </div>
+  </div>
+
+  <h2>The lever lands where the cost — and the bottleneck — already concentrate</h2>
+  <p>If the export regime sat on a cheap, abundant part, it would be a nuisance. It sits where money and scarcity already pile up. On InfraMosaic's reference bill of materials, rebased on Morgan Stanley's Exhibit 54, the drivetrain China dominates is most of the robot: <strong>screws 20%, motors 20%, reducers 13%</strong> — and the motors run on the magnets China controls outright. Roughly half the hardware cost of a humanoid flows through nodes where China's share runs from 56% to ~100%.</p>
+
+  <p>Supply tightness points the same way. InfraMosaic's node-by-node order book has planetary roller screws running at <strong>770% of projected 2030 capacity</strong> — the single tightest mechanical bottleneck in the build — and the magnet node flagged "deficit-risk" not because of factory capacity but because the rare-earth <em>input</em> is the binding constraint. The two places the value chain is physically tightest are two of the three places the export lever already sits. The West's most exposed pure-plays — Japan's Harmonic Drive (InfraMosaic exposure score 92) and Nabtesco (84) — make the reducers, not the magnets that feed them. The keystone is upstream of the West's best cards.</p>
+
+  <div class="watch">
+    <h3>What to watch</h3>
+    <ul>
+      <li><b>The Dy/Tb premium spread.</b> The $230-vs-$800 dysprosium gap is the cleanest real-time read on how tightly the licence regime is being enforced. A widening spread is the lever being pulled; a narrowing one is reshoring starting to bite.</li>
+      <li><b>Ex-China magnet tonnage.</b> US capacity is barely 6,000 tonnes by 2027 against China's ~300,000 today. Until that number moves an order of magnitude, "magnet diversification" is a press release, not a supply chain.</li>
+      <li><b>Roller-screw localisation outside China.</b> At 770% of 2030 capacity, screws are where a Western or Japanese line could most change the map — watch new precision-grind capacity, not unit-price headlines.</li>
+      <li><b>Whether the headline HHI moves.</b> It won't fall meaningfully while the magnet node sits at 10,000. The number to track is node-level concentration, not the reassuring 2,468 national average.</li>
+    </ul>
+  </div>
+
+  <p>The investable mistake is to read 40.4% and HHI 2,468 as a market you can engineer around. The data says the opposite. China's lead is narrow in coverage and total in depth — it owns the few parts that gate the many. The export-control regime didn't create that asymmetry; it weaponised the part of it that was already irreplaceable. Diversification will come, node by node, screw by screw. The magnet keystone goes last.</p>
+
+  <div class="ctarow">
+    <a class="btn btn-g" href="../dashboard/">Explore the live data →</a>
+    <a class="btn btn-ghost" href="../ledger/" style="border-color:#cdd6df;color:var(--green-d)">Verify in the ledger →</a>
+  </div>
+
+  <p class="method"><b>Method.</b> Figures are drawn from InfraMosaic's Humanoid Value-Chain database (build 2026-06-13, methodology v1.0) — a 255-company universe mapped to 25 value-chain nodes with criticality, China-dependence, HHI and a node-by-node supply/demand order book. Headline KPIs <span class="mono">kpi.china_share_pct</span> (40.4%) and <span class="mono">kpi.overall_hhi_country</span> (2,467.6) resolve to hash-chained, AQuA-reviewed records in the <a href="../ledger/">Publication Ledger</a> (363 records, 134 integrity tests passing). Rare-earth pricing reflects 2025-Q4 assessments; Dy/Tb export controls dated April 2025. InfraMosaic is independent research; nothing herein is investment advice.</p>
+
+</article>
+
+<!-- FOOTER -->
+<footer><div class="wrap">
+  <div class="fcols">
+    <div>
+      <a class="logo" href="../" style="color:#fff">
+        <svg class="mark" viewBox="0 0 32 32"><rect width="32" height="32" rx="6" fill="#13314c"/>
+          <rect x="5" y="5" width="9" height="9" fill="#13966b"/><rect x="18" y="5" width="9" height="9" fill="#cdd6df"/>
+          <rect x="5" y="18" width="9" height="9" fill="#cdd6df"/><rect x="18" y="18" width="9" height="9" fill="#3fcf9a"/></svg>
+        <span>InfraMosaic</span></a>
+      <p class="blurb">The price-reporting agency and asset-level database for the frontier hard-tech economy. Every figure carries its provenance.</p>
+    </div>
+    <div><h5>Data</h5><ul>
+      <li><a href="../dashboard/">Live dashboard</a></li>
+      <li><a href="../ledger/">Publication ledger</a></li>
+      <li><a href="../report/index.html">State of Humanoids 2026</a></li>
+      <li><a href="../report/humanoid100_2026.html">Humanoid 100 — 2026 update</a></li></ul></div>
+    <div><h5>Insight</h5><ul>
+      <li><a href="../dashboard/">Supply/demand order book</a></li>
+      <li><a href="../dashboard/">Exposure index (IMES)</a></li>
+      <li><a href="../dashboard/">Price &amp; index board</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <span>© <span id="yr">2026</span> InfraMosaic · Independent research</span>
+    <span class="disc">Independent research and analysis. Not affiliated with, endorsed by, or sponsored by Morgan Stanley; the MS Humanoid 100 is used solely as a published cross-reference. Nothing herein is investment advice.</span>
+  </div>
+</div></footer>
+
+<script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
